@@ -8,6 +8,7 @@ class App extends Component {
     return(
       <>
         <Header />
+        <div className="searchBar"><Search/></div>    
         
       </>
     )
@@ -15,20 +16,3 @@ class App extends Component {
 }
 
 export default App;
-
-// import React from 'react';
-// import logo from './logo.svg';
-// import './App.css';
-// import Header from './components/Header'
-// import Search from './components/Search';
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//           <Header />
-//       </header>
-//       <div className="searchBar"><Search/></div>
-//     </div>
-//   );
-// }
-// export default App;

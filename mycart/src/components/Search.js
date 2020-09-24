@@ -1,11 +1,15 @@
 import React, { Fragment } from 'react'
 
-const Header = (props) => {
+const Search = (props) => {
 return (
-    <Fragment>
-        <h1>searchBar</h1>
-		</Fragment>
-  )
+        <form className="search">
+            <input
+                placeholder="Search item"
+                // value={props.searchValue}
+                // onChange={props.search}
+            />
+        </form>
+    );
 }
 
-export default Header
+export default Search
