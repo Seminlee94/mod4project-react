@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from "./components/Header.js";
 import Search from "./components/Search.js";
+import {
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import Departments from "./containers/Departments.js";	
+import MyRecipes from "./containers/MyRecipes.js";
+import Cart from "./containers/Cart.js";	
+import TempIndex from "./containers/TempIndex";
 
 class App extends Component {
 
