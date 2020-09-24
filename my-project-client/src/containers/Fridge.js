@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react'
 
-const Cart = (props) => {
+const Fridge = (props) => {
 return (
     <Fragment>
-        <h1>Cart</h1>
+        <h1>Fridge</h1>
 		</Fragment>
   )
 }
 
-export default Cart
+export default Fridge
