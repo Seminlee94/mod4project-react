@@ -7,10 +7,26 @@ import {
 } from "react-router-dom";
 import Departments from "./containers/Departments.js";
 import MyRecipes from "./containers/MyRecipes.js";
-import Cart from "./components/Cart.js";
+import Cart from "./containers/Cart.js";
+require('dotenv').config()
 
+// console.log(process.env)
 class App extends Component {
+  
+  state = {
+    recipeArray: []
+  }
+
+  componentDidMount(){
+    fetch(`https://api.spoonacular.com/recipes/findByNutrients?minCarbs=10&maxCarbs=50&number=2&apiKey=${process.env.REACT_APP_SPOONACULAR_KEY}`)
+      .then(resp=>resp.json())
+      .then(data=>this.setState(()=>({
+        recipeArray: data })))
+  }
+
+
   render() {
+    console.log(this.state.recipeArray)
     return(
       <div>
         <ul>
@@ -35,7 +51,7 @@ class App extends Component {
             <Cart />
           </Route>
           <Route path="/myrecipes">
-            <MyRecipes />
+            <MyRecipes recipe={this.state.recipeArray} />
           </Route>
         </Switch>
       </div>
