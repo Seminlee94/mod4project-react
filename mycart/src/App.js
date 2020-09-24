@@ -43,44 +43,30 @@ class App extends Component {
 
   return(     
     <div className="App">
-    <header className="App-header"> <Header /> </header>
-      <div className="searchBar">
-         <Search searchValue={this.state.searchValue} search={this.search}/>
-      </div>    
-      <div>
-        <div className="temporary-search-index"> 
-         <TempIndex itemArray={this.showItemArray}/>
-        </div>
-        <ul> 
-          <li>
-            <Link to="/departments">Departments</Link>
-          </li>
-          <li>
-            <Link to="/cart">Cart</Link>
-          </li>
-          <li>
-            <Link to="/myrecipes">myrecipes</Link>
-          </li>
-        </ul>
-
-        <hr />
-
-        <Switch>
-          <Route path="/departments">
-            <Departments />
-          </Route>
-          <Route path="/cart">
-            <Cart />
-          </Route>
-          <Route path="/myrecipes">
-            <MyRecipes />
-          </Route>
-        </Switch>
+      <header className="App-header"> <Header /> </header>
+        <div className="searchBar">
+          <Search searchValue={this.state.searchValue} search={this.search}/>
+        </div>    
+        
+          <div className="temporary-search-index"> 
+          <TempIndex itemArray={this.showItemArray}/>
+          </div>
+          <ul> 
+            <li>
+              <Link to="/departments">Departments</Link>
+            </li>
+            <li>
+              <Link to="/cart">Cart</Link>
+            </li>
+            <li>
+              <Link to="/myrecipes">myrecipes</Link>
+            </li>
+          </ul>
       </div>
-    </div>
-    )
+        
+
+  )
   }
 }
 
 export default App;
-
