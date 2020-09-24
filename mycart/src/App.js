@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import Departments from "./containers/Departments.js";
 import MyRecipes from "./containers/MyRecipes.js";
-import Cart from "./components/Cart.js";
+import Cart from "./containers/Cart.js";
 
 class App extends Component {
   render() {
@@ -18,7 +18,7 @@ class App extends Component {
      <header className="App-header"> <Header /> </header>
      <div className="searchBar"><Search/></div>    
       <div>
-        <ul>
+        <ul> 
           <li>
             <Link to="/departments">Departments</Link>
           </li>
