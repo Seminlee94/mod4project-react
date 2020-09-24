@@ -56,7 +56,7 @@ class Departments extends React.Component {
                 <div
                   style={{
                     padding: "10px",
-                    width: "16%",
+                    width: "auto",
                     background: "#f0f0f0"
                   }}
                 >

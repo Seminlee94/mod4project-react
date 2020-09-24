@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import Header from "./components/Header.js";
+// import Header from "./components/Header.js";
 import Search from "./components/Search.js";
-import {
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import Departments from "./containers/Departments.js";	
-import MyRecipes from "./containers/MyRecipes.js";
-import Cart from "./containers/Cart.js";	
 import TempIndex from "./containers/TempIndex";
+import Navbar from "./components/Navbar/Navbar.js";
 
 class App extends Component {
 
@@ -44,26 +37,13 @@ class App extends Component {
 
   return(     
     <div className="App">
-      <header className="App-header"> <Header /> </header>
-        <div className="searchBar">
-          <Search searchValue={this.state.searchValue} search={this.search}/>
-        </div>    
-        
-          <div className="temporary-search-index"> 
-          <TempIndex itemArray={this.showItemArray}/>
-          </div>
-          <ul> 
-            <li>
-              <Link to="/departments">Departments</Link>
-            </li>
-            <li>
-              <Link to="/cart">Cart</Link>
-            </li>
-            <li>
-              <Link to="/myrecipes">myrecipes</Link>
-            </li>
-          </ul>
-      </div>
+      {/* <header className="App-header"> <Header /> </header> */}
+      <Navbar />
+      <Search className="searchBar" searchValue={this.state.searchValue} search={this.search}/>
+      
+      <TempIndex className="temporary-search-index" itemArray={this.showItemArray}/>
+
+    </div>
         
 
   )
