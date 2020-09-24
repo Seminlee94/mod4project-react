@@ -4,7 +4,7 @@ const Cart = (props) => {
 return (
     <Fragment>
         <h1>Cart</h1>
-		</Fragment>
+	</Fragment>
   )
 }
 

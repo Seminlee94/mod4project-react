@@ -3,8 +3,8 @@ import React, { Fragment } from 'react'
 const Item = (props) => {
 return (
     <Fragment>
-        <h1>searchBar</h1>
-		</Fragment>
+        <h1>{props.item.name}</h1>
+	</Fragment>
   )
 }
 

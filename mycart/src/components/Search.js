@@ -1,15 +1,23 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 
-const Search = (props) => {
-return (
+class Search extends React.Component {
+
+    onChange = (e) => {
+      console.log(e.target.value, "searchbar triggering");
+      this.props.search(e.target.value);
+    };
+
+    render(props) {
+      return (
         <form className="search">
-            <input
-                placeholder="Search item"
-                // value={props.searchValue}
-                // onChange={props.search}
-            />
+             <input
+                placeholder="search"
+                value={this.props.value}
+                onChange={this.onChange}
+             ></input>
         </form>
-    );
+      );
+    }
 }
 
 export default Search

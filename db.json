@@ -1,4 +1,5 @@
-[
+{
+  "items": [
     {
         "id": 1,
         "name": "Schwebel Giant Bread",
@@ -99,4 +100,5 @@
         "image": "https://wfmproducts.azureedge.net/images-500/060569007032.jpg",
         "description": "Bread, Delicatessen Rye"
     }
-]
+  ]
+}
