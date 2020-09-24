@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import {
     Switch,
     Route,
@@ -7,6 +7,7 @@ import {
 import Departments from "../containers/Departments.js";
 import MyRecipes from "../containers/MyRecipes.js";
 import Cart from "../containers/Cart.js";
+import '../header.css';
 require('dotenv').config()
 
   
@@ -28,8 +29,7 @@ class Header extends React.Component {
     render() {
 
         return (
-            <Fragment>
-                <div>
+                <div className="header-link" >
                     <img src="https://static.thenounproject.com/png/356889-200.png" alt="img" width="30" />
                     <Link to="/departments">Departments</Link>
 
@@ -40,7 +40,7 @@ class Header extends React.Component {
         
                   <hr />
         
-                  <Switch>
+                  <Switch class="header-switch">
                     <Route path="/departments">
                       <Departments />
                     </Route>
@@ -52,7 +52,6 @@ class Header extends React.Component {
                     </Route>
                   </Switch>
                 </div>
-            </Fragment>
           )
     }
 }

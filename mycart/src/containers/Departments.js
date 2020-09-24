@@ -11,7 +11,7 @@ const routes = [
 {
     path: "/Department/Meat",
     sidebar: () => "",
-    main: () => <h2>Meat</h2>
+    main: () => <h2>afdaf</h2>
 },
 {
     path: "/Department/Bakery",
@@ -22,6 +22,26 @@ const routes = [
     path: "/Department/Seafood",
     sidebar: () => "",//<div>Seafood!</div>,
     main: () => <h2>Seafood</h2>
+},
+{
+    path: "/Department/Produce",
+    sidebar: () => "",
+    main: () => <h2>Produce</h2>
+},
+{
+    path: "/Department/Cheese",
+    sidebar: () => "",
+    main: () => <h2>Cheese</h2>
+},
+{
+    path: "/Department/Prepared Foods",
+    sidebar: () => "",
+    main: () => <h2>Prepared Foods</h2>
+},
+{
+    path: "/Department/liquors",
+    sidebar: () => "",
+    main: () => <h2>Wine, Beer and Spirits</h2>
 }
 ];
   
@@ -36,7 +56,7 @@ class Departments extends React.Component {
                 <div
                   style={{
                     padding: "10px",
-                    width: "40%",
+                    width: "16%",
                     background: "#f0f0f0"
                   }}
                 >
@@ -49,6 +69,18 @@ class Departments extends React.Component {
                     </li>
                     <li>
                       <Link to="/Department/Seafood">Seafood</Link>
+                    </li>
+                    <li>
+                      <Link to="/Department/Produce">Produce</Link>
+                    </li>
+                    <li>
+                      <Link to="/Department/Cheese">Cheese</Link>
+                    </li>
+                    <li>
+                      <Link to="/Department/Prepared_foods">Prepared Foods</Link>
+                    </li>
+                    <li>
+                      <Link to="/Department/liquors">Wine, Beer & Spirits</Link>
                     </li>
                   </ul>
         
