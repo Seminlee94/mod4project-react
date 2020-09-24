@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import "./App.css";
+import { Switch, Route, Link } from "react-router-dom";
+import {BrowserRouter as Router } from "react-router-dom";
 import HomeIndex from "./containers/HomeIndex";
 import Navbar from "./components/Navbar/Navbar.js";
+import Search from "./components/Home/Search.js";
+import TempIndex from "./containers/TempIndex.js";
+import Fridge from "./containers/Fridge.js";
+import Friends from "./containers/Friends.js";
+import Shop from "./containers/Shop.js";
 
 class App extends Component {
 
@@ -38,10 +45,32 @@ class App extends Component {
 
   return(     
     <div className="App">
-      <Navbar />
-      <Search className="searchBar" searchValue={this.state.searchValue} search={this.search}/>
-      
-      <TempIndex className="temporary-search-index" itemArray={this.showItemArray()}/>
+      <Router>
+
+        <Navbar />
+        
+        <Switch class="header-switch">
+
+          <Route path="/shop">
+              <Shop />
+          </Route>
+
+          <Route path="/fridge">
+              <Fridge />
+          </Route>
+
+          <Route path="/friends">
+              <Friends />
+          </Route>
+
+          <Route path="/">
+            <Search className="searchBar" searchValue={this.state.searchValue} search={this.search}/> 
+            <TempIndex className="temporary-search-index" itemArray={this.showItemArray()}/>
+          </Route>
+
+        </Switch>
+      </Router>
+
 
     </div>
         
