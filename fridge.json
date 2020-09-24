@@ -1,0 +1,219 @@
+{
+    "fridge-items" :[
+            {
+            "id": 1,
+            "user_id": 1,
+            "created_at": "2020-09-24T19:49:48.436Z",
+            "updated_at": "2020-09-24T19:49:48.436Z",
+            "items": [
+                {
+                "id": 15,
+                "name": "Mnks Sunflower Bread",
+                "price": 3,
+                "category": "Bread",
+                "sub_category": "Bread, Packaged",
+                "quantity": 69,
+                "image": "https://wfmproducts.azureedge.net/images-500/00041678429861.jpg",
+                "description": "Bread, Sunflower, with Rolled Oats"
+                },
+                {
+                "id": 17,
+                "name": "Dmfl Vollkornbrot Bread",
+                "price": 3,
+                "category": "Bread",
+                "sub_category": "Bread, Packaged",
+                "quantity": 89,
+                "image": "https://wfmproducts.azureedge.net/images-500/00060569007117.jpg",
+                "description": "Bread, Whole Grain Rye, Vollkornbrot"
+                },
+                {
+                "id": 17,
+                "name": "Dmfl Vollkornbrot Bread",
+                "price": 3,
+                "category": "Bread",
+                "sub_category": "Bread, Packaged",
+                "quantity": 89,
+                "image": "https://wfmproducts.azureedge.net/images-500/00060569007117.jpg",
+                "description": "Bread, Whole Grain Rye, Vollkornbrot"
+                },
+                {
+                "id": 26,
+                "name": "Wg Org 27 Grain/Seed",
+                "price": 5,
+                "category": "Bread",
+                "sub_category": "Bread, Packaged",
+                "quantity": 59,
+                "image": "https://wfmproducts.azureedge.net/images-500/00077890413104.jpg",
+                "description": "27 Grains & Seeds Sandwich Bread"
+                },
+                {
+                "id": 36,
+                "name": "Wg FP Trad Naan",
+                "price": 6,
+                "category": "Bread",
+                "sub_category": "Stuffing, Pitas, Flatbreads, Wraps & Pizza Shells",
+                "quantity": 80,
+                "image": "https://wfmproducts.azureedge.net/images-500/00077890335383.jpg",
+                "description": "Traditional Naan, FAMILY PACK"
+                },
+                {
+                "id": 58,
+                "name": "WEG Medium Brie",
+                "price": 15,
+                "category": "Cheese",
+                "sub_category": "Cave-Ripened Cheese",
+                "quantity": 98,
+                "image": "https://wfmproducts.azureedge.net/images-500/00277416000003.jpg",
+                "description": "Medium Brie Cheese, Buttery"
+                },
+                {
+                "id": 60,
+                "name": "ZZZ Feta Crmb-Pkg 8oz",
+                "price": 3,
+                "category": "Cheese",
+                "sub_category": "Feta Cheese",
+                "quantity": 63,
+                "image": "https://assets.materialup.com/uploads/b03b23aa-aa69-4657-aa5e-fa5fef2c76e8/preview.png",
+                "description": "ZZZ Feta Crmb-Pkg 8oz"
+                },
+                {
+                "id": 69,
+                "name": "Weg Trad Feta in Brine",
+                "price": 3,
+                "category": "Cheese",
+                "sub_category": "Feta Cheese",
+                "quantity": 71,
+                "image": "https://wfmproducts.azureedge.net/images-500/077890427040.jpg",
+                "description": "Cheese, Feta, in Brine, Plain"
+                },
+                {
+                "id": 70,
+                "name": "Klondike Cheese MOD",
+                "price": 1,
+                "category": "Cheese",
+                "sub_category": "Feta Cheese",
+                "quantity": 59,
+                "image": "https://assets.materialup.com/uploads/b03b23aa-aa69-4657-aa5e-fa5fef2c76e8/preview.png",
+                "description": "Klondike Cheese MOD"
+                },
+                {
+                "id": 71,
+                "name": "ZZZBelGioioso MOD",
+                "price": 3,
+                "category": "Cheese",
+                "sub_category": "Feta Cheese",
+                "quantity": 92,
+                "image": "https://assets.materialup.com/uploads/b03b23aa-aa69-4657-aa5e-fa5fef2c76e8/preview.png",
+                "description": "ZZZBelGioioso MOD"
+                },
+                {
+                "id": 74,
+                "name": "WEG French Feta-Sm Pail",
+                "price": 14,
+                "category": "Cheese",
+                "sub_category": "Feta Cheese",
+                "quantity": 93,
+                "image": "https://wfmproducts.azureedge.net/images-500/277418000001.jpg",
+                "description": "French Feta Cheese in Brine"
+                },
+                {
+                "id": 75,
+                "name": "Bf Neck/Soup Bones",
+                "price": 1,
+                "category": "Meat",
+                "sub_category": "Beef",
+                "quantity": 87,
+                "image": "https://assets.materialup.com/uploads/b03b23aa-aa69-4657-aa5e-fa5fef2c76e8/preview.png",
+                "description": "Bf Neck/Soup Bones"
+                },
+                {
+                "id": 86,
+                "name": "T-Bone Stk",
+                "price": 13,
+                "category": "Meat",
+                "sub_category": "Beef",
+                "quantity": 71,
+                "image": "https://assets.materialup.com/uploads/b03b23aa-aa69-4657-aa5e-fa5fef2c76e8/preview.png",
+                "description": "T-Bone Stk"
+                },
+                {
+                "id": 90,
+                "name": "ZZZTop Rnd Rst Beef",
+                "price": 5,
+                "category": "Meat",
+                "sub_category": "Beef",
+                "quantity": 75,
+                "image": "https://assets.materialup.com/uploads/b03b23aa-aa69-4657-aa5e-fa5fef2c76e8/preview.png",
+                "description": "ZZZTop Rnd Rst Beef"
+                },
+                {
+                "id": 95,
+                "name": "Center Chops",
+                "price": 3,
+                "category": "Meat",
+                "sub_category": "Pork",
+                "quantity": 63,
+                "image": "https://assets.materialup.com/uploads/b03b23aa-aa69-4657-aa5e-fa5fef2c76e8/preview.png",
+                "description": "Center Chops"
+                },
+                {
+                "id": 98,
+                "name": "Catfish H&G Whole",
+                "price": 5,
+                "category": "Seafood",
+                "sub_category": "Crab and Lobster",
+                "quantity": 73,
+                "image": "https://assets.materialup.com/uploads/b03b23aa-aa69-4657-aa5e-fa5fef2c76e8/preview.png",
+                "description": "Catfish H&G Whole"
+                },
+                {
+                "id": 111,
+                "name": "TO Lobster Chunk",
+                "price": 2,
+                "category": "Seafood",
+                "sub_category": "Crab and Lobster",
+                "quantity": 81,
+                "image": "https://wfmproducts.azureedge.net/images-500/00715166052014.jpg",
+                "description": "Lobster Classic, Chunk Style"
+                },
+                {
+                "id": 114,
+                "name": "Weg FYFGA Seabass",
+                "price": 19,
+                "category": "Seafood",
+                "sub_category": "Frozen Shrimp & Seafood",
+                "quantity": 100,
+                "image": "https://wfmproducts.azureedge.net/images-500/00077890131435.jpg",
+                "description": "Chilean Seabass"
+                },
+                {
+                "id": 116,
+                "name": "Weg King Crab 5lb 20-24",
+                "price": 149,
+                "category": "Seafood",
+                "sub_category": "Frozen Shrimp & Seafood",
+                "quantity": 80,
+                "image": "https://wfmproducts.azureedge.net/images-500/077890150177.jpg",
+                "description": "King Crab Legs"
+                },
+                {
+                "id": 123,
+                "name": "Weg FYFGA Snapper",
+                "price": 12,
+                "category": "Seafood",
+                "sub_category": "Frozen Shrimp & Seafood",
+                "quantity": 97,
+                "image": "https://wfmproducts.azureedge.net/images-500/00077890351888.jpg",
+                "description": "Snapper"
+                }
+            ],
+          "user": {
+          "id": 1,
+          "username": "example",
+          "password_digest": "example",
+          "name": "example",
+          "address": "example"
+          }
+      }
+    ]
+}   
