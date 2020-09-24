@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 import { Switch, Route, Link } from "react-router-dom";
-import Departments from "../../containers/Departments.js";
-import MyRecipes from "../../containers/MyRecipes.js";
-import Cart from "../../containers/Cart.js";
 import "./Navbar.css";
 import { MenuItems } from "./MenuItems.js";
-import Item from "../Home/Item.js";
 import { Button } from "./Button.js";
 // require('dotenv').config()
 
@@ -84,6 +80,7 @@ class Navbar extends Component {
             );
           })}
         </ul>
+
         <Button>Sign Up</Button>
       </nav>
     );

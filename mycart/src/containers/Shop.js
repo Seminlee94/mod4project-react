@@ -9,44 +9,44 @@ import {
 
 const routes = [
 {
-    path: "/Department/Meat",
+    path: "/Shop/Meat",
     sidebar: () => "",
     main: () => <h2>afdaf</h2>
 },
 {
-    path: "/Department/Bakery",
+    path: "/Shop/Bakery",
     sidebar: () => "",
     main: () => <h2>Bakery</h2>
 },
 {
-    path: "/Department/Seafood",
+    path: "/Shop/Seafood",
     sidebar: () => "",//<div>Seafood!</div>,
     main: () => <h2>Seafood</h2>
 },
 {
-    path: "/Department/Produce",
+    path: "/Shop/Produce",
     sidebar: () => "",
     main: () => <h2>Produce</h2>
 },
 {
-    path: "/Department/Cheese",
+    path: "/Shop/Cheese",
     sidebar: () => "",
     main: () => <h2>Cheese</h2>
 },
 {
-    path: "/Department/Prepared Foods",
+    path: "/Shop/Prepared Foods",
     sidebar: () => "",
     main: () => <h2>Prepared Foods</h2>
 },
 {
-    path: "/Department/liquors",
+    path: "/Shop/liquors",
     sidebar: () => "",
     main: () => <h2>Wine, Beer and Spirits</h2>
 }
 ];
   
 
-class Departments extends React.Component {
+class Shop extends React.Component {
 
     render(){
         return(
@@ -62,25 +62,25 @@ class Departments extends React.Component {
                 >
                   <ul style={{ listStyleType: "none", padding: 0 }}>
                     <li>
-                      <Link to="/Department/Meat">Meat</Link>
+                      <Link to="/Shop/Meat">Meat</Link>
                     </li>
                     <li>
-                      <Link to="/Department/Bakery">Bakery</Link>
+                      <Link to="/Shop/Bakery">Bakery</Link>
                     </li>
                     <li>
-                      <Link to="/Department/Seafood">Seafood</Link>
+                      <Link to="/Shop/Seafood">Seafood</Link>
                     </li>
                     <li>
-                      <Link to="/Department/Produce">Produce</Link>
+                      <Link to="/Shop/Produce">Produce</Link>
                     </li>
                     <li>
-                      <Link to="/Department/Cheese">Cheese</Link>
+                      <Link to="/Shop/Cheese">Cheese</Link>
                     </li>
                     <li>
-                      <Link to="/Department/Prepared_foods">Prepared Foods</Link>
+                      <Link to="/Shop/Prepared_foods">Prepared Foods</Link>
                     </li>
                     <li>
-                      <Link to="/Department/liquors">Wine, Beer & Spirits</Link>
+                      <Link to="/Shop/liquors">Wine, Beer & Spirits</Link>
                     </li>
                   </ul>
         
@@ -114,4 +114,4 @@ class Departments extends React.Component {
     }
 }
 
-export default Departments
+export default Shop
