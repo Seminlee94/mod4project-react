@@ -12,11 +12,40 @@ import MyRecipes from "./containers/MyRecipes.js";
 import Cart from "./containers/Cart.js";
 
 class App extends Component {
+
+  state = {
+    itemArray: [],
+    searchValue: "",
+  }
+
+  componentDidMount() {
+      fetch("http://localhost:8002/items")
+      .then((res) => res.json())
+      .then((data) => this.setState({ itemArray: data }));
+  }
+
+  search = (searchValue) => {
+    this.setState({ searchValue: searchValue });
+  };
+
   render() {
-    return(     
+    const itemArray =
+    this.state.searchValue === ""
+      ? this.state.itemArray
+      : this.state.itemArray.filter(
+          (p) =>
+            p.name
+              .toLowerCase()
+              .includes(this.state.searchValue.toLowerCase()) ||
+            p.description.toLowerCase().includes(this.state.searchValue.toLowerCase())
+        );
+
+  return(     
     <div className="App">
-     <header className="App-header"> <Header /> </header>
-     <div className="searchBar"><Search/></div>    
+    <header className="App-header"> <Header /> </header>
+      <div className="searchBar">
+         <Search searchValue={this.state.searchValue} search={this.search}/>
+      </div>    
       <div>
         <ul> 
           <li>
@@ -51,19 +80,3 @@ class App extends Component {
 
 export default App;
 
-// import React from 'react';
-// import logo from './logo.svg';
-// import './App.css';
-// import Header from './components/Header'
-// import Search from './components/Search';
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//           <Header />
-//       </header>
-//       <div className="searchBar"><Search/></div>
-//     </div>
-//   );
-// }
-// export default App;
