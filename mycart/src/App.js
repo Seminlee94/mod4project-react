@@ -20,17 +20,19 @@ class App extends Component {
   }
 
   componentDidMount() {
-      fetch("http://localhost:8002/items")
+      fetch("http://localhost:8000/items")
       .then((res) => res.json())
       .then((data) => this.setState({ itemArray: data }));
   }
+ 
 
   search = (searchValue) => {
     this.setState({ searchValue: searchValue });
+    console.log("settingSearch:", this.state.searchValue)
   };
 
-  showItemArray = 
-  this.state.searchValue === ""
+  showItemArray = () => {
+  return this.state.searchValue === ""
     ? this.state.itemArray
     : this.state.itemArray.filter(
         (item) =>
@@ -38,19 +40,18 @@ class App extends Component {
             .toLowerCase()
             .includes(this.state.searchValue.toLowerCase()) ||
           item.description.toLowerCase().includes(this.state.searchValue.toLowerCase())
-    )
-    
+        )
+  }
   render() {
-
-  return(     
-    <div className="App">
+    return(     
+      <div className="App">
       <header className="App-header"> <Header /> </header>
         <div className="searchBar">
           <Search searchValue={this.state.searchValue} search={this.search}/>
         </div>    
         
           <div className="temporary-search-index"> 
-          <TempIndex itemArray={this.showItemArray}/>
+          <TempIndex itemArray={this.showItemArray()}/>
           </div>
           <ul> 
             <li>
