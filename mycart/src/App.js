@@ -10,7 +10,7 @@ import {
 import Departments from "./containers/Departments.js";
 import MyRecipes from "./containers/MyRecipes.js";
 import Cart from "./containers/Cart.js";
-
+import TempIndex from "./containers/TempIndex"
 class App extends Component {
 
   state = {
@@ -28,17 +28,18 @@ class App extends Component {
     this.setState({ searchValue: searchValue });
   };
 
+  showItemArray = 
+  this.state.searchValue === ""
+    ? this.state.itemArray
+    : this.state.itemArray.filter(
+        (item) =>
+          item.name
+            .toLowerCase()
+            .includes(this.state.searchValue.toLowerCase()) ||
+          item.description.toLowerCase().includes(this.state.searchValue.toLowerCase())
+    )
+    
   render() {
-    const itemArray =
-    this.state.searchValue === ""
-      ? this.state.itemArray
-      : this.state.itemArray.filter(
-          (p) =>
-            p.name
-              .toLowerCase()
-              .includes(this.state.searchValue.toLowerCase()) ||
-            p.description.toLowerCase().includes(this.state.searchValue.toLowerCase())
-        );
 
   return(     
     <div className="App">
@@ -47,6 +48,9 @@ class App extends Component {
          <Search searchValue={this.state.searchValue} search={this.search}/>
       </div>    
       <div>
+        <div className="temporary-search-index"> 
+         <TempIndex itemArray={this.showItemArray}/>
+        </div>
         <ul> 
           <li>
             <Link to="/departments">Departments</Link>

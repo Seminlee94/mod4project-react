@@ -4,7 +4,7 @@ const Fridge = (props) => {
 return (
     <Fragment>
         <h1>Fridge</h1>
-		</Fragment>
+	</Fragment>
   )
 }
 
