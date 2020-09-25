@@ -23,14 +23,14 @@ class Shelf extends React.Component {
     return (
       <div className="fridge-item-card">
         {this.state.displayIndex !== 0 && (
-          <MoreButton moreItems={this.prev}>previous/</MoreButton>
+          <MoreButton moreItems={this.prev}>previous</MoreButton>
         )}
         {categoryArray.slice(
           this.state.displayIndex,
           this.state.displayIndex + 4
         )}
         {categoryArray.length > this.state.displayIndex + 4 && (
-          <MoreButton moreItems={this.next}>next/</MoreButton>
+          <MoreButton moreItems={this.next}>next</MoreButton>
         )}
       </div>
     );

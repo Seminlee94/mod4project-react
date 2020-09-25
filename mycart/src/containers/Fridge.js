@@ -86,23 +86,31 @@ class Fridge extends React.Component {
     return filteredBakery.map((el) => <FridgeItem item={el} />);
   };
   render() {
-    // const bakery
+    const fridgeLeftArray = [
+      { category: "Bakery", shelf: this.filterBakery() },
+      { category: "Produce", shelf: this.filterProduce() },
+      { category: "Meat", shelf: this.filterMeat() },
+      { category: "Seafood", shelf: this.filterSeafood() },
+    ];
+    const fridgeRightArray = [
+      // { category: "Liqours", shelf: this.filterLiqours() },
+      { category: "PreparedFoods", shelf: this.filterPreparedFood() },
+      { category: "Other", shelf: this.filterOther() },
+      { category: "Cheese", shelf: this.filterCheese() },
+    ];
+    const fridgeLeft = fridgeLeft.map((category, shelf) => (
+      <div className="fridge-shelf">
+        <div className="fridge-category">{category}</div>
+        <Shelf category={shelf} />
+      </div>
+    ));
     return (
       <div className="fridge-container">
         <div className="fridge-container-left">
           <div className="fridge-shelf">
             <div className="fridge-category">Bakery</div>
-            <div className="fridge-item-card">
-              <Shelf category={this.filterBakery()} />
-              {/* <Shelf category={this.filterProduce()} />
-              <Shelf category={this.filterMeat()} />
-              <Shelf category={this.filterSeafood()} /> */}
-              {/* <Shelf category={this.filterLiqours()} /> */}
-              {/* <Shelf category={this.filterPreparedFood()} />
-              <Shelf category={this.filterOther()} />
-              <Shelf category={this.filterCheese()} /> */}
-              {/* {this.filter("Bread")} */}
-            </div>
+
+            <Shelf category={this.filterBakery()} />
           </div>
 
           <div className="fridge-shelf">
