@@ -50,7 +50,7 @@ class App extends Component {
 
   render() {
 
-  return(     
+  return( 
     <div className="App" style={{ height: '100%', position: 'absolute', left: '0px', width: '100%', overflow: 'hidden'}}>
       <Router>
 
