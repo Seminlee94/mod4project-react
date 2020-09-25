@@ -98,7 +98,13 @@ class Fridge extends React.Component {
       { category: "Other", shelf: this.filterOther() },
       { category: "Cheese", shelf: this.filterCheese() },
     ];
-    const fridgeLeft = fridgeLeft.map((category, shelf) => (
+    const fridgeLeft = fridgeLeftArray.map((category, shelf) => (
+      <div className="fridge-shelf">
+        <div className="fridge-category">{category}</div>
+        <Shelf category={shelf} />
+      </div>
+    ));
+    const fridgeright = fridgeRightArray.map((category, shelf) => (
       <div className="fridge-shelf">
         <div className="fridge-category">{category}</div>
         <Shelf category={shelf} />
