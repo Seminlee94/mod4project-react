@@ -1,0 +1,27 @@
+.fridge-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.fridge-blank {
+    height: 100%;
+    border-style: solid;
+}
+
+.fridge-container-left {
+    width: 49%;
+    height: 100%;
+}
+
+.fridge-container-right {
+    width: 49%;
+    height: 100%;
+}
+
+.fridge-shelf {
+    border-bottom-style: solid;
+    border-radius: 4px;
+    width: 100%;
+    height: 20%;
+}

@@ -15,12 +15,19 @@ class App extends Component {
   state = {
     itemArray: [],
     searchValue: "",
+    fridgeItemArray: []
   }
 
   componentDidMount() {
-      fetch("http://localhost:8000/items")
-      .then((res) => res.json())
-      .then((data) => this.setState({ itemArray: data }));
+    fetch("http://localhost:8000/items")
+    .then((res) => res.json())
+    .then((data) => this.setState({ itemArray: data }));
+  }
+
+  componentWillMount() {
+    fetch("http://localhost:8000/fridge-items")
+      .then(resp => resp.json())
+      .then(data => this.setState({ fridgeItemArray: data[0].items }))
   }
  
 
@@ -44,7 +51,7 @@ class App extends Component {
   render() {
 
   return(     
-    <div className="App">
+    <div className="App" style={{ height: '100%', position: 'absolute', left: '0px', width: '100%', overflow: 'hidden'}}>
       <Router>
 
         <Navbar />
@@ -56,7 +63,7 @@ class App extends Component {
           </Route>
 
           <Route path="/fridge">
-              <Fridge />
+              <Fridge item={this.state.fridgeItemArray} />
           </Route>
 
           <Route path="/friends">
