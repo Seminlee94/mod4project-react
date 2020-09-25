@@ -1,13 +1,18 @@
 import React from 'react'
 import FridgeItem from "../components/Fridge/FridgeItem.js";
 import "../components/Fridge/Fridge.css";
+import MoreButton from "../components/Home/MoreButton.js";
 // import AddForm from "../components/Fridge/AddForm.js";
 
 class Fridge extends React.Component {
 
-  items = () => {
-    return this.props.item.map(item => <FridgeItem item={item} /> )
-  }
+  // state = {
+  //   displayIndex: 0
+  // }
+
+  // items = () => {
+  //   return this.props.item.map(item => <FridgeItem item={item} /> )
+  // }
 
   filterBakery = () => {
     let filteredBakery = this.props.item.filter(item => item.category==="Bread")
@@ -56,7 +61,9 @@ class Fridge extends React.Component {
         <div className="fridge-container-left">
           <div className="fridge-shelf">
             <div className="fridge-category">Bakery</div>
-            <div className="fridge-item-card">{this.filterBakery()}</div> 
+            <div className="fridge-item-card">{this.filterBakery()}
+            {/* <MoreButton moreItems={this.props.more} /> */}
+            </div> 
           </div>
 
           <div className="fridge-shelf">

@@ -16,6 +16,7 @@ class App extends Component {
     itemArray: [],
     searchValue: "",
     fridgeItemArray: []
+    // displayIndex: 0
   }
 
   componentDidMount() {
@@ -30,6 +31,22 @@ class App extends Component {
       .then(data => this.setState({ fridgeItemArray: data[0].items }))
   }
  
+  // renderFourItems = () => {
+  //   return this.state.fridgeItemArray.slice(this.state.displayIndex, this.state.displayIndex+4)
+  // }
+
+  more = (event) => {
+    let newDisplayIndex = this.state.displayIndex + 4
+
+    //bonus
+    if(newDisplayIndex >= this.state.fridgeItemArray.length){
+      newDisplayIndex = 0
+    }
+
+    this.setState({
+      displayIndex: newDisplayIndex
+    })
+  }
 
   search = (searchValue) => {
     this.setState({ searchValue: searchValue });
@@ -64,6 +81,7 @@ class App extends Component {
 
           <Route path="/fridge">
               <Fridge item={this.state.fridgeItemArray} />
+              {/* <Fridge item={this.renderFourItems()} more={this.more} /> */}
           </Route>
 
           <Route path="/friends">
