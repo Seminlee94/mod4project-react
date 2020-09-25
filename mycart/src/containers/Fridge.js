@@ -13,44 +13,9 @@ class Fridge extends React.Component {
   //   return this.props.item.map(item => <FridgeItem item={item} /> )
   // }
 
-  filterBakery = () => {
-    let filteredBakery = this.props.item.filter(item => item.category==="Bread")
+  filter = (Category) => {
+    let filteredBakery = this.props.item.filter(item => item.category===Category)
     return filteredBakery.map(el => <FridgeItem item={el} />) 
-  }
-
-  filterProduce = () => {
-    let filteredProduce = this.props.item.filter(item => item.category==="Produce")
-    return filteredProduce.map(el => <FridgeItem item={el} />) 
-  }
-
-  filterMeat = () => {
-    let filteredMeat = this.props.item.filter(item => item.category==="Meat")
-    return filteredMeat.map(el => <FridgeItem item={el} />) 
-  }
-
-  filterSeafood = () => {
-    let filteredSeafood = this.props.item.filter(item => item.category==="Seafood")
-    return filteredSeafood.map(el => <FridgeItem item={el} />) 
-  }
-
-  filterLiquors = () => {
-    let filteredLiquors = this.props.item.filter(item => item.category==="Liquors")
-    return filteredLiquors.map(el => <FridgeItem item={el} />) 
-  }
-
-  filterPreparedFood = () => {
-    let filteredPreparedFood = this.props.item.filter(item => item.category==="Prepared Food")
-    return filteredPreparedFood.map(el => <FridgeItem item={el} />) 
-  }
-
-  filterOther = () => {
-    let filteredOther = this.props.item.filter(item => item.category==="Other Departments")
-    return filteredOther.map(el => <FridgeItem item={el} />) 
-  }
-  
-  filterCheese = () => {
-    let filteredCheese = this.props.item.filter(item => item.category==="Cheese")
-    return filteredCheese.map(el => <FridgeItem item={el} />) 
   }
 
   render() {
@@ -58,26 +23,25 @@ class Fridge extends React.Component {
       <div className="fridge-container">
 
         <div className="fridge-container-left">
+
           <div className="fridge-shelf">
             <div className="fridge-category">Bakery</div>
-            <div className="fridge-item-card">{this.filterBakery()}
-            {/* <MoreButton moreItems={this.props.more} /> */}
-            </div> 
+            <div className="fridge-item-card">{this.filter("Bread")}</div> 
           </div>
 
           <div className="fridge-shelf">
             <div className="fridge-category">Produce</div>
-            <div className="fridge-item-card">{this.filterProduce()}</div> 
+            <div className="fridge-item-card">{this.filter("Produce")}</div> 
           </div>
 
           <div className="fridge-shelf">
             <div className="fridge-category">Meat</div>
-            <div className="fridge-item-card">{this.filterMeat()}</div> 
+            <div className="fridge-item-card">{this.filter("Meat")}</div> 
           </div>
 
           <div className="fridge-shelf">
             <div className="fridge-category">Seafood</div>
-            <div className="fridge-item-card">{this.filterSeafood()}</div> 
+            <div className="fridge-item-card">{this.filter("Seafood")}</div> 
           </div>
 
         </div>
@@ -87,22 +51,22 @@ class Fridge extends React.Component {
         <div className="fridge-container-right">
           <div className="fridge-shelf">
               <div className="fridge-category">Cheese</div>
-              <div className="fridge-item-card">{this.filterCheese()}</div> 
+              <div className="fridge-item-card">{this.filter("Cheese")}</div> 
             </div>
 
             <div className="fridge-shelf">
               <div className="fridge-category">Liquors</div>
-              <div className="fridge-item-card">{this.filterLiquors()}</div> 
+              <div className="fridge-item-card">{this.filter("Liquors")}</div> 
             </div>
 
             <div className="fridge-shelf">
               <div className="fridge-category">Prepared Food</div>
-              <div className="fridge-item-card">{this.filterPreparedFood()}</div> 
+              <div className="fridge-item-card">{this.filter("PreparedFood")}</div> 
             </div>
 
             <div className="fridge-shelf">
               <div className="fridge-category">Other</div>
-              <div className="fridge-item-card">{this.filterOther()}</div> 
+              <div className="fridge-item-card">{this.filter("Other")}</div> 
             </div>
         </div>
       </div>
