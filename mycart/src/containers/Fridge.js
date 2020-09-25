@@ -23,6 +23,7 @@ class Fridge extends React.Component {
   //   });
   // };
 
+<<<<<<< HEAD
   filterBakery = () => {
     let filteredBakery = this.props.item.filter(
       (item) => item.category === "Bread"
@@ -85,6 +86,13 @@ class Fridge extends React.Component {
     );
     return filteredBakery.map((el) => <FridgeItem item={el} />);
   };
+=======
+  filter = (Category) => {
+    let filteredBakery = this.props.item.filter(item => item.category===Category)
+    return filteredBakery.map(el => <FridgeItem item={el} />) 
+  }
+
+>>>>>>> 0cbccece8528de33b8e3fcc69e655b0d6c74efe4
   render() {
     const fridgeLeftArray = [
       { category: "Bakery", shelf: this.filterBakery() },
@@ -113,25 +121,42 @@ class Fridge extends React.Component {
     return (
       <div className="fridge-container">
         <div className="fridge-container-left">
+
           <div className="fridge-shelf">
             <div className="fridge-category">Bakery</div>
+<<<<<<< HEAD
 
             <Shelf category={this.filterBakery()} />
+=======
+            <div className="fridge-item-card">{this.filter("Bread")}</div> 
+>>>>>>> 0cbccece8528de33b8e3fcc69e655b0d6c74efe4
           </div>
 
           <div className="fridge-shelf">
             <div className="fridge-category">Produce</div>
+<<<<<<< HEAD
             <div className="fridge-item-card">{this.filterProduce()}</div>
+=======
+            <div className="fridge-item-card">{this.filter("Produce")}</div> 
+>>>>>>> 0cbccece8528de33b8e3fcc69e655b0d6c74efe4
           </div>
 
           <div className="fridge-shelf">
             <div className="fridge-category">Meat</div>
+<<<<<<< HEAD
             <div className="fridge-item-card">{this.filterMeat()}</div>
+=======
+            <div className="fridge-item-card">{this.filter("Meat")}</div> 
+>>>>>>> 0cbccece8528de33b8e3fcc69e655b0d6c74efe4
           </div>
 
           <div className="fridge-shelf">
             <div className="fridge-category">Seafood</div>
+<<<<<<< HEAD
             <div className="fridge-item-card">{this.filterSeafood()}</div>
+=======
+            <div className="fridge-item-card">{this.filter("Seafood")}</div> 
+>>>>>>> 0cbccece8528de33b8e3fcc69e655b0d6c74efe4
           </div>
         </div>
 
@@ -139,6 +164,7 @@ class Fridge extends React.Component {
 
         <div className="fridge-container-right">
           <div className="fridge-shelf">
+<<<<<<< HEAD
             <div className="fridge-category">Cheese</div>
             <div className="fridge-item-card">{this.filterCheese()}</div>
           </div>
@@ -157,6 +183,26 @@ class Fridge extends React.Component {
             <div className="fridge-category">Other</div>
             <div className="fridge-item-card">{this.filterOther()}</div>
           </div>
+=======
+              <div className="fridge-category">Cheese</div>
+              <div className="fridge-item-card">{this.filter("Cheese")}</div> 
+            </div>
+
+            <div className="fridge-shelf">
+              <div className="fridge-category">Liquors</div>
+              <div className="fridge-item-card">{this.filter("Liquors")}</div> 
+            </div>
+
+            <div className="fridge-shelf">
+              <div className="fridge-category">Prepared Food</div>
+              <div className="fridge-item-card">{this.filter("PreparedFood")}</div> 
+            </div>
+
+            <div className="fridge-shelf">
+              <div className="fridge-category">Other</div>
+              <div className="fridge-item-card">{this.filter("Other")}</div> 
+            </div>
+>>>>>>> 0cbccece8528de33b8e3fcc69e655b0d6c74efe4
         </div>
       </div>
     );
