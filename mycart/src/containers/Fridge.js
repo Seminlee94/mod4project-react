@@ -28,13 +28,13 @@ class Fridge extends React.Component {
       { category: "Other", shelf: this.filter("Other") },
       { category: "Cheese", shelf: this.filter("Cheese") },
     ];
-    const fridgeLeft = fridgeLeftArray.map((category, shelf) => (
+    const fridgeLeft = fridgeLeftArray.map(({ category, shelf }) => (
       <div className="fridge-shelf">
         <div className="fridge-category">{category}</div>
         <Shelf category={shelf} />
       </div>
     ));
-    const fridgeRight = fridgeRightArray.map((category, shelf) => (
+    const fridgeRight = fridgeRightArray.map(({ category, shelf }) => (
       <div className="fridge-shelf">
         <div className="fridge-category">{category}</div>
         <Shelf category={shelf} />
@@ -43,92 +43,13 @@ class Fridge extends React.Component {
 
     return (
       <div className="fridge-container">
-        <div className="fridge-container-left"> </div>
-        {fridgeLeft}
+        <div className="fridge-container-left">{fridgeLeft}</div>
+
         <div className="fridge-blank"></div>
 
-        <div className="fridge-container-right"> </div>
-        {fridgeRight}
+        <div className="fridge-container-right">{fridgeRight}</div>
       </div>
     );
   }
 }
 export default Fridge;
-
-{
-  /* 
-          <div className="fridge-shelf">
-            <div className="fridge-category">Bakery</div>
-
-            <Shelf category={this.filterBakery()} />
-            <div className="fridge-item-card">{this.filter("Bread")}</div>
-          </div>
-
-          <div className="fridge-shelf">
-            <div className="fridge-category">Produce</div>
-            <div className="fridge-item-card">{this.filterProduce()}</div>
-            <div className="fridge-item-card">{this.filter("Produce")}</div>
-          </div>
-
-          <div className="fridge-shelf">
-            <div className="fridge-category">Meat</div>
-            <div className="fridge-item-card">{this.filterMeat()}</div>
-            <div className="fridge-item-card">{this.filter("Meat")}</div>
-          </div>
-
-          <div className="fridge-shelf">
-            <div className="fridge-category">Seafood</div>
-            <div className="fridge-item-card">{this.filterSeafood()}</div>
-          </div>
-
-            <div className="fridge-shelf">
-              <div className="fridge-category">Cheese</div>
-              <div className="fridge-item-card">{this.filterCheese()}</div>
-            </div>
-
-            <div className="fridge-shelf">
-              <div className="fridge-category">Liquors</div>
-              <div className="fridge-item-card">{this.filterLiquors()}</div>
-            </div>
-
-            <div className="fridge-shelf">
-              <div className="fridge-category">Prepared Food</div>
-              <div className="fridge-item-card">
-                {this.filterPreparedFood()}
-              </div>
-            </div>
-
-            <div className="fridge-shelf">
-              <div className="fridge-category">Other</div>
-              <div className="fridge-item-card">{this.filterOther()}</div>
-            </div>
-            <div className="fridge-category">Cheese</div>
-            <div className="fridge-item-card">{this.filter("Cheese")}</div>
-          </div>
-
-          <div className="fridge-shelf">
-            <div className="fridge-category">Liquors</div>
-            <div className="fridge-item-card">{this.filter("Liquors")}</div>
-          </div>
-
-          <div className="fridge-shelf">
-            <div className="fridge-category">Prepared Food</div>
-            <div className="fridge-item-card">
-              {this.filter("PreparedFood")}
-            </div>
-          </div>
-
-          <div className="fridge-shelf">
-            <div className="fridge-category">Other</div>
-            <div className="fridge-item-card">{this.filter("Other")}</div>
-          </div>
-        </div>
-      </div> */
-}
-{
-  /* ); */
-}
-{
-  /* }
-} */
-}
