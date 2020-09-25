@@ -10,14 +10,13 @@ class HomeIndex extends Component {
   };
 
   componentDidMount() {
-    fetch("http://localhost:8000/items")
+    fetch("http://localhost:9000/items")
       .then((res) => res.json())
       .then((data) => this.setState({ itemArray: data }));
   }
 
   search = (searchValue) => {
     this.setState({ searchValue: searchValue });
-    console.log("settingSearch:", this.state.searchValue);
   };
 
   showItemArray() {
