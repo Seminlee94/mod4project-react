@@ -75,7 +75,7 @@ class App extends Component {
         <Switch class="header-switch">
 
           <Route path="/shop">
-              <Shop />
+              <Shop item={this.state.itemArray} />
           </Route>
 
           <Route path="/fridge">
