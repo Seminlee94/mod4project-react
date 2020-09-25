@@ -1,5 +1,5 @@
 import React from "react";
-import FridgeItem from "../components/Fridge/FridgeItem.js";
+// import FridgeItem from "../components/Fridge/FridgeItem.js";
 import "../components/Fridge/Fridge.css";
 import MoreButton from "../components/Home/MoreButton.js";
 
@@ -20,6 +20,7 @@ class Shelf extends React.Component {
 
   render() {
     const categoryArray = this.props.category;
+    console.log(this.props.category);
     return (
       <div className="fridge-item-card">
         {this.state.displayIndex !== 0 && (
