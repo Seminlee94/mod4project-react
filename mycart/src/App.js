@@ -14,8 +14,14 @@ class App extends Component {
   state = {
     itemArray: [],
     searchValue: "",
+<<<<<<< HEAD
     fridgeItemArray: [],
   };
+=======
+    fridgeItemArray: []
+    // displayIndex: 0
+  }
+>>>>>>> 02b914844fad5866557dbd6ef6eda05494f32b58
 
   componentDidMount() {
     fetch("http://localhost:8000/items")
@@ -28,6 +34,26 @@ class App extends Component {
       .then((resp) => resp.json())
       .then((data) => this.setState({ fridgeItemArray: data[0].items }));
   }
+<<<<<<< HEAD
+=======
+ 
+  // renderFourItems = () => {
+  //   return this.state.fridgeItemArray.slice(this.state.displayIndex, this.state.displayIndex+4)
+  // }
+
+  more = (event) => {
+    let newDisplayIndex = this.state.displayIndex + 4
+
+    //bonus
+    if(newDisplayIndex >= this.state.fridgeItemArray.length){
+      newDisplayIndex = 0
+    }
+
+    this.setState({
+      displayIndex: newDisplayIndex
+    })
+  }
+>>>>>>> 02b914844fad5866557dbd6ef6eda05494f32b58
 
   search = (searchValue) => {
     this.setState({ searchValue: searchValue });
@@ -70,7 +96,12 @@ class App extends Component {
 
             <Route path="/fridge">
               <Fridge item={this.state.fridgeItemArray} />
+<<<<<<< HEAD
             </Route>
+=======
+              {/* <Fridge item={this.renderFourItems()} more={this.more} /> */}
+          </Route>
+>>>>>>> 02b914844fad5866557dbd6ef6eda05494f32b58
 
             <Route path="/friends">
               <Friends />
