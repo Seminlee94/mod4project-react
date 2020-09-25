@@ -94,9 +94,9 @@ class Fridge extends React.Component {
             <div className="fridge-category">Bakery</div>
             <div className="fridge-item-card">
               <Shelf category={this.filterBakery()} />
-              <Shelf category={this.filterProduce()} />
+              {/* <Shelf category={this.filterProduce()} />
               <Shelf category={this.filterMeat()} />
-              <Shelf category={this.filterSeafood()} />
+              <Shelf category={this.filterSeafood()} /> */}
               {/* <Shelf category={this.filterLiqours()} /> */}
               {/* <Shelf category={this.filterPreparedFood()} />
               <Shelf category={this.filterOther()} />

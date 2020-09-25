@@ -25,7 +25,10 @@ class Shelf extends React.Component {
         {this.state.displayIndex !== 0 && (
           <MoreButton moreItems={this.prev}>previous/</MoreButton>
         )}
-        {categoryArray.slice(this.state.displayIndex + 4)}
+        {categoryArray.slice(
+          this.state.displayIndex,
+          this.state.displayIndex + 4
+        )}
         {categoryArray.length > this.state.displayIndex + 4 && (
           <MoreButton moreItems={this.next}>next/</MoreButton>
         )}
