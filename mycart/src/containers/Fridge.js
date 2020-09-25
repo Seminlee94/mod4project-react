@@ -1,8 +1,7 @@
 import React from 'react'
 import FridgeItem from "../components/Fridge/FridgeItem.js";
 import "../components/Fridge/Fridge.css";
-import MoreButton from "../components/Home/MoreButton.js";
-// import AddForm from "../components/Fridge/AddForm.js";
+// import MoreButton from "../components/Home/MoreButton.js";
 
 class Fridge extends React.Component {
 
