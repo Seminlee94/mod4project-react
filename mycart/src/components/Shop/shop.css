@@ -1,0 +1,26 @@
+.category-links{
+    display: flex;
+    align-items: center;
+    padding: 8px 0px 8px 16px;
+    list-style: none;
+    height: 60px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.category-links:hover {
+    background-color: #1a83ff;
+    cursor: pointer;
+}
+
+.active {
+    height: auto;
+    width: 100%;
+    left: 0;
+    opacity: 0.85;
+}
+
+.subcategory {
+    display: none;
+}

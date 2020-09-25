@@ -1,117 +1,133 @@
 import React from 'react'
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-  } from "react-router-dom";
+// import {
+//     BrowserRouter as Router,
+//     Switch,
+//     Route,
+//     Link
+//   } from "react-router-dom";
+import "../components/Shop/shop.css";
+import { ShopCategory } from "../components/Shop/ShopCategory.js";
 
-
-const routes = [
-{
-    path: "/Shop/Meat",
-    sidebar: () => "",
-    main: () => <h2>afdaf</h2>
-},
-{
-    path: "/Shop/Bakery",
-    sidebar: () => "",
-    main: () => <h2>Bakery</h2>
-},
-{
-    path: "/Shop/Seafood",
-    sidebar: () => "",//<div>Seafood!</div>,
-    main: () => <h2>Seafood</h2>
-},
-{
-    path: "/Shop/Produce",
-    sidebar: () => "",
-    main: () => <h2>Produce</h2>
-},
-{
-    path: "/Shop/Cheese",
-    sidebar: () => "",
-    main: () => <h2>Cheese</h2>
-},
-{
-    path: "/Shop/Prepared Foods",
-    sidebar: () => "",
-    main: () => <h2>Prepared Foods</h2>
-},
-{
-    path: "/Shop/liquors",
-    sidebar: () => "",
-    main: () => <h2>Wine, Beer and Spirits</h2>
-}
-];
-  
 
 class Shop extends React.Component {
 
-    render(){
-        return(
+  state = {
+    clicked: false
+  }
 
-            <Router>
-              <div style={{ display: "flex" }}>
-                <div
-                  style={{
-                    padding: "10px",
-                    width: "auto",
-                    background: "#f0f0f0"
-                  }}
-                >
-                  <ul style={{ listStyleType: "none", padding: 0 }}>
-                    <li>
-                      <Link to="/Shop/Meat">Meat</Link>
-                    </li>
-                    <li>
-                      <Link to="/Shop/Bakery">Bakery</Link>
-                    </li>
-                    <li>
-                      <Link to="/Shop/Seafood">Seafood</Link>
-                    </li>
-                    <li>
-                      <Link to="/Shop/Produce">Produce</Link>
-                    </li>
-                    <li>
-                      <Link to="/Shop/Cheese">Cheese</Link>
-                    </li>
-                    <li>
-                      <Link to="/Shop/Prepared_foods">Prepared Foods</Link>
-                    </li>
-                    <li>
-                      <Link to="/Shop/liquors">Wine, Beer & Spirits</Link>
-                    </li>
+  clickHandler = () => {
+    this.setState((previousState) => ({
+      clicked: !previousState.clicked
+    }))
+  }
+
+  render() {
+    return(
+      <div className="dd-wrapper" style={{ display: "flex" }}>
+        <div
+          className="dd-category"
+          style={{
+            padding: "10px",
+            width: "auto",
+            background: "#f0f0f0"
+          }}
+        >
+          <ul style={{ listStyleType: "none", padding: 0 }}>
+            {ShopCategory.map((item,index) => {
+              return (
+                <li className="category" key={index} >
+                   <p className={item.cName} onClick={this.clickHandler}>
+                    {item.title}
+                  </p> 
+                  <ul className={this.state.clicked ? "active" : "subcategory" } >
+                      <li>
+                          adfds
+                      </li>
+                      <li>
+                         afaewfe
+                      </li>
+                      <li>
+                          re23r
+                      </li>
                   </ul>
-        
-                  <Switch>
-                    {routes.map((route, index) => (
-                      <Route
-                        key={index}
-                        path={route.path}
-                        exact={route.exact}
-                        children={<route.sidebar />}
-                      />
-                    ))}
-                  </Switch>
-                </div>
-        
-                <div style={{ flex: 1, padding: "10px" }}>
-                  <Switch>
-                    {routes.map((route, index) => (
-                      <Route
-                        key={index}
-                        path={route.path}
-                        exact={route.exact}
-                        children={<route.main />}
-                      />
-                    ))}
-                  </Switch>
-                </div>
-              </div>
-            </Router>
-        )
-    }
+                </li>
+              )
+            })}
+            
+          </ul>
+        </div>
+      </div>
+    )
+  }
 }
 
 export default Shop
+
+
+          /* <Switch>
+            {routes.map((route, index) => (
+              <RouteWithSubRoutes
+                key={index}
+                {...route}
+                children={<route.main />}
+              />
+            ))}
+          </Switch>
+        </div>
+
+        <div style={{ flex: 1, padding: "10px", width: "auto", background: "#f0f0f0" }}>
+          <Switch>
+            {routes.map((route, index) => (
+              <Route
+                key={index}
+                path={route.path}
+                exact={route.exact}
+                children={<route.main />}
+              />
+            ))}
+          </Switch>
+        </div>
+       </div>
+    </Router>
+  ) 
+}
+
+function RouteWithSubRoutes(route) {
+  return(
+    <Route
+    path={route.path}
+    render={props => (
+      <route.component {...props} routes={route.routes} />
+    )}
+    />
+  )
+}
+
+function Meat({ routes }) {
+  return (
+
+
+    <div>
+      <ul>
+        <li>
+          <Link to="shop/meat/beef">Beef</Link>
+        </li>
+      </ul>
+
+
+            <div style={{ flex: 1, padding: "10px" }}>
+        <Switch>
+          {routes.map((route, i) => (
+            <RouteWithSubRoutes key={i} {...route} 
+            children={<route.main/> } />
+            ))}
+        </Switch>
+      </div>
+    </div>
+  );
+}
+
+function Beef() {
+  return <p>Beef</p>
+} */
+
