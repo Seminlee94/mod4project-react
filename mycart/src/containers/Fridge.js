@@ -5,14 +5,6 @@ import "../components/Fridge/Fridge.css";
 
 class Fridge extends React.Component {
 
-  // state = {
-  //   displayIndex: 0
-  // }
-
-  // items = () => {
-  //   return this.props.item.map(item => <FridgeItem item={item} /> )
-  // }
-
   filter = (Category) => {
     let filteredBakery = this.props.item.filter(item => item.category===Category)
     return filteredBakery.map(el => <FridgeItem item={el} />) 
