@@ -1,3 +1,9 @@
+body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
 .fridge-container {
     width: 100%;
     height: 100%;
@@ -21,7 +27,30 @@
 
 .fridge-shelf {
     border-bottom-style: solid;
-    border-radius: 4px;
     width: 100%;
-    height: 20%;
+    height: 23%;
+    /* display: flex; */
+    /* justify-content: center; */
+}
+
+.fridge-category {
+    width: 100%;
+    text-align: center;
+}
+
+.fridge-item-card {
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+}
+
+.item-image {
+    height: 50%;
+    margin-top: 20%;
+    padding: 0.1rem;
+}
+
+.item-image:hover {
+    cursor: pointer;
 }
