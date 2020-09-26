@@ -68,7 +68,7 @@ class App extends Component {
   render() {
 
   return( 
-    <div className="App" style={{ height: '100%', position: 'absolute', left: '0px', width: '100%', overflow: 'hidden'}}>
+    <div className="App" style={{ height: '100%', position: 'absolute', left: '0px', width: '100%', overflow: "scroll" }}>
       <Router>
 
         <Navbar />

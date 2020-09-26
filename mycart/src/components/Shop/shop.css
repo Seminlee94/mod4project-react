@@ -1,21 +1,21 @@
-.category-links{
-    display: flex;
-    align-items: center;
+.category{
+    /* align-items: center; */
     padding: 8px 0px 8px 16px;
-    list-style: none;
-    height: 60px;
+    /* list-style: none; */
+    height: auto;
     border-radius: 4px;
     text-decoration: none;
     font-weight: bold;
 }
 
-.category-links:hover {
+.category:hover {
     background-color: #1a83ff;
     cursor: pointer;
 }
 
 .active {
     height: auto;
+    font-size: 16px;
     width: 100%;
     left: 0;
     opacity: 0.85;

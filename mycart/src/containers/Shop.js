@@ -1,197 +1,185 @@
 import React from 'react'
-// import {
-//     BrowserRouter as Router,
-//     Switch,
-//     Route,
-//     Link
-//   } from "react-router-dom";
 import "../components/Shop/shop.css";
-import { ShopCategory } from "../components/Shop/ShopCategory.js";
-import ShopSubcategory from '../components/Shop/ShopSubcategory.js';
+// import { ShopCategory } from "../components/Shop/ShopCategory.js";
+// import ShopSubcategory from '../components/Shop/ShopSubcategory.js';
 
 class Shop extends React.Component {
-  filter = (Category) => {
-    let filtered = this.props.item.filter(item => item.category === Category);
-    return filtered.map(el => console.log(el))
-  };
+
+  state = {
+    itemArray: [],
+    meatClicked: false,
+    bakeryClicked: false,
+    produceClicked: false,
+    seafoodClicked: false,
+    cheeseClicked: false,
+    preparedClicked: false,
+    liquorClicked: false,
+    otherClicked: false
+
+  }
+
+  componentDidMount() {
+    fetch("http://localhost:8000/items")
+    .then((res) => res.json())
+    .then((data) => this.setState({ itemArray: data }));
+  }
+
+
+  clickHandler = (e) => {
+    if(e.target.textContent==="Meat"){
+      this.setState((previousState) => ({
+        meatClicked: !previousState.meatClicked
+      }))
+    } else if(e.target.textContent==="Bakery"){
+      this.setState((previousState) => ({
+        bakeryClicked: !previousState.bakeryClicked
+      }))
+    } else if(e.target.textContent==="Produce"){
+      this.setState((previousState) => ({
+        produceClicked: !previousState.produceClicked
+      }))
+    } else if(e.target.textContent==="Seafood"){
+      this.setState((previousState) => ({
+        seafoodClicked: !previousState.seafoodClicked
+      }))
+    } else if(e.target.textContent==="Cheese"){
+      this.setState((previousState) => ({
+        cheeseClicked: !previousState.cheeseClicked
+      }))
+    } else if(e.target.textContent==="Prepared Foods"){
+      this.setState((previousState) => ({
+        preparedClicked: !previousState.preparedClicked
+      }))
+    } else if(e.target.textContent==="Wine, Beer and Spirits"){
+      this.setState((previousState) => ({
+        liquorClicked: !previousState.liquorClicked
+      }))
+    } else if(e.target.textContent==="Other Departments"){
+      this.setState((previousState) => ({
+        otherClicked: !previousState.otherClicked
+      }))
+    }
+  }
+
+  // filter = (category) => {
+  //   return category.map(el => <ShopSubcategory item={el} />)
+  // }
 
   render() {
-    const ShopArray = [
-      { category: "Bakery", subcategory: this.filter("Bread") },
-      { category: "Produce", subcategory: this.filter("Produce") },
-      { category: "Meat", subcategory: this.filter("Meat") },
-      { category: "Seafood", subcategory: this.filter("Seafood") },
-      {
-        category: "Prepared Foods",
-        subcategory: this.filter("Prepared Foods"),
-      },
-      { category: "Other Departments", subcategory: this.filter("Other Departments") },
-      { category: "Cheese", subcategory: this.filter("Cheese") },
-    ];
 
-    const shopCategoryContainer = ShopArray.map(({category, subcategory}) => (
-      <div className="shop-category">
-        <div className="shop-subcategory">{category}</div>
-        <ShopSubcategory item={subcategory} />
+    console.log(this.state.categoryArray)
+
+    return(
+      <div className="dd-wrapper" style={{ display: "flex" }}>
+        <div
+          className="dd-category"
+          style={{
+            padding: "10px",
+            width: "auto",
+            background: "#f0f0f0"
+          }}
+        >
+          <ul style={{ listStyleType: "none", padding: 0 }}>
+            {/* {ShopCategory.map((item) => {
+              return (
+                <li className="category" >
+                   <p className={item.cName} onClick={this.clickHandler}>
+                    {item.category} 
+                  </p> 
+                  <ul className={this.state.clicked ? "active" : "subcategory" } >
+                  
+                      <li>                        
+                        {this.filterMeat()}
+                      </li>
+
+                  </ul>
+                </li>
+ 
+              )
+            })} */}
+
+            <li className="category" onClick={this.clickHandler}><p>Bakery</p> 
+              <ul className={this.state.bakeryClicked ? "active" : "subcategory"}>
+                <li>Bread, Fresh Baked</li>
+                <li>Bread, Packaged</li>
+                <li>Breakfast</li>
+                <li>Cakes</li>
+                <li>Cookies</li>
+                <li>Rolls</li>
+              </ul> 
+            </li>
+            <li className="category" onClick={this.clickHandler}><p>Meat</p>
+              <ul className={this.state.meatClicked ? "active" : "subcategory"}>
+                <li>Bacon</li>
+                <li>Beef</li>
+                <li>Chicken</li>
+                <li>Ground Meat</li>
+                <li>Ham</li>
+                <li>Pork</li>
+                <li>Sausage</li>
+                <li>Turkey</li>
+              </ul>
+            </li>
+            <li className="category" onClick={this.clickHandler}><p>Seafood</p>
+              <ul className={this.state.seafoodClicked ? "active" : "subcategory"}>
+                <li>Crab and Lobster</li>
+                <li>Fresh Seafood</li>
+                <li>Frozen Shrimp & Seafood</li>
+              </ul>
+            </li>
+            <li className="category" onClick={this.clickHandler}><p>Produce</p>
+              <ul className={this.state.produceClicked ? "active" : "subcategory"}>
+                <li>Fruit</li>
+                <li>Vegetables</li>
+              </ul>
+            </li>
+            <li className="category" onClick={this.clickHandler}><p>Cheese</p>
+              <ul className={this.state.cheeseClicked ? "active" : "subcategory"}>
+                <li>Blue Cheese</li>
+                <li>Cave-Ripened Cheese</li>
+                <li>Feta Cheese</li>
+                <li>Cheddar, Gouda, Swiss & more</li>
+                <li>Goat & Sheep</li>
+                <li>Italian Cheese</li>
+              </ul>
+            </li>
+            <li className="category" onClick={this.clickHandler}><p>Prepared Foods</p>
+              <ul className={this.state.preparedClicked ? "active" : "subcategory"}>
+                <li>Asian</li>
+                <li>Pizza & Wings</li>
+                <li>Salads</li>
+                <li>Soups</li>
+                <li>Sushi</li>
+              </ul>
+            </li>
+            <li className="category" onClick={this.clickHandler}><p>Wine, Beer and Spirits</p>
+              <ul className={this.state.liquorClicked ? "active" : "subcategory"}>
+                <li>Beer</li>
+                <li>Wine</li>
+              </ul>
+            </li>
+            <li className="category" onClick={this.clickHandler}><p>Other Departments</p>
+              <ul className={this.state.otherClicked ? "active" : "subcategory"}>
+                <li>Baby</li>
+                <li>Beverages</li>
+                <li>Bulk Foods</li>
+                <li>Coffee Shop</li>
+                <li>Dairy</li>
+                <li>Grocery</li>
+                <li>Kosher</li>
+                <li>Personal Care and Makeup</li>
+                <li>Pet Supplies</li>
+              </ul>
+            </li>
+            
+          </ul>
+        </div>
       </div>
-    ));
-
-    return (
-      <div className="fridge-container">
-        <div className="fridge-container-left"> </div>
-        {shopCategoryContainer}
-
-      </div>
-    );
+    )
   }
 }
-export default Shop;
+
+export default Shop
 
 
-
-
-
-
-
-// class Shop extends React.Component {
-
-//   state = {
-//     itemArray: [],
-//     clicked: false,
-//     meatArray:[]
-//   }
-
-//   componentDidMount() {
-//     fetch("http://localhost:8000/items")
-//     .then((res) => res.json())
-//     .then((data) => this.setState({ itemArray: data }));
-//   }
-
-
-//   clickHandler = (e) => {
-//     console.log(this.state)
-//     console.dir(e.target)
-//     if(e.target.textContent==="Meat"){
-//       let newArray = [...this.state.itemArray]
-//       let foundArray = newArray.filter(el => el.category==="Meat")
-//       this.setState((previousState) => ({
-//         clicked: !previousState.clicked,
-//         meatArray: foundArray
-//       }))
-//     }
-//   }
-
-  
-
-//   render() {
-//     return(
-//       <div className="dd-wrapper" style={{ display: "flex" }}>
-//         <div
-//           className="dd-category"
-//           style={{
-//             padding: "10px",
-//             width: "auto",
-//             background: "#f0f0f0"
-//           }}
-//         >
-//           <ul style={{ listStyleType: "none", padding: 0 }}>
-//             {ShopCategory.map((item) => {
-//               return (
-//                 <li className="category" >
-//                   {/* <ShopSubcategory className={item.cName} item={item} onClick={this.clickHandler} /> */}
-//                    <p className={item.cName} onClick={this.clickHandler}>
-//                     {item.category} 
-//                   </p> 
-//                   <ul className={this.state.clicked ? "active" : "subcategory" } >
-                  
-//                       <li>                        
-//                         <ShopSubcategory item={this.state.meatArray}/>
-//                       </li>
-
-//                   </ul>
-//                 </li>
- 
-//               )
-//             })}
-            
-//           </ul>
-//         </div>
-//       </div>
-//     )
-//   }
-// }
-
-// export default Shop
-
-
-
-
-
-
-          /* <Switch>
-            {routes.map((route, index) => (
-              <RouteWithSubRoutes
-                key={index}
-                {...route}
-                children={<route.main />}
-              />
-            ))}
-          </Switch>
-        </div>
-
-        <div style={{ flex: 1, padding: "10px", width: "auto", background: "#f0f0f0" }}>
-          <Switch>
-            {routes.map((route, index) => (
-              <Route
-                key={index}
-                path={route.path}
-                exact={route.exact}
-                children={<route.main />}
-              />
-            ))}
-          </Switch>
-        </div>
-       </div>
-    </Router>
-  ) 
-}
-
-function RouteWithSubRoutes(route) {
-  return(
-    <Route
-    path={route.path}
-    render={props => (
-      <route.component {...props} routes={route.routes} />
-    )}
-    />
-  )
-}
-
-function Meat({ routes }) {
-  return (
-
-
-    <div>
-      <ul>
-        <li>
-          <Link to="shop/meat/beef">Beef</Link>
-        </li>
-      </ul>
-
-
-            <div style={{ flex: 1, padding: "10px" }}>
-        <Switch>
-          {routes.map((route, i) => (
-            <RouteWithSubRoutes key={i} {...route} 
-            children={<route.main/> } />
-            ))}
-        </Switch>
-      </div>
-    </div>
-  );
-}
-
-function Beef() {
-  return <p>Beef</p>
-} */
 
