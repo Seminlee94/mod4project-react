@@ -49,17 +49,23 @@ class App extends Component {
   };
 
   render() {
+    return (
+      <div
+        className="App"
+        style={{
+          height: "100%",
+          position: "absolute",
+          left: "0px",
+          width: "100%",
+          overflow: "scroll",
+        }}
+      >
+        <Router>
+          <Navbar />
 
-  return( 
-    <div className="App" style={{ height: '100%', position: 'absolute', left: '0px', width: '100%', overflow: "scroll" }}>
-      <Router>
-
-        <Navbar />
-        
           <Switch class="header-switch">
-
             <Route path="/shop">
-                <Shop item={this.state.itemArray} />
+              <Shop itemArray={this.state.itemArray} />
             </Route>
 
             <Route path="/fridge">
@@ -81,9 +87,8 @@ class App extends Component {
                 itemArray={this.showItemArray()}
               />
             </Route>
-
-        </Switch>
-      </Router>
+          </Switch>
+        </Router>
       </div>
     );
   }

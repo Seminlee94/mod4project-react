@@ -1,20 +1,23 @@
-import React from "react"
-import ItemRightCard from "./ItemCard.js"
+import React from "react";
+import ItemRightCard from "./ItemRightCard.js";
 
-class ShopRight extends React.Component{
+class ShopRight extends React.Component {
+  //props returns clickedItemArray properly
+  //wont render itemrightcard
+  // console.log("shopRighttab props:", this.props);
+  clickedItems = () => {
+    return this.props.itemClickedArray.map((clickedItem) => (
+      <ItemRightCard key={clickedItem.id} item={clickedItem} />
+    ));
+  };
 
-    items = () => {
-        return this.props.item.map(item => <ItemRightCard key={item.id} item={item} /> )
-    }
-
-    render() {
-
-        return(
-            <div className="shop-right" >
-                <h3>{this.items()}</h3>
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div className="shop-right">
+        <h3>{this.clickedItems()}</h3>
+      </div>
+    );
+  }
 }
 
-export default ShopRight
+export default ShopRight;
