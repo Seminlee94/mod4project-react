@@ -9,7 +9,7 @@ import { SeafoodCategory } from "../components/Shop/Subcategory-lists/Seafood.js
 import { LiquorCategory } from "../components/Shop/Subcategory-lists/Liquor.js"
 import { PreparedfoodCategory } from "../components/Shop/Subcategory-lists/Preparedfood.js"
 import { OtherCategory } from "../components/Shop/Subcategory-lists/Other.js"
-
+// dfadfadsf
 
 
 class Shop extends React.Component {
