@@ -1,7 +1,8 @@
 import React from 'react'
-import "../components/Shop/shop.css";
-import ShopMain from '../components/Shop/ShopMain';
-import { BakeryCategory } from "../components/Shop/Subcategory-lists/Bakery.js"
+import "../components/Shop/shop.css"
+import ShopMain from '../components/Shop/ShopMain'
+import ShopRight from '../components/Shop/ShopRight'
+import { BreadCategory } from "../components/Shop/Subcategory-lists/Bread.js"
 import { MeatCategory } from "../components/Shop/Subcategory-lists/Meat.js"
 import { CheeseCategory } from "../components/Shop/Subcategory-lists/Cheese.js"
 import { ProduceCategory } from "../components/Shop/Subcategory-lists/Produce.js"
@@ -15,10 +16,11 @@ import { OtherCategory } from "../components/Shop/Subcategory-lists/Other.js"
 class Shop extends React.Component {
 
   state = {
+    clickedArray: [],
     itemArray: [],
     filteredItem: [],
     meatClicked: false,
-    bakeryClicked: false,
+    breadClicked: false,
     produceClicked: false,
     seafoodClicked: false,
     cheeseClicked: false,
@@ -34,15 +36,23 @@ class Shop extends React.Component {
     .then((data) => this.setState({ itemArray: data }));
   }
 
+  itemClickHandler = (item) => {
+    let newArray = this.state.clickedArray
+    let foundObj = this.state.itemArray.find(el => el.name===item.name)
+    this.setState(()=>({
+      clickedArray: [...newArray, foundObj]
+    }))
+  }
+
 
   clickHandler = (e) => {
     if(e.target.textContent==="Meat"){
       this.setState((previousState) => ({
         meatClicked: !previousState.meatClicked
       }))
-    } else if(e.target.textContent==="Bakery"){
+    } else if(e.target.textContent==="Bread"){
       this.setState((previousState) => ({
-        bakeryClicked: !previousState.bakeryClicked
+        breadClicked: !previousState.breadClicked
       }))
     } else if(e.target.textContent==="Produce"){
       this.setState((previousState) => ({
@@ -93,11 +103,11 @@ class Shop extends React.Component {
           <ul style={{ listStyleType: "none", padding: 0 }}>
 
 
-            <li className="category" onClick={this.clickHandler}><p>Bakery</p> 
-              <ul className={this.state.bakeryClicked ? "active" : "subcategory"}>
-                {this.state.bakeryClicked ? BakeryCategory.map((item) => { 
+            <li className="category" onClick={this.clickHandler}><p>Bread</p> 
+              <ul className={this.state.breadClicked ? "active" : "subcategory"}>
+                {this.state.breadClicked ? BreadCategory.map((item) => { 
                   return( 
-                    <li className={item.cName} key={item.id}>
+                    <li className={item.cName} key={item.id} onClick={this.subclickHandler} >
                         {item.subcategory}
                     </li>
                   )})
@@ -218,7 +228,8 @@ class Shop extends React.Component {
             
           </ul>
         </div>
-        <ShopMain item={this.state.filteredItem} />  
+        <ShopMain item={this.state.filteredItem} itemClickHandler={this.itemClickHandler}/>
+        <ShopRight item={this.state.clickedArray} />
       </div>
     )
   }
