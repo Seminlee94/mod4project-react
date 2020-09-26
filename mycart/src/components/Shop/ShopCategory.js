@@ -1,70 +1,43 @@
 export const ShopCategory = [
     {
-        url: "/shop",
+        url: "/shop/meat",
         category: "Meat",
         cName: "category-links",
-        subcategory: [ 
-            {
-                name: "Bacon",
-                name: "Beef" 
-            }
-        ]
-        
     },
     {
-        url: "/shop",
+        url: "/shop/bakery",
         category: "Bakery",
-        cName: "category-links",
-        subcategory: [{ name: "Bread, Fresh Baked" }]
-             
+        cName: "category-links",        
     },
     {
         url: "/shop",
         category: "Seafood",
         cName: "category-links",
-        subcategory: [{ name: "Crab and Lobster" }]
-
-        
     },
     {
         url: "/shop",
         category: "Produce",
         cName: "category-links",
-        subcategory: [{ name: "Fruit" }]
-
-        
     },
     {
         url: "/shop",
         category: "Cheese",
         cName: "category-links",
-        subcategory: [{ name: "Blue Cheese" }]
-
-        
     },
     {
         url: "/shop",
         category: "Prepared Foods",
         cName: "category-links",
-        subcategory: [{ name: "Asian" }]
-
-        
     },
     {
         url: "/shop",
         category: "Wine, Beer and Spirits",
         cName: "category-links",
-        subcategory: [{ name: "Beer Shop" }]
-
-        
     },
     {
         url: "/shop",
         category: "Other Departments",
         cName: "category-links",
-        subcategory: [{ name: "Baby" }]
-
-        
     }
     ];
 

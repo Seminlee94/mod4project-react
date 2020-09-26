@@ -29,23 +29,6 @@ class App extends Component {
       .then((data) => this.setState({ fridgeItemArray: data[0].items }));
   }
 
-  // renderFourItems = () => {
-  //   return this.state.fridgeItemArray.slice(this.state.displayIndex, this.state.displayIndex+4)
-  // }
-
-  // more = (event) => {
-  //   let newDisplayIndex = this.state.displayIndex + 4
-
-  //   //bonus
-  //   if(newDisplayIndex >= this.state.fridgeItemArray.length){
-  //     newDisplayIndex = 0
-  //   }
-
-  //   this.setState({
-  //     displayIndex: newDisplayIndex
-  //   })
-  // }
-
   search = (searchValue) => {
     this.setState({ searchValue: searchValue });
     console.log("settingSearch:", this.state.searchValue);
@@ -73,11 +56,11 @@ class App extends Component {
 
         <Navbar />
         
-        <Switch class="header-switch">
+          <Switch class="header-switch">
 
-          <Route path="/shop">
-              <Shop item={this.state.itemArray} />
-          </Route>
+            <Route path="/shop">
+                <Shop item={this.state.itemArray} />
+            </Route>
 
             <Route path="/fridge">
               <Fridge item={this.state.fridgeItemArray} />
@@ -87,27 +70,22 @@ class App extends Component {
               <Friends />
             </Route>
 
-            <Route path=""></Route>
-          </Switch>
-        </Router>
-        <Search
-          className="searchBar"
-          searchValue={this.state.searchValue}
-          search={this.search}
-        />
-        <HomeIndex
-          className="temporary-search-index"
-          itemArray={this.showItemArray()}
-        />
+            <Route path="/">
+              <Search
+                className="searchBar"
+                searchValue={this.state.searchValue}
+                search={this.search}
+              />
+              <HomeIndex
+                className="temporary-search-index"
+                itemArray={this.showItemArray()}
+              />
+            </Route>
+
+        </Switch>
+      </Router>
       </div>
     );
-    // render() {
-    //   return (
-    //     <div className="app">
-    //       <Navbar />
-    //       <HomeIndex />
-    //     </div>
-    //   );
   }
 }
 
