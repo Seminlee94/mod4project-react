@@ -31,7 +31,6 @@ class App extends Component {
 
   search = (searchValue) => {
     this.setState({ searchValue: searchValue });
-    console.log("settingSearch:", this.state.searchValue);
   };
 
   showItemArray = () => {
@@ -46,6 +45,25 @@ class App extends Component {
               .toLowerCase()
               .includes(this.state.searchValue.toLowerCase())
         );
+  };
+
+  moveToFridge = (id) => {
+    let foundObj = this.state.itemArray.find((el) => el.id === parseInt(id));
+    // console.log("foundobj:", foundObj);
+    fetch("http://localhost:8000/fridge-items", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json",
+      },
+      body: JSON.stringify(foundObj),
+    })
+      .then((res) => res.json())
+      .then((newObj) =>
+        this.setState({
+          fridgeItemArray: [...this.state.fridgeItemArray, newObj],
+        })
+      );
   };
 
   render() {
@@ -65,7 +83,10 @@ class App extends Component {
 
           <Switch class="header-switch">
             <Route path="/shop">
-              <Shop itemArray={this.state.itemArray} />
+              <Shop
+                itemArray={this.state.itemArray}
+                moveToFridge={this.moveToFridge}
+              />
             </Route>
 
             <Route path="/fridge">

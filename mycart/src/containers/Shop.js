@@ -28,13 +28,6 @@ class Shop extends React.Component {
   itemClickHandler = (id) => {
     let newArray = this.state.clickedArray;
     let foundObj = this.props.itemArray.find((el) => el.id === parseInt(id));
-    // console.log(
-    //   "Shop.js itemclickHandler:",
-    //   "clickedArray:",
-    //   newArray,
-    //   "foundObj",
-    //   foundObj
-    // );
     this.setState(() => ({
       clickedArray: [...newArray, foundObj],
     }));
@@ -274,7 +267,10 @@ class Shop extends React.Component {
           item={this.state.filteredItem}
           itemClickHandler={this.itemClickHandler}
         />
-        <ShopRight itemClickedArray={this.state.clickedArray} />
+        <ShopRight
+          moveToFridge={this.props.moveToFridge}
+          itemClickedArray={this.state.clickedArray}
+        />
       </div>
     );
   }

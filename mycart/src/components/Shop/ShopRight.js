@@ -7,7 +7,11 @@ class ShopRight extends React.Component {
   // console.log("shopRighttab props:", this.props);
   clickedItems = () => {
     return this.props.itemClickedArray.map((clickedItem) => (
-      <ItemRightCard key={clickedItem.id} item={clickedItem} />
+      <ItemRightCard
+        key={clickedItem.id}
+        item={clickedItem}
+        moveToFridge={this.props.moveToFridge}
+      />
     ));
   };
 

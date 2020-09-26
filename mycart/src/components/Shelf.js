@@ -20,7 +20,6 @@ class Shelf extends React.Component {
 
   render() {
     const categoryArray = this.props.category;
-    console.log(this.props.category);
     return (
       <div className="fridge-item-card">
         {this.state.displayIndex !== 0 && (
