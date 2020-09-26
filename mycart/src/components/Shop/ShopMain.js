@@ -3,15 +3,15 @@ import ItemCard from "./ItemCard.js"
 
 class ShopMain extends React.Component{
 
-      filtered = () => {
-      return this.props.item.map(item => <ItemCard key={item.id} item={item} /> )
+      items = () => {
+      return this.props.item.map(item => <ItemCard key={item.id} item={item} itemClickHandler={this.props.itemClickHandler} /> )
   }
 
     render() {
 
         return(
-            <div className="Item-card">
-                {this.filtered()}
+            <div className="item-container">
+                {this.items()}
             </div>
         )
     }
