@@ -64,10 +64,10 @@ class App extends Component {
     })
       .then((res) => res.json())
       .then((newObj) => {
-        // Copy the array
-        const updatedArray = [...this.state.clickedArray];
         // Delete the selected item from the array
-        delete updatedArray[clickedItemIndex];
+        const updatedArray = this.state.clickedArray.filter(
+          (item, index) => index !== clickedItemIndex
+        );
 
         this.setState({
           fridgeItemArray: [...this.state.fridgeItemArray, newObj],
