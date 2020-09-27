@@ -13,9 +13,9 @@ import Shop from "./containers/Shop.js";
 class App extends Component {
   state = {
     itemArray: [],
-    searchValue: "",
     fridgeItemArray: [],
     clickedArray: [],
+    searchValue: "",
   };
 
   componentDidMount() {
