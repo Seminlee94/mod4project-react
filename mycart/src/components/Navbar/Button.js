@@ -1,5 +1,6 @@
 import React from "react";
 import "./Button.css";
+import Login from "../User/Login"
 
 const STYLES = [
     'btn--primary',
@@ -24,8 +25,14 @@ export const Button = ({
     const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0]
 
     return (
-        <button className={`btn ${checkButtonStyle} ${checkButtonSize}`} onClick={onClick} type={type}>
-            {children}
-        </button>
+        // <button className={`btn ${checkButtonStyle} ${checkButtonSize}`} onClick={onClick} type={type}>
+        //     {children}
+        // </button>
+        <div className="dropdown">
+            <button className="dropbtn" onClick={onClick} type={type} >{children}</button>
+            <Login />
+        </div>
+
+        
     )
 }
