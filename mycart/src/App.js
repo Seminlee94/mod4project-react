@@ -51,7 +51,7 @@ class App extends Component {
   moveToFridge = (id) => {
     let foundObj = this.state.itemArray.find((el) => el.id === parseInt(id));
     // console.log("foundobj:", foundObj);
-    fetch("http://localhost:8000/fridge-items", {
+    fetch("http://localhost:8000/fridge-items/", {
       method: "POST",
       headers: {
         "content-type": "application/json",

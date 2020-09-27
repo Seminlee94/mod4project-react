@@ -1171,7 +1171,6 @@
       "description": "Wild Caught Mahi-Mahi, FAMILY PACK"
     }
   ],
-
   "fridge-items": [
     {
       "id": 1,
@@ -1387,6 +1386,16 @@
         "name": "example",
         "address": "example"
       }
+    },
+    {
+      "id": 76,
+      "name": "Fyf Choh 2/2/3 Rib",
+      "price": 17,
+      "category": "Meat",
+      "sub_category": "Beef",
+      "quantity": 88,
+      "image": "https://wfmproducts.azureedge.net/images-500/00202043000003.jpg",
+      "description": "Angus Beef Semi-Boneless Rib Roast, Choice"
     }
   ]
 }
