@@ -89,6 +89,24 @@
 
 .item-right-card {
     display: flex;
+    width: 100%;
+}
+
+.fridge-button {
+    height: 50px;
+    width: 27%;
+    border-radius: 6px;
+}
+
+.fridge-button:hover {
+    cursor: pointer;
+    background-color: #ff4500 
+}
+
+.item-right-price {
+    margin-top: 15px;
+    font-size: 22px;
+    width: 35%;
 }
 
 .item-right-card.img {
