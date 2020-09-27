@@ -2,7 +2,7 @@ import React, { Component } from "react";
 // import { Switch, Route, Link } from "react-router-dom";
 import "./Navbar.css";
 import { MenuItems } from "./MenuItems.js";
-import { Button } from "./Button.js";
+// import { Button } from "./Button.js";
 
 
 class Navbar extends Component {
@@ -37,7 +37,26 @@ class Navbar extends Component {
           })}
         </ul>
 
-        <Button>Sign Up</Button>
+        <div class="dropdown">
+            <button class="dropbtn">Sign In</button>
+            <div class="dropdown-content">
+                <h4>SIGN IN</h4>
+                <div class="sign-in-form">
+                    <form>
+                        <input type="text" id="sign-in-username" placeholder="Enter Username" />
+                        <input type="text" id="sign-in-password" placeholder="Enter Password" />
+                        <div>
+                          <button>SIGN IN</button>
+                        </div>
+                    </form>
+                </div>
+                <h6>OR</h6>
+                <h6>New User? SIGN UP!!</h6>
+                <div>
+                  <button>SIGN UP</button>
+                </div>
+            </div>
+        </div>
       </nav>
     );
   }
