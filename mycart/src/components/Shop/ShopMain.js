@@ -31,7 +31,7 @@ class ShopMain extends React.Component{
                 .includes(this.state.searchTerm.toLowerCase())
           );
 
-        return findItems.map(item => <ItemCard item={item} />)
+        return findItems.map(item => <ItemCard key={item.id} item={item} itemClickHandler={this.props.itemClickHandler} />)
     }
 
     submitHandler = (term) => {

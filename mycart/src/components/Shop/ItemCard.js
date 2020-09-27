@@ -1,7 +1,6 @@
 import React from "react";
 
 const ItemCard = (props) => {
-  // console.log(props.item);
   //all the items
   return (
     <div
