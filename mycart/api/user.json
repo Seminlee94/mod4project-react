@@ -1,0 +1,53 @@
+{
+    "users" : [
+        {
+            "id": 1,
+            "username": "example",
+            "password_digest": "example",
+            "name": "example",
+            "address": "example"
+        },
+        {
+            "id": 2,
+            "username": "example1",
+            "password_digest": "example1",
+            "name": "example1",
+            "address": "example1"
+        },
+        {
+            "id": 3,
+            "username": "example2",
+            "password_digest": "example2",
+            "name": "example2",
+            "address": "example2"
+        },
+        {
+            "id": 4,
+            "username": "example3",
+            "password_digest": "example3",
+            "name": "example3",
+            "address": "example3"
+        },
+        {
+            "id": 5,
+            "username": "example4",
+            "password_digest": "example4",
+            "name": "example4",
+            "address": "example4"
+        },
+        {
+            "id": 6,
+            "username": "example5",
+            "password_digest": "example5",
+            "name": "example5",
+            "address": "example5"
+        },
+        {
+            "id": 7,
+            "username": "example6",
+            "password_digest": "example6",
+            "name": "example6",
+            "address": "example6"
+        }
+    ]
+}

@@ -6,7 +6,7 @@ class Search extends React.Component {
       this.props.search(e.target.value);
     };
     
-    render(props) {
+    render() {
     
       return (
         <form className="search">

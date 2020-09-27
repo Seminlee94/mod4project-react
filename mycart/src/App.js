@@ -13,8 +13,8 @@ import Shop from "./containers/Shop.js";
 class App extends Component {
   state = {
     itemArray: [],
-    searchValue: "",
     fridgeItemArray: [],
+    searchValue: ""
   };
 
   componentDidMount() {
@@ -28,6 +28,7 @@ class App extends Component {
       .then((resp) => resp.json())
       .then((data) => this.setState({ fridgeItemArray: data[0].items }));
   }
+
 
   search = (searchValue) => {
     this.setState({ searchValue: searchValue });
