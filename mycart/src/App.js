@@ -14,7 +14,8 @@ class App extends Component {
   state = {
     itemArray: [],
     fridgeItemArray: [],
-    searchValue: ""
+    clickedArray: [],
+    searchValue: "",
   };
 
   componentDidMount() {
@@ -28,7 +29,6 @@ class App extends Component {
       .then((resp) => resp.json())
       .then((data) => this.setState({ fridgeItemArray: data[0].items }));
   }
-
 
   search = (searchValue) => {
     this.setState({ searchValue: searchValue });
@@ -48,23 +48,40 @@ class App extends Component {
         );
   };
 
-  moveToFridge = (id) => {
-    let foundObj = this.state.itemArray.find((el) => el.id === parseInt(id));
-    // console.log("foundobj:", foundObj);
-    fetch("http://localhost:8000/fridge-items/", {
+  moveToFridge = (id, clickedItemIndex) => {
+    // Copy the object, so that we don't change any places it's being referenced
+    let foundObj = {
+      ...this.state.itemArray.find((el) => el.id === parseInt(id)),
+    };
+    delete foundObj.id; //deletes the store ID, letting newObj create new ID for fridgeitem so we don't get conflicts when trying to post
+    fetch("http://localhost:8000/fridge-items", {
       method: "POST",
       headers: {
-        "content-type": "application/json",
-        accepts: "application/json",
+        "Content-Type": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify(foundObj),
     })
       .then((res) => res.json())
-      .then((newObj) =>
+      .then((newObj) => {
+        // Copy the array
+        const updatedArray = [...this.state.clickedArray];
+        // Delete the selected item from the array
+        delete updatedArray[clickedItemIndex];
+
         this.setState({
           fridgeItemArray: [...this.state.fridgeItemArray, newObj],
-        })
-      );
+          clickedArray: updatedArray,
+        });
+      });
+  };
+
+  itemClickHandler = (id) => {
+    let newArray = this.state.clickedArray;
+    let foundObj = this.state.itemArray.find((el) => el.id === parseInt(id));
+    this.setState(() => ({
+      clickedArray: [...newArray, foundObj],
+    }));
   };
 
   render() {
@@ -87,6 +104,8 @@ class App extends Component {
               <Shop
                 itemArray={this.state.itemArray}
                 moveToFridge={this.moveToFridge}
+                clickedArray={this.state.clickedArray}
+                itemClickHandler={this.itemClickHandler}
               />
             </Route>
 
