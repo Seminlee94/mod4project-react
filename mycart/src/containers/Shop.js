@@ -13,7 +13,6 @@ import { OtherCategory } from "../components/Shop/Subcategory-lists/Other.js";
 
 class Shop extends React.Component {
   state = {
-    // clickedArray: [],
     filteredItem: [],
     meatClicked: false,
     breadClicked: false,
@@ -25,26 +24,6 @@ class Shop extends React.Component {
     otherClicked: false,
   };
 
-  // itemClickHandler = (id) => {
-  //   let newArray = this.state.clickedArray;
-  //   let foundObj = this.props.itemArray.find((el) => el.id === parseInt(id));
-  //   this.setState(() => ({
-  //     clickedArray: [...newArray, foundObj],
-  //   }));
-  // };
-  // itemDeleter = (id) => {
-  //   const updatedArray = this.state.clickedArray.filter(
-  //     (currentObj) => id !== currentObj.id
-  //   );
-  //   this.setState({
-  //     clickedArray: updatedArray,
-  //   });
-  // };
-  //             //sending down filtered subcats        //populates clickedArray for rightsidebar
-  //  <ShopMain item={this.state.filteredItem} itemClickHandler={this.itemClickHandler}/>
-
-  //                  //right side bar clicked items
-  //  <ShopRight clickedItem={this.state.clickedArray} />
   clickHandler = (e) => {
     if (e.target.textContent === "Meat") {
       this.setState((previousState) => ({
@@ -91,7 +70,6 @@ class Shop extends React.Component {
   };
 
   render() {
-
     return (
       <div className="dd-wrapper" style={{ display: "flex" }}>
         <div

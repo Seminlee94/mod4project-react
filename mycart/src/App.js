@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import "./App.css";
 import { Switch, Route, Link } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
-import HomeIndex from "./containers/HomeIndex";
+import HomeIndex from "./components/Home/HomeIndex";
 import Navbar from "./components/Navbar/Navbar.js";
-// import Search from "./components/Home/Search.js";
-import TempIndex from "./containers/TempIndex.js";
 import Fridge from "./containers/Fridge.js";
 import Friends from "./containers/Friends.js";
 import Shop from "./containers/Shop.js";
@@ -15,7 +13,7 @@ class App extends Component {
     itemArray: [],
     fridgeItemArray: [],
     clickedArray: [],
-    searchValue: "",
+    recipeArray: [],
   };
 
   componentDidMount() {
@@ -29,24 +27,6 @@ class App extends Component {
       .then((resp) => resp.json())
       .then((data) => this.setState({ fridgeItemArray: data[0].items }));
   }
-
-  search = (searchValue) => {
-    this.setState({ searchValue: searchValue });
-  };
-
-  showItemArray = () => {
-    return this.state.searchValue === ""
-      ? this.state.itemArray
-      : this.state.itemArray.filter(
-          (item) =>
-            item.name
-              .toLowerCase()
-              .includes(this.state.searchValue.toLowerCase()) ||
-            item.description
-              .toLowerCase()
-              .includes(this.state.searchValue.toLowerCase())
-        );
-  };
 
   moveToFridge = (id, clickedItemIndex) => {
     // Copy the object, so that we don't change any places it's being referenced
@@ -64,7 +44,6 @@ class App extends Component {
     })
       .then((res) => res.json())
       .then((newObj) => {
-        // Delete the selected item from the array
         const updatedArray = this.state.clickedArray.filter(
           (item, index) => index !== clickedItemIndex
         );
@@ -118,14 +97,11 @@ class App extends Component {
             </Route>
 
             <Route path="/">
-              {/* <Search
-                className="searchBar"
-                searchValue={this.state.searchValue}
-                search={this.search}
-              /> */}
               <HomeIndex
                 className="temporary-search-index"
-                itemArray={this.showItemArray()}
+                fridgeItemArray={this.state.fridgeItemArray}
+                shopItemArray={this.state.itemArray}
+                recipeArray={this.state.recipeArray}
               />
             </Route>
           </Switch>
