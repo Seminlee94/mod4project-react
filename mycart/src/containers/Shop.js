@@ -91,6 +91,7 @@ class Shop extends React.Component {
   };
 
   render() {
+
     return (
       <div className="dd-wrapper" style={{ display: "flex" }}>
         <div
@@ -272,6 +273,7 @@ class Shop extends React.Component {
           </ul>
         </div>
         <ShopMain
+          itemArray={this.props.itemArray}
           item={this.state.filteredItem}
           itemClickHandler={this.props.itemClickHandler}
         />

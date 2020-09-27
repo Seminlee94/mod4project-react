@@ -35,14 +35,20 @@
     cursor: pointer;
 }
 
+.shop-main {
+    justify-content: center;
+    text-align: center;
+    width: 70%;
+}
+
 .item-container{
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
     /* grid-template-rows: auto; */
     height: auto;
     width: 100%;
-    margin-left: 15%;
-    margin-right: 15%;
+    margin-left: 5%;
+    margin-right: 5%;
     
 }
 
@@ -72,7 +78,7 @@
 }
 
 .shop-right {
-    width: 230px;
+    width: 15%;
     height: 500px;
     border-style: solid;
     border-radius: 10px;

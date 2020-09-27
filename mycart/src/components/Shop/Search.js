@@ -1,3 +1,28 @@
+// import React from 'react'
+
+// class Search extends React.Component {
+
+//     onChange = (e) => {
+//       this.props.search(e.target.value);
+//     };
+    
+//     render() {
+    
+//       return (
+//         <form className="search">
+//              <input
+//                 placeholder="search"
+//                 value={this.props.searchValue}
+//                 onChange={this.onChange}
+//              ></input>
+//              <button>Submit</button>
+//         </form>
+//       );
+//     }
+// }
+
+// export default Search
+
 import React from 'react'
 
 class Search extends React.Component {
@@ -28,6 +53,7 @@ class Search extends React.Component {
                 value={this.state.searchValue}
                 onChange={this.onChange}
              ></input>
+             <button>Submit</button>
         </form>
       );
     }

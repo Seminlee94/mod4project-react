@@ -4,7 +4,7 @@ import { Switch, Route, Link } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import HomeIndex from "./containers/HomeIndex";
 import Navbar from "./components/Navbar/Navbar.js";
-import Search from "./components/Home/Search.js";
+// import Search from "./components/Home/Search.js";
 import TempIndex from "./containers/TempIndex.js";
 import Fridge from "./containers/Fridge.js";
 import Friends from "./containers/Friends.js";
@@ -118,11 +118,11 @@ class App extends Component {
             </Route>
 
             <Route path="/">
-              <Search
+              {/* <Search
                 className="searchBar"
                 searchValue={this.state.searchValue}
                 search={this.search}
-              />
+              /> */}
               <HomeIndex
                 className="temporary-search-index"
                 itemArray={this.showItemArray()}

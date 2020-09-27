@@ -17,7 +17,6 @@ class HomeIndex extends Component {
 
   search = (searchValue) => {
     this.setState({ searchValue: searchValue });
-    console.log("settingSearch:", this.state.searchValue);
   };
 
   showItemArray() {
@@ -54,7 +53,7 @@ class HomeIndex extends Component {
             searchValue={this.state.searchValue}
             search={this.search}
           />
-        }
+        } 
         <TempIndex
           className="temporary-search-index"
           itemArray={this.showItemArray()}
