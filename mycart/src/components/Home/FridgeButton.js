@@ -1,10 +1,11 @@
 import React from "react";
 
 const FridgeButton = (props) => {
-  console.log(props.item);
-  const moveToFridge = (e) => props.moveToFridge(props.item);
+  const onClick = (e) => {
+    return props.moveToFridge(props.item, props.clickedItemIndex);
+  };
   return (
-    <button className="fridge-button" onClick={() => moveToFridge()}>
+    <button className="fridge-button" onClick={onClick}>
       {props.children}
     </button>
   );

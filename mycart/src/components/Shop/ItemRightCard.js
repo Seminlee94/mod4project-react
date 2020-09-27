@@ -9,7 +9,11 @@ const ItemRightCard = (props) => {
         <p>${props.item.price}</p>
       </strong>
       <p>{props.item.name}</p>
-      <FridgeButton moveToFridge={props.moveToFridge} item={props.item.id}>
+      <FridgeButton
+        moveToFridge={props.moveToFridge}
+        item={props.item.id}
+        clickedItemIndex={props.clickedItemIndex}
+      >
         Move To Fridge
       </FridgeButton>
     </div>

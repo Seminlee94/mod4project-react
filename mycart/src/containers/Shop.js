@@ -13,7 +13,7 @@ import { OtherCategory } from "../components/Shop/Subcategory-lists/Other.js";
 
 class Shop extends React.Component {
   state = {
-    clickedArray: [],
+    // clickedArray: [],
     filteredItem: [],
     meatClicked: false,
     breadClicked: false,
@@ -25,13 +25,21 @@ class Shop extends React.Component {
     otherClicked: false,
   };
 
-  itemClickHandler = (id) => {
-    let newArray = this.state.clickedArray;
-    let foundObj = this.props.itemArray.find((el) => el.id === parseInt(id));
-    this.setState(() => ({
-      clickedArray: [...newArray, foundObj],
-    }));
-  };
+  // itemClickHandler = (id) => {
+  //   let newArray = this.state.clickedArray;
+  //   let foundObj = this.props.itemArray.find((el) => el.id === parseInt(id));
+  //   this.setState(() => ({
+  //     clickedArray: [...newArray, foundObj],
+  //   }));
+  // };
+  // itemDeleter = (id) => {
+  //   const updatedArray = this.state.clickedArray.filter(
+  //     (currentObj) => id !== currentObj.id
+  //   );
+  //   this.setState({
+  //     clickedArray: updatedArray,
+  //   });
+  // };
   //             //sending down filtered subcats        //populates clickedArray for rightsidebar
   //  <ShopMain item={this.state.filteredItem} itemClickHandler={this.itemClickHandler}/>
 
@@ -265,11 +273,11 @@ class Shop extends React.Component {
         </div>
         <ShopMain
           item={this.state.filteredItem}
-          itemClickHandler={this.itemClickHandler}
+          itemClickHandler={this.props.itemClickHandler}
         />
         <ShopRight
           moveToFridge={this.props.moveToFridge}
-          itemClickedArray={this.state.clickedArray}
+          itemClickedArray={this.props.clickedArray}
         />
       </div>
     );
