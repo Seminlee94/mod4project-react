@@ -2,7 +2,7 @@ import React, { Component } from "react";
 // import { Switch, Route, Link } from "react-router-dom";
 import "./Navbar.css";
 import { MenuItems } from "./MenuItems.js";
-import { Button } from "./Button.js";
+// import { Button } from "./Button.js";
 
 
 class Navbar extends Component {
