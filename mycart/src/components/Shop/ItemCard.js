@@ -23,7 +23,7 @@ class ItemCard extends React.Component {
     return (
       <Card
         style={{ width: "18rem", cursor: "pointer" }}
-        onClick={() => this.props.itemClickHandler(this.props.item.id)}
+        onClick={() => this.props.itemClickHandler(this.props.item)}
         onMouseOver={this.onMouseOver}
         onMouseOut={this.onMouseOut}
         border={this.state.mouseOver ? "primary" : "light"}

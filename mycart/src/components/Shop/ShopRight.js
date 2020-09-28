@@ -10,7 +10,7 @@ class ShopRight extends React.Component {
           key={cartItem.item.id}
           item={cartItem.item}
           moveToFridge={this.props.moveToFridge}
-          clickedItemIndex={index}
+          // clickedItemIndex={index}
         />
       </ListGroup.Item>
     ));
