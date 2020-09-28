@@ -23,12 +23,13 @@ class Search extends React.Component {
       return (
         <form className="search" onSubmit={this.submitHandler}>
              <input
+                className="search-input"
                 type="text"
                 placeholder="Search Item"
                 value={this.state.searchValue}
                 onChange={this.onChange}
              ></input>
-             <button>Submit</button>
+             <button className="search-button">Submit</button>
         </form>
       );
     }
