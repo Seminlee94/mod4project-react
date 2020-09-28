@@ -45,8 +45,9 @@
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
     /* grid-template-rows: auto; */
+    /* position: absolute; */
     height: auto;
-    width: 100%;
+    width: 80%;
     margin-left: 5%;
     margin-right: 5%;
     
@@ -90,6 +91,7 @@
 .item-right-card {
     display: flex;
     width: 100%;
+    border-bottom-style: solid;
 }
 
 .fridge-button {
@@ -109,13 +111,10 @@
     width: 35%;
 }
 
-.item-right-card.img {
-    width: "50px";
-}
 
 .item-search {
     margin-top: 20px;
-    border-bottom-style: solid;
+
 }
 
 .search-input {

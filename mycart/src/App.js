@@ -58,9 +58,12 @@ class App extends Component {
   itemClickHandler = (id) => {
     let newArray = this.state.clickedArray;
     let foundObj = this.state.itemArray.find((el) => el.id === parseInt(id));
-    this.setState(() => ({
-      clickedArray: [...newArray, foundObj],
-    }));
+    if ((newArray.includes(foundObj))===false) {
+
+      this.setState(() => ({
+        clickedArray: [...newArray, foundObj],
+      }));
+    }
   };
 
   render() {
