@@ -41,28 +41,21 @@ class Shop extends React.Component {
   }
 
   itemClickHandler = (item) => {
-    console.log("clicked: ", item)
-    // let foundObj = this.props.itemArray.find((el) => el.id === parseInt(id));
-    // console.log(foundObj)
-    if ((this.state.cartItem.includes(item))===false) {
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "accepts": "application/json"
-        },
-        body: JSON.stringify({
-          cart_id: 1,
-          item_id: item.id
-        })
-      }
-      fetch("http://localhost:3000/cart_items", options)
-        .then(resp=>resp.json())
-        .then(data=>this.setState(()=>({
-          cartItem: [...this.state.cartItem, data]
-        })))
-
-    }
+    fetch("http://localhost:3000/cart_items", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "accepts": "application/json"
+      },
+      body: JSON.stringify({
+        cart_id: 1,
+        item_id: item.id
+      })
+    })
+      .then(resp => resp.json())
+      .then(data => this.setState(()=>({
+        cartItem: [...this.state.cartItem, data]
+      })))
   };
 
   clickHandler = (e) => {

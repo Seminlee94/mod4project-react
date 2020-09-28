@@ -5,13 +5,13 @@ import ItemRightCard from "./ItemRightCard.js";
 class ShopRight extends React.Component {
 
   clickedItems = () => {
-    return this.props.itemClickedArray.map((cartItem, index) => (
+    return this.props.itemClickedArray.map((cartItem) => (
       <ListGroup.Item action>
         <ItemRightCard
           key={cartItem.item.id}
           item={cartItem.item}
           moveToFridge={this.props.moveToFridge}
-          clickedItemIndex={index}
+          // clickedItemIndex={index}
         />
       </ListGroup.Item>
     ));
