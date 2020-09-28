@@ -14,6 +14,7 @@ import { OtherCategory } from "../components/Shop/Subcategory-lists/Other.js";
 class Shop extends React.Component {
   state = {
     filteredItem: [],
+    cartItem: [],
     clicked: false,
     meatClicked: false,
     breadClicked: false,
@@ -24,6 +25,14 @@ class Shop extends React.Component {
     liquorClicked: false,
     otherClicked: false,
   };
+
+  componentDidMount() {
+    fetch("http://localhost:3000/user_carts/1")
+      .then(resp => resp.json())
+      .then(data => this.setState(()=>({
+        cartItem: data.cart.cart_item
+      })))
+  }
 
   clickHandler = (e) => {
     if (e.target.textContent === "Meat") {
@@ -259,8 +268,9 @@ class Shop extends React.Component {
           clicked={this.state.clicked}
         />
         <ShopRight
+          itemArray={this.props.itemArray}
           moveToFridge={this.props.moveToFridge}
-          itemClickedArray={this.props.clickedArray}
+          itemClickedArray={this.state.cartItem}
         />
       </div>
     );

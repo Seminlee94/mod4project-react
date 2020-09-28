@@ -5,15 +5,18 @@ class ShopRight extends React.Component {
   //props returns clickedItemArray properly
   //wont render itemrightcard
   // console.log("shopRighttab props:", this.props);
+  // clickedItems = () => {
+  //   return this.props.itemClickedArray.map((clickedItem, index) => (
+  //     <ItemRightCard
+  //       key={clickedItem.id}
+  //       item={clickedItem}
+  //       moveToFridge={this.props.moveToFridge}
+  //       clickedItemIndex={index}
+  //     />
+  //   ));
+  // };
   clickedItems = () => {
-    return this.props.itemClickedArray.map((clickedItem, index) => (
-      <ItemRightCard
-        key={clickedItem.id}
-        item={clickedItem}
-        moveToFridge={this.props.moveToFridge}
-        clickedItemIndex={index}
-      />
-    ));
+    return this.props.itemClickedArray.map(cartitem=> <ItemRightCard key={cartitem.item.id} item={cartitem.item} /> )
   };
 
   render() {
