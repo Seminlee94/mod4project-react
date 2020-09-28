@@ -41,25 +41,12 @@
   width: 70%;
 }
 
-<<<<<<< HEAD
-.item-container{
-    display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
-    /* grid-template-rows: auto; */
-    /* position: absolute; */
-    height: auto;
-    width: 80%;
-    margin-left: 5%;
-    margin-right: 5%;
-    
-=======
 .item-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   height: auto;
   width: 100%;
   grid-row-gap: 20px;
->>>>>>> frontpage
 }
 
 .item-card {
@@ -96,14 +83,8 @@
 }
 
 .item-right-card {
-<<<<<<< HEAD
-    display: flex;
-    width: 100%;
-    border-bottom-style: solid;
-=======
   display: flex;
   width: 100%;
->>>>>>> frontpage
 }
 
 .fridge-button {
@@ -123,23 +104,8 @@
   width: 35%;
 }
 
-<<<<<<< HEAD
-
-.item-search {
-    margin-top: 20px;
-
-}
-
-.search-input {
-    font-size: 25px;
-}
-
-.search-button {
-    font-size: 25px;
-=======
 .item-right-card.img {
   width: "50px";
->>>>>>> frontpage
 }
 
 @media only screen and (max-width: 600px) {
