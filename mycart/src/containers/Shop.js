@@ -1,4 +1,8 @@
 import React from "react";
+import ListGroup from "react-bootstrap/ListGroup";
+import Accordion from "react-bootstrap/Accordion";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 import "../components/Shop/shop.css";
 import ShopMain from "../components/Shop/ShopMain";
 import ShopRight from "../components/Shop/ShopRight";
@@ -14,50 +18,6 @@ import { OtherCategory } from "../components/Shop/Subcategory-lists/Other.js";
 class Shop extends React.Component {
   state = {
     filteredItem: [],
-    meatClicked: false,
-    breadClicked: false,
-    produceClicked: false,
-    seafoodClicked: false,
-    cheeseClicked: false,
-    preparedfoodClicked: false,
-    liquorClicked: false,
-    otherClicked: false,
-  };
-
-  clickHandler = (e) => {
-    if (e.target.textContent === "Meat") {
-      this.setState((previousState) => ({
-        meatClicked: !previousState.meatClicked,
-      }));
-    } else if (e.target.textContent === "Bread") {
-      this.setState((previousState) => ({
-        breadClicked: !previousState.breadClicked,
-      }));
-    } else if (e.target.textContent === "Produce") {
-      this.setState((previousState) => ({
-        produceClicked: !previousState.produceClicked,
-      }));
-    } else if (e.target.textContent === "Seafood") {
-      this.setState((previousState) => ({
-        seafoodClicked: !previousState.seafoodClicked,
-      }));
-    } else if (e.target.textContent === "Cheese") {
-      this.setState((previousState) => ({
-        cheeseClicked: !previousState.cheeseClicked,
-      }));
-    } else if (e.target.textContent === "Prepared Foods") {
-      this.setState((previousState) => ({
-        preparedfoodClicked: !previousState.preparedfoodClicked,
-      }));
-    } else if (e.target.textContent === "Liquor") {
-      this.setState((previousState) => ({
-        liquorClicked: !previousState.liquorClicked,
-      }));
-    } else if (e.target.textContent === "Other") {
-      this.setState((previousState) => ({
-        otherClicked: !previousState.otherClicked,
-      }));
-    }
   };
 
   subclickHandler = (e) => {
@@ -70,186 +30,45 @@ class Shop extends React.Component {
   };
 
   render() {
+    const ShopMapper = [
+      { title: "Bread", category: BreadCategory },
+      { title: "Meat", category: MeatCategory },
+      { title: "Seafood", category: SeafoodCategory },
+      { title: "Produce", category: ProduceCategory },
+      { title: "Cheese", category: CheeseCategory },
+      { title: "Liqour", category: LiquorCategory },
+      { title: "PreparedFoods", category: PreparedfoodCategory },
+      { title: "Other", category: OtherCategory },
+    ];
+
+    const ShopMap = ShopMapper.map(({ title, category }) => (
+      <Accordion>
+        <Card style={{ border: 0, marginBottom: "5px" }}>
+          <Accordion.Toggle
+            as={Button}
+            variant="secondary"
+            eventKey="0"
+            style={{ textAlign: "left" }}
+          >
+            {title}
+          </Accordion.Toggle>
+          <Accordion.Collapse eventKey="0">
+            <ListGroup>
+              {category.map((item) => (
+                <ListGroup.Item key={item.id} onClick={this.subclickHandler}>
+                  {item.subcategory}
+                </ListGroup.Item>
+              ))}
+            </ListGroup>
+          </Accordion.Collapse>
+        </Card>
+      </Accordion>
+    ));
+
     return (
       <div className="dd-wrapper" style={{ display: "flex" }}>
-        <div
-          className="dd-category"
-          style={{
-            padding: "10px",
-            width: "auto",
-            background: "#f0f0f0",
-          }}
-        >
-          <ul style={{ listStyleType: "none", padding: 0 }}>
-            <li className="category" onClick={this.clickHandler}>
-              <p>Bread</p>
-              <ul
-                className={this.state.breadClicked ? "active" : "subcategory"}
-              >
-                {this.state.breadClicked
-                  ? BreadCategory.map((item) => {
-                      return (
-                        <li
-                          className={item.cName}
-                          key={item.id}
-                          onClick={this.subclickHandler}
-                        >
-                          {item.subcategory}
-                        </li>
-                      );
-                    })
-                  : null}
-              </ul>
-            </li>
+        <div style={{ width: "250px" }}>{ShopMap}</div>
 
-            <li className="category" onClick={this.clickHandler}>
-              <p>Meat</p>
-              <ul className={this.state.meatClicked ? "active" : "subcategory"}>
-                {this.state.meatClicked
-                  ? MeatCategory.map((item) => {
-                      return (
-                        <li
-                          className={item.cName}
-                          key={item.id}
-                          onClick={this.subclickHandler}
-                        >
-                          {item.subcategory}
-                        </li>
-                      );
-                    })
-                  : null}
-              </ul>
-            </li>
-
-            <li className="category" onClick={this.clickHandler}>
-              <p>Seafood</p>
-              <ul
-                className={this.state.seafoodClicked ? "active" : "subcategory"}
-              >
-                {this.state.seafoodClicked
-                  ? SeafoodCategory.map((item) => {
-                      return (
-                        <li
-                          className={item.cName}
-                          key={item.id}
-                          onClick={this.subclickHandler}
-                        >
-                          {item.subcategory}
-                        </li>
-                      );
-                    })
-                  : null}
-              </ul>
-            </li>
-
-            <li className="category" onClick={this.clickHandler}>
-              <p>Produce</p>
-              <ul
-                className={this.state.produceClicked ? "active" : "subcategory"}
-              >
-                {this.state.produceClicked
-                  ? ProduceCategory.map((item) => {
-                      return (
-                        <li
-                          className={item.cName}
-                          key={item.id}
-                          onClick={this.subclickHandler}
-                        >
-                          {item.subcategory}
-                        </li>
-                      );
-                    })
-                  : null}
-              </ul>
-            </li>
-
-            <li className="category" onClick={this.clickHandler}>
-              <p>Cheese</p>
-              <ul
-                className={this.state.cheeseClicked ? "active" : "subcategory"}
-              >
-                {this.state.cheeseClicked
-                  ? CheeseCategory.map((item) => {
-                      return (
-                        <li
-                          className={item.cName}
-                          key={item.id}
-                          onClick={this.subclickHandler}
-                        >
-                          {item.subcategory}
-                        </li>
-                      );
-                    })
-                  : null}
-              </ul>
-            </li>
-
-            <li className="category" onClick={this.clickHandler}>
-              <p>Liquor</p>
-              <ul
-                className={this.state.liquorClicked ? "active" : "subcategory"}
-              >
-                {this.state.liquorClicked
-                  ? LiquorCategory.map((item) => {
-                      return (
-                        <li
-                          className={item.cName}
-                          key={item.id}
-                          onClick={this.subclickHandler}
-                        >
-                          {item.subcategory}
-                        </li>
-                      );
-                    })
-                  : null}
-              </ul>
-            </li>
-
-            <li className="category" onClick={this.clickHandler}>
-              <p>Prepared Foods</p>
-              <ul
-                className={
-                  this.state.preparedfoodClicked ? "active" : "subcategory"
-                }
-              >
-                {this.state.preparedfoodClicked
-                  ? PreparedfoodCategory.map((item) => {
-                      return (
-                        <li
-                          className={item.cName}
-                          key={item.id}
-                          onClick={this.subclickHandler}
-                        >
-                          {item.subcategory}
-                        </li>
-                      );
-                    })
-                  : null}
-              </ul>
-            </li>
-
-            <li className="category" onClick={this.clickHandler}>
-              <p>Other</p>
-              <ul
-                className={this.state.otherClicked ? "active" : "subcategory"}
-              >
-                {this.state.otherClicked
-                  ? OtherCategory.map((item) => {
-                      return (
-                        <li
-                          className={item.cName}
-                          key={item.id}
-                          onClick={this.subclickHandler}
-                        >
-                          {item.subcategory}
-                        </li>
-                      );
-                    })
-                  : null}
-              </ul>
-            </li>
-          </ul>
-        </div>
         <ShopMain
           itemArray={this.props.itemArray}
           item={this.state.filteredItem}
