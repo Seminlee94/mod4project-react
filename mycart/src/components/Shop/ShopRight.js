@@ -1,4 +1,5 @@
 import React from "react";
+import ListGroup from "react-bootstrap/ListGroup";
 import ItemRightCard from "./ItemRightCard.js";
 
 class ShopRight extends React.Component {
@@ -17,12 +18,23 @@ class ShopRight extends React.Component {
   // };
   clickedItems = () => {
     return this.props.itemClickedArray.map(cartitem=> <ItemRightCard key={cartitem.item.id} item={cartitem.item} /> )
+    // return this.props.itemClickedArray.map((clickedItem, index) => (
+    //   <ListGroup.Item action>
+    //     <ItemRightCard
+    //       key={clickedItem.id}
+    //       item={clickedItem}
+    //       moveToFridge={this.props.moveToFridge}
+    //       clickedItemIndex={index}
+    //     />
+    //   </ListGroup.Item>
+    // ));
   };
 
   render() {
     return (
       <div className="shop-right">
-        <h3>{this.clickedItems()}</h3>
+        <h3>Cart</h3>
+        <ListGroup>{this.clickedItems()}</ListGroup>;
       </div>
     );
   }
