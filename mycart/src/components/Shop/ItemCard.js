@@ -1,19 +1,43 @@
 import React from "react";
+import Card from "react-bootstrap/Card";
 
-const ItemCard = (props) => {
-  //all the items
-  return (
-    <div
-      className="item-card"
-      onClick={() => props.itemClickHandler(props.item.id)}
-    >
-      <img src={props.item.image} width="100%" height="175px" display="block" />
-      <strong>
-        <p className="item-card-price">${props.item.price}</p>
-      </strong>
-      <h5 className="item-card-name">{props.item.name}</h5>
-    </div>
-  );
-};
+class ItemCard extends React.Component {
+  state = {
+    mouseOver: false,
+  };
+
+  onMouseOver = () => {
+    this.setState({
+      mouseOver: true,
+    });
+  };
+
+  onMouseOut = () => {
+    this.setState({
+      mouseOver: false,
+    });
+  };
+
+  render() {
+    //all the items
+    return (
+      <Card
+        style={{ width: "18rem", cursor: "pointer" }}
+        onClick={() => this.props.itemClickHandler(this.props.item.id)}
+        onMouseOver={this.onMouseOver}
+        onMouseOut={this.onMouseOut}
+        border={this.state.mouseOver ? "primary" : "light"}
+      >
+        <Card.Img variant="top" src={this.props.item.image} />
+        <Card.Body>
+          <Card.Title>{this.props.item.name}</Card.Title>
+          <Card.Text text="primary" className="item-card-price">
+            ${this.props.item.price}
+          </Card.Text>
+        </Card.Body>
+      </Card>
+    );
+  }
+}
 
 export default ItemCard;
