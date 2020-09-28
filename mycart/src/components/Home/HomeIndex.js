@@ -17,11 +17,12 @@ class HomeIndex extends Component {
     return (
       <div className="app">
         <HomeStore
-
-        // itemArray={this.showItemArray()}
-        // catCount={this.state.catCount}
-        // moreItems={this.moreItems}
-        // leftItems={this.leftItems}
+          shopItemArray={this.props.shopItemArray}
+          fridgeItemArray={this.props.fridgeItemArray}
+          recipeArray={this.props.recipeArray}
+          // catCount={this.state.catCount}
+          // moreItems={this.moreItems}
+          // leftItems={this.leftItems}
         />
         <HomeFridge />
         <HomeRecipes />
