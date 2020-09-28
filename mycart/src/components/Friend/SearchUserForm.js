@@ -23,8 +23,13 @@ class SearchUserForm extends React.Component {
 
         return (
             <form onSubmit={this.submitHandler}>
-                <input type="text" value={this.state.searchTerm} onChange={this.changeHandler} />
-                <button>Submit</button>
+                <input 
+                    className="search-input" 
+                    type="text" 
+                    placeholder="Type username"
+                    value={this.state.searchTerm} 
+                    onChange={this.changeHandler} />
+                <button className="search-button">Submit</button>
             </form>
         )
     }
