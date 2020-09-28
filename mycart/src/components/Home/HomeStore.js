@@ -1,9 +1,23 @@
 import React from "react";
 
 class HomeStore extends React.Component {
-  state = {};
   render() {
-    return <div>HomeStorePlaceholder</div>;
+    return (
+      <div>
+        <div>
+          <h2>{this.props.item.name}</h2>
+          <p>
+            {/* {props.item.description} */}
+            <div className="item-description"></div>
+            <img
+              className="item-image"
+              alt={this.props.item.name}
+              src={this.props.item.image}
+            />
+          </p>
+        </div>
+      </div>
+    );
   }
 }
 

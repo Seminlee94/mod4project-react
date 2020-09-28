@@ -41,6 +41,15 @@
   width: 70%;
 }
 
+/* .item-container{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    height: auto;
+    width: 80%;
+    margin-left: 5%;
+    margin-right: 5%;
+} */
+
 .item-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -104,6 +113,17 @@
   width: 35%;
 }
 
+/* .item-search {
+    margin-top: 20px;
+
+}
+
+.search-input {
+    font-size: 25px;
+}
+
+.search-button {
+    font-size: 25px; */
 .item-right-card.img {
   width: "50px";
 }
