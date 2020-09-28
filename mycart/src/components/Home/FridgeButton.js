@@ -11,7 +11,7 @@ const FridgeButton = (props) => {
     //         onClick={onClick}
     //         style={{ height:"50px" }}>{props.children}</button>
     <>
-      <Button variant="info" onClick={onClick}>
+      <Button variant="info" onClick={onClick} style={{ marginRight: "5px" }}>
         Add to Fridge
       </Button>
       <Button variant="success" onClick={onClick}>

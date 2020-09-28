@@ -1,46 +1,47 @@
 .shop-container {
-    display: flex;
+  display: flex;
 }
 
-.category{
-    /* align-items: center; */
-    padding: 8px 0px 8px 16px;
-    /* list-style: none; */
-    height: auto;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: bold;
+.category {
+  /* align-items: center; */
+  padding: 8px 0px 8px 16px;
+  /* list-style: none; */
+  height: auto;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 .category:hover {
-    background-color: #1a83ff;
-    cursor: pointer;
+  background-color: #1a83ff;
+  cursor: pointer;
 }
 
 .active {
-    height: auto;
-    font-size: 16px;
-    width: 75%;
-    left: 0;
-    opacity: 0.85;
-    background-color: white;
+  height: auto;
+  font-size: 16px;
+  width: 75%;
+  left: 0;
+  opacity: 0.85;
+  background-color: white;
 }
 
 .subcategory {
-    display: none;
+  display: none;
 }
 
 .subcategory-links:hover {
-    background-color: #1a83ff;
-    cursor: pointer;
+  background-color: #1a83ff;
+  cursor: pointer;
 }
 
 .shop-main {
-    justify-content: center;
-    text-align: center;
-    width: 70%;
+  justify-content: center;
+  text-align: center;
+  width: 70%;
 }
 
+<<<<<<< HEAD
 .item-container{
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
@@ -51,66 +52,78 @@
     margin-left: 5%;
     margin-right: 5%;
     
+=======
+.item-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  height: auto;
+  width: 100%;
+  grid-row-gap: 20px;
+>>>>>>> frontpage
 }
 
 .item-card {
-    margin-right: 30px;
-    margin-top: 50px;
-    display: inline-grid;
-    height: 85%;
-    width: 85%;
-    text-align: center;
-    font-weight: bold;
-    /* background-color: white; */
+  margin-right: 30px;
+  margin-top: 50px;
+  display: inline-grid;
+  height: 85%;
+  width: 85%;
+  text-align: center;
+  font-weight: bold;
+  /* background-color: white; */
 }
-
 
 .item-card:hover {
-    cursor: pointer;
-    font-size: 22px;
+  cursor: pointer;
+  font-size: 22px;
 }
 
-
 .item-card-price {
-    width: 100%;
-    height: 10%;
-    font-size: 22px;
-    color: #D6370F;
+  width: 100%;
+  height: 10%;
+  font-size: 22px;
+  color: #d6370f;
+  font-weight: bold;
 }
 
 .shop-right {
-    width: 15%;
-    height: 500px;
-    border-style: solid;
-    border-radius: 10px;
-    position: fixed;
-    right: 15px;
-    overflow: scroll;
+  height: 500px;
+  /* border-style: solid;
+  border-radius: 10px; */
+  position: fixed;
+  right: 15px;
+  overflow-y: scroll;
 }
 
 .item-right-card {
+<<<<<<< HEAD
     display: flex;
     width: 100%;
     border-bottom-style: solid;
+=======
+  display: flex;
+  width: 100%;
+>>>>>>> frontpage
 }
 
 .fridge-button {
-    height: 50px;
-    width: 27%;
-    border-radius: 6px;
+  height: 50px;
+  width: 27%;
+  border-radius: 6px;
 }
 
 .fridge-button:hover {
-    cursor: pointer;
-    background-color: #ff4500 
+  cursor: pointer;
+  background-color: #ff4500;
 }
 
 .item-right-price {
-    margin-top: 15px;
-    font-size: 22px;
-    width: 35%;
+  margin-top: 15px;
+  font-size: 22px;
+  width: 35%;
 }
 
+<<<<<<< HEAD
 
 .item-search {
     margin-top: 20px;
@@ -123,25 +136,27 @@
 
 .search-button {
     font-size: 25px;
+=======
+.item-right-card.img {
+  width: "50px";
+>>>>>>> frontpage
 }
 
 @media only screen and (max-width: 600px) {
-    .item-container {
-        display: grid;
-        grid-template-columns: 10px 10px 10px 10px;
-        grid-template-rows: auto;
-        height: auto;
-        width: auto;
-        border-style:solid;
-    }
-    
-    .item-card {
-        display: inline-grid;
-        height: 300px;
-        width: 30.6%;
-        margin: 10px 10px 10px 10px;
-        border-style: solid;
-    }
+  .item-container {
+    display: grid;
+    grid-template-columns: 10px 10px 10px 10px;
+    grid-template-rows: auto;
+    height: auto;
+    width: auto;
+    border-style: solid;
+  }
 
+  .item-card {
+    display: inline-grid;
+    height: 300px;
+    width: 30.6%;
+    margin: 10px 10px 10px 10px;
+    border-style: solid;
+  }
 }
-
