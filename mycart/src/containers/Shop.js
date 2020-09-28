@@ -18,7 +18,6 @@ import { OtherCategory } from "../components/Shop/Subcategory-lists/Other.js";
 class Shop extends React.Component {
   state = {
     filteredItem: [],
-    // cartItem: [],
   };
 
   // componentDidMount() {

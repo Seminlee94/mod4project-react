@@ -14,14 +14,13 @@ class App extends Component {
     fridgeItemArray: [],
     recipeArray: [],
     cartItemArray: [],
-    // clickedArray: [],
   };
 
   componentDidMount() {
     const urls = [
-      "http://localhost:8000/items",
-      "http://localhost:8000/fridge-items",
-      "http://localhost:8000/recipes",
+      "http://localhost:3000/items",
+      "http://localhost:3000/fridge-items",
+      "http://localhost:3000/recipes",
       // "http://localhost:3000/user_carts/1",
     ];
     // const promises = urls.map((url) => fetch(url));
