@@ -55,16 +55,17 @@ class App extends Component {
       });
   };
 
-  // itemClickHandler = (id) => {
-  //   let newArray = this.state.clickedArray;
-  //   let foundObj = this.state.itemArray.find((el) => el.id === parseInt(id));
-  //   if ((newArray.includes(foundObj))===false) {
+  itemClickHandler = (id) => {
+    console.log("clicked: ",id)
+    // let newArray = this.state.clickedArray;
+    // let foundObj = this.state.itemArray.find((el) => el.id === parseInt(id));
+    // if ((newArray.includes(foundObj))===false) {
 
-  //     this.setState(() => ({
-  //       clickedArray: [...newArray, foundObj],
-  //     }));
-  //   }
-  // };
+    //   this.setState(() => ({
+    //     clickedArray: [...newArray, foundObj],
+    //   }));
+    // }
+  };
 
   render() {
     return (
@@ -87,7 +88,7 @@ class App extends Component {
                 itemArray={this.state.itemArray}
                 moveToFridge={this.moveToFridge}
                 clickedArray={this.state.clickedArray}
-                // itemClickHandler={this.itemClickHandler}
+                itemClickHandler={this.itemClickHandler}
               />
             </Route>
 
