@@ -3,9 +3,8 @@ import ListGroup from "react-bootstrap/ListGroup";
 import ItemRightCard from "./ItemRightCard.js";
 
 class ShopRight extends React.Component {
-
   clickedItems = () => {
-    return this.props.itemClickedArray.map((cartItem, index) => (
+    return this.props.cartItemArray.map((cartItem, index) => (
       <ListGroup.Item action>
         <ItemRightCard
           key={cartItem.item.id}

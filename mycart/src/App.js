@@ -10,22 +10,31 @@ import Shop from "./containers/Shop.js";
 
 class App extends Component {
   state = {
-    itemArray: [],
+    shopItemArray: [],
     fridgeItemArray: [],
-    // clickedArray: [],
     recipeArray: [],
+    cartItemArray: [],
+    // clickedArray: [],
   };
 
   componentDidMount() {
-    fetch("http://localhost:8000/items")
-      .then((res) => res.json())
-      .then((data) => this.setState({ itemArray: data }));
-  }
-
-  componentWillMount() {
-    fetch("http://localhost:8000/fridge-items")
-      .then((resp) => resp.json())
-      .then((data) => this.setState({ fridgeItemArray: data[0].items }));
+    const urls = [
+      "http://localhost:8000/items",
+      "http://localhost:8000/fridge-items",
+      "http://localhost:8000/recipes",
+      // "http://localhost:3000/user_carts/1",
+    ];
+    // const promises = urls.map((url) => fetch(url));
+    Promise.all(urls.map((url) => fetch(url).then((resp) => resp.json()))).then(
+      (data) =>
+        this.setState({
+          shopItemArray: data[0],
+          fridgeItemArray: data[1],
+          recipeArray: data[2],
+          //   cartItemArray: data[3].cart.cart_item,
+        })
+    );
+    //cartItemArray needs testing, haven't pulled updated db.json
   }
 
   moveToFridge = (id, clickedItemIndex) => {
@@ -44,27 +53,29 @@ class App extends Component {
     })
       .then((res) => res.json())
       .then((newObj) => {
-        const updatedArray = this.state.clickedArray.filter(
+        const updatedArray = this.state.cartItemArray.filter(
           (item, index) => index !== clickedItemIndex
         );
 
         this.setState({
           fridgeItemArray: [...this.state.fridgeItemArray, newObj],
-          clickedArray: updatedArray,
+          cartItemArray: updatedArray,
         });
       });
   };
 
   itemClickHandler = (id) => {
-    console.log("clicked: ",id)
-    // let newArray = this.state.clickedArray;
-    // let foundObj = this.state.itemArray.find((el) => el.id === parseInt(id));
-    // if ((newArray.includes(foundObj))===false) {
-
-    //   this.setState(() => ({
-    //     clickedArray: [...newArray, foundObj],
-    //   }));
-    // }
+    // console.log("clicked: ", id);
+    console.log("clicked");
+    let newArray = this.state.cartItemArray;
+    let foundObj = this.state.shopItemArray.find(
+      (el) => el.id === parseInt(id)
+    );
+    if (newArray.includes(foundObj) === false) {
+      this.setState(() => ({
+        cartItemArray: [...newArray, foundObj],
+      }));
+    }
   };
 
   render() {
@@ -85,9 +96,9 @@ class App extends Component {
           <Switch class="header-switch">
             <Route path="/shop">
               <Shop
-                itemArray={this.state.itemArray}
+                shopItemArray={this.state.shopItemArray}
                 moveToFridge={this.moveToFridge}
-                clickedArray={this.state.clickedArray}
+                cartItemArray={this.state.cartItemArray}
                 itemClickHandler={this.itemClickHandler}
               />
             </Route>
@@ -104,7 +115,7 @@ class App extends Component {
               <HomeIndex
                 className="temporary-search-index"
                 fridgeItemArray={this.state.fridgeItemArray}
-                shopItemArray={this.state.itemArray}
+                shopItemArray={this.state.shopItemArray}
                 recipeArray={this.state.recipeArray}
               />
             </Route>

@@ -18,71 +18,25 @@ import { OtherCategory } from "../components/Shop/Subcategory-lists/Other.js";
 class Shop extends React.Component {
   state = {
     filteredItem: [],
-    cartItem: [],
-    clicked: false,
-    meatClicked: false,
-    breadClicked: false,
-    produceClicked: false,
-    seafoodClicked: false,
-    cheeseClicked: false,
-    preparedfoodClicked: false,
-    liquorClicked: false,
-    otherClicked: false,
+    // cartItem: [],
   };
 
-  componentDidMount() {
-    fetch("http://localhost:3000/user_carts/1")
-      .then((resp) => resp.json())
-      .then((data) =>
-        this.setState(() => ({
-          cartItem: data.cart.cart_item,
-        }))
-      );
-  }
+  // componentDidMount() {
+  //   fetch("http://localhost:3000/user_carts/1")
+  //     .then((resp) => resp.json())
+  //     .then((data) =>
+  //       this.setState(() => ({
+  //         cartItem: data.cart.cart_item,
+  //       }))
+  //     );
+  // }
 
-  clickHandler = (e) => {
-    if (e.target.textContent === "Meat") {
-      this.setState((previousState) => ({
-        meatClicked: !previousState.meatClicked,
-      }));
-    } else if (e.target.textContent === "Bread") {
-      this.setState((previousState) => ({
-        breadClicked: !previousState.breadClicked,
-      }));
-    } else if (e.target.textContent === "Produce") {
-      this.setState((previousState) => ({
-        produceClicked: !previousState.produceClicked,
-      }));
-    } else if (e.target.textContent === "Seafood") {
-      this.setState((previousState) => ({
-        seafoodClicked: !previousState.seafoodClicked,
-      }));
-    } else if (e.target.textContent === "Cheese") {
-      this.setState((previousState) => ({
-        cheeseClicked: !previousState.cheeseClicked,
-      }));
-    } else if (e.target.textContent === "Prepared Foods") {
-      this.setState((previousState) => ({
-        preparedfoodClicked: !previousState.preparedfoodClicked,
-      }));
-    } else if (e.target.textContent === "Liquor") {
-      this.setState((previousState) => ({
-        liquorClicked: !previousState.liquorClicked,
-      }));
-    } else if (e.target.textContent === "Other") {
-      this.setState((previousState) => ({
-        otherClicked: !previousState.otherClicked,
-      }));
-    }
-  };
-
-  subclickHandler = (e) => {
-    let filteredArray = this.props.itemArray.filter(
+  shopSideBarClicker = (e) => {
+    let filteredArray = this.props.shopItemArray.filter(
       (item) => item.sub_category === e.target.textContent
     );
     this.setState(() => ({
       filteredItem: [...filteredArray],
-      clicked: true,
     }));
   };
 
@@ -112,7 +66,7 @@ class Shop extends React.Component {
           <Accordion.Collapse eventKey="0">
             <ListGroup>
               {category.map((item) => (
-                <ListGroup.Item key={item.id} onClick={this.subclickHandler}>
+                <ListGroup.Item key={item.id} onClick={this.shopSideBarClicker}>
                   {item.subcategory}
                 </ListGroup.Item>
               ))}
@@ -130,12 +84,11 @@ class Shop extends React.Component {
           itemArray={this.props.itemArray}
           item={this.state.filteredItem}
           itemClickHandler={this.props.itemClickHandler}
-          clicked={this.state.clicked}
+          clicked={this.props.clickedArray}
         />
         <ShopRight
-          itemArray={this.props.itemArray}
           moveToFridge={this.props.moveToFridge}
-          itemClickedArray={this.state.cartItem}
+          cartItemArray={this.props.cartItemArray}
         />
       </div>
     );

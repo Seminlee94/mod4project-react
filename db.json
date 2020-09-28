@@ -1730,5 +1730,50 @@
       "description": "Enriched Bread, Giant",
       "id": 92
     }
+  ],
+
+  "recipes": [
+    {
+      "id": 1,
+      "title": "Miso Black Cod",
+      "picture": "https://source.unsplash.com/random",
+      "sourceUrl": "",
+      "ingredients": ""
+    },
+    {
+      "id": 2,
+      "title": "Spicy Jerk Chicken",
+      "picture": "https://source.unsplash.com/random",
+      "sourceUrl": "",
+      "ingredients": ""
+    },
+    {
+      "id": 3,
+      "title": "Tonkatsu Ramen",
+      "picture": "https://source.unsplash.com/random",
+      "sourceUrl": "",
+      "ingredients": ""
+    },
+    {
+      "id": 4,
+      "title": "Kimchi Jigae",
+      "picture": "https://source.unsplash.com/random",
+      "sourceUrl": "",
+      "ingredients": ""
+    },
+    {
+      "id": 5,
+      "title": "Lemon Parmesan Pasta",
+      "picture": "https://source.unsplash.com/random",
+      "sourceUrl": "",
+      "ingredients": ""
+    },
+    {
+      "id": 6,
+      "title": "Oxtail Stew",
+      "picture": "https://source.unsplash.com/random",
+      "sourceUrl": "",
+      "ingredients": ""
+    }
   ]
 }
