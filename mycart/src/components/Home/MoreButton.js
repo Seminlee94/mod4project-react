@@ -1,10 +1,18 @@
 import React from "react";
+import Button from "react-bootstrap/Button";
 
 const MoreButton = (props) => {
   return (
-    <button className="more-less-button" onClick={props.moreItems}>
+    <Button
+      variant="outline-info"
+      onClick={props.moreItems}
+      style={{
+        border: 0,
+        alignSelf: "center",
+      }}
+    >
       {props.children}
-    </button>
+    </Button>
   );
 };
 
