@@ -14,6 +14,7 @@ import { OtherCategory } from "../components/Shop/Subcategory-lists/Other.js";
 class Shop extends React.Component {
   state = {
     filteredItem: [],
+    clicked: false,
     meatClicked: false,
     breadClicked: false,
     produceClicked: false,
@@ -27,35 +28,35 @@ class Shop extends React.Component {
   clickHandler = (e) => {
     if (e.target.textContent === "Meat") {
       this.setState((previousState) => ({
-        meatClicked: !previousState.meatClicked,
+        meatClicked: !previousState.meatClicked
       }));
     } else if (e.target.textContent === "Bread") {
       this.setState((previousState) => ({
-        breadClicked: !previousState.breadClicked,
+        breadClicked: !previousState.breadClicked
       }));
     } else if (e.target.textContent === "Produce") {
       this.setState((previousState) => ({
-        produceClicked: !previousState.produceClicked,
+        produceClicked: !previousState.produceClicked
       }));
     } else if (e.target.textContent === "Seafood") {
       this.setState((previousState) => ({
-        seafoodClicked: !previousState.seafoodClicked,
+        seafoodClicked: !previousState.seafoodClicked
       }));
     } else if (e.target.textContent === "Cheese") {
       this.setState((previousState) => ({
-        cheeseClicked: !previousState.cheeseClicked,
+        cheeseClicked: !previousState.cheeseClicked
       }));
     } else if (e.target.textContent === "Prepared Foods") {
       this.setState((previousState) => ({
-        preparedfoodClicked: !previousState.preparedfoodClicked,
+        preparedfoodClicked: !previousState.preparedfoodClicked
       }));
     } else if (e.target.textContent === "Liquor") {
       this.setState((previousState) => ({
-        liquorClicked: !previousState.liquorClicked,
+        liquorClicked: !previousState.liquorClicked
       }));
     } else if (e.target.textContent === "Other") {
       this.setState((previousState) => ({
-        otherClicked: !previousState.otherClicked,
+        otherClicked: !previousState.otherClicked
       }));
     }
   };
@@ -66,6 +67,7 @@ class Shop extends React.Component {
     );
     this.setState(() => ({
       filteredItem: [...filteredArray],
+      clicked: true
     }));
   };
 
@@ -254,6 +256,7 @@ class Shop extends React.Component {
           itemArray={this.props.itemArray}
           item={this.state.filteredItem}
           itemClickHandler={this.props.itemClickHandler}
+          clicked={this.state.clicked}
         />
         <ShopRight
           moveToFridge={this.props.moveToFridge}

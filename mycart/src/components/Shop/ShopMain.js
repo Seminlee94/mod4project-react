@@ -7,11 +7,15 @@ class ShopMain extends React.Component{
 
     state = {
         searchTerm: "",
-        itemArray: []
+        itemArray: [],
     }
     
     items = () => {
         return this.props.item.map(item => <ItemCard key={item.id} item={item} itemClickHandler={this.props.itemClickHandler} /> )
+    }
+
+    itemArray = () => {
+        return this.props.itemArray.map(item => <ItemCard key={item.id} item={item} itemClickHandler={this.props.itemClickHandler} /> )
     }
 
     showItemArray() {
@@ -43,14 +47,14 @@ class ShopMain extends React.Component{
     
     render() {
         this.state.itemArray = this.props.itemArray
-        console.log(this.state.itemArray)
-
+        
         return(
             <div className="shop-main">
                 <div className="item-search">
                     <Search className="searchBar" searchTerm={this.state.searchTerm} search={this.search} submitHandler={this.submitHandler}  />
                 </div>
                 <div className="item-container">
+                    {((this.state.searchTerm === "")&&(this.props.clicked===false)) ? this.itemArray() : null }
                     {this.state.searchTerm === "" ? this.items() : this.showItemArray()}
                 </div>
 

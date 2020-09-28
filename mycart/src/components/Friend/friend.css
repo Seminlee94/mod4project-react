@@ -9,3 +9,11 @@
     width: 40%;
     height: 800px;
 }
+
+.search-input {
+    font-size: 25px;
+}
+
+.search-button {
+    font-size: 25px;
+}
