@@ -1,4 +1,5 @@
 import React from "react";
+import { Switch, Route, Link, Redirect } from "react-router-dom";
 import FridgeItem from "../components/Fridge/FridgeItem.js";
 import "../components/Fridge/Fridge.css";
 // import MoreButton from "../components/Home/MoreButton.js";
@@ -42,13 +43,25 @@ class Fridge extends React.Component {
     ));
 
     return (
-      <div className="fridge-container">
-        <div className="fridge-container-left">{fridgeLeft}</div>
 
-        <div className="fridge-blank"></div>
+      <>
+        {this.props.user ? 
 
-        <div className="fridge-container-right">{fridgeRight}</div>
-      </div>
+            <div className="fridge-container">
+            <div className="fridge-container-left">{fridgeLeft}</div>
+    
+            <div className="fridge-blank"></div>
+    
+            <div className="fridge-container-right">{fridgeRight}</div>
+          </div>
+        
+        :
+        
+         <Redirect to="/" />
+        
+        }
+
+      </>
     );
   }
 }

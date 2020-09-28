@@ -14,6 +14,7 @@ class App extends Component {
     fridgeItemArray: [],
     recipeArray: [],
     cartItemArray: [],
+    user: null
   };
 
   componentDidMount() {
@@ -21,7 +22,7 @@ class App extends Component {
       "http://localhost:3000/items",
       "http://localhost:3000/fridge-items",
       "http://localhost:3000/recipes",
-      // "http://localhost:3000/user_carts/1",
+      "http://localhost:3000/user_carts/1",
     ];
     // const promises = urls.map((url) => fetch(url));
     Promise.all(urls.map((url) => fetch(url).then((resp) => resp.json()))).then(
@@ -30,7 +31,7 @@ class App extends Component {
           shopItemArray: data[0],
           fridgeItemArray: data[1],
           recipeArray: data[2],
-          //   cartItemArray: data[3].cart.cart_item,
+          cartItemArray: data[3].cart.cart_item,
         })
     );
     //cartItemArray needs testing, haven't pulled updated db.json
@@ -99,15 +100,21 @@ class App extends Component {
                 moveToFridge={this.moveToFridge}
                 cartItemArray={this.state.cartItemArray}
                 itemClickHandler={this.itemClickHandler}
+                user={this.state.user}
               />
             </Route>
 
             <Route path="/fridge">
-              <Fridge item={this.state.fridgeItemArray} />
+              <Fridge 
+                item={this.state.fridgeItemArray}
+                user={this.state.user} 
+              />
             </Route>
 
             <Route path="/friends">
-              <Friends />
+              <Friends 
+                user={this.state.user}
+              />
             </Route>
 
             <Route path="/">
