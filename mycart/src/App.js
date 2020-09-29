@@ -216,6 +216,7 @@ class App extends Component {
             <Route path="/friends">
               <Friends user={this.state.user} />
             </Route>
+            <Route path="/recipes"></Route>
 
             <Route path="/">
               <HomeIndex
