@@ -59,7 +59,7 @@ class ShopMain extends React.Component {
   };
 
   render() {
-    this.state.itemArray = this.props.itemArray;
+    // this.state.itemArray = this.props.itemArray;
 
     return (
       <div className="shop-main">
@@ -72,7 +72,7 @@ class ShopMain extends React.Component {
           />
         </div>
         <div className="item-container">
-          {this.state.searchTerm === "" && this.props.clicked === false
+          {((this.state.searchTerm === "") && (this.props.clicked === false))
             ? this.itemArray()
             : null}
           {this.state.searchTerm === "" ? this.items() : this.showItemArray()}

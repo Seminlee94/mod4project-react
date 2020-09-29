@@ -3,7 +3,7 @@ import MyFriends from "../components/Friend/MyFriends"
 import { Redirect } from "react-router-dom";
 import SearchUserForm from "../components/Friend/SearchUserForm"
 // import SearchedUsers from "../components/Friend/SearchedUsers"
-import UserCard from "../components/Friend/UserCard"
+import SearchUserCard from "../components/Friend/SearchUserCard"
 import "../components/Friend/friend.css"
 
 
@@ -15,15 +15,14 @@ class Friends extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:8001/users")
+    fetch("http://localhost:3000/api/v1/users")
       .then(resp => resp.json())
       .then(data => this.setState({ userArray: data }))
   }
 
   searchUser = () => {
     let findUser = this.state.userArray.find(el => el.username.toLowerCase()===this.state.searchTerm.toLowerCase())
-    
-    return <UserCard user={findUser} />
+    return <SearchUserCard user={findUser} />
   }
 
   submitHandler = (term) => {

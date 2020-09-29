@@ -18,28 +18,24 @@ import { OtherCategory } from "../components/Shop/Subcategory-lists/Other.js";
 class Shop extends React.Component {
   state = {
     filteredItem: [],
+    clicked: false
   };
 
-  // componentDidMount() {
-  //   fetch("http://localhost:3000/user_carts/1")
-  //     .then((resp) => resp.json())
-  //     .then((data) =>
-  //       this.setState(() => ({
-  //         cartItem: data.cart.cart_item,
-  //       }))
-  //     );
-  // }
 
   shopSideBarClicker = (e) => {
-    let filteredArray = this.props.shopItemArray.filter(
+    let filteredArray = this.state.itemArray.filter(
       (item) => item.sub_category === e.target.textContent
     );
     this.setState(() => ({
       filteredItem: [...filteredArray],
+      clicked: true
     }));
   };
 
+ 
+
   render() {
+
     const ShopMapper = [
       { title: "Bread", category: BreadCategory },
       { title: "Meat", category: MeatCategory },
@@ -65,7 +61,7 @@ class Shop extends React.Component {
           <Accordion.Collapse eventKey="0">
             <ListGroup>
               {category.map((item) => (
-                <ListGroup.Item key={item.id} onClick={this.shopSideBarClicker}>
+                <ListGroup.Item key={item.id} onClick={this.shopSideBarClicker} style={{ cursor:"pointer" }} >
                   {item.subcategory}
                 </ListGroup.Item>
               ))}
@@ -75,21 +71,29 @@ class Shop extends React.Component {
       </Accordion>
     ));
 
+
     return (
       <div className="dd-wrapper" style={{ display: "flex" }}>
         <div style={{ width: "250px" }}>{ShopMap}</div>
 
         <ShopMain
-          itemArray={this.props.itemArray}
+          itemArray={this.props.shopItemArray}
           item={this.state.filteredItem}
           itemClickHandler={this.props.itemClickHandler}
-          clicked={this.props.clickedArray}
+          clicked={this.state.clicked}
         />
-        <ShopRight
-          moveToFridge={this.props.moveToFridge}
-          cartItemArray={this.props.cartItemArray}
-        />
+        
+        {this.props.userCartArray.length > 0 ? <ShopRight
+          // moveToFridge={this.props.moveToFridge}
+          userCartArray={this.props.userCartArray}
+          deleteHandler={this.props.deleteHandler}
+          />
+          :
+          null
+        }
+        
       </div>
+
     );
   }
 }
