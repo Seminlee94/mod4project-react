@@ -1,39 +1,56 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import HomeIndex from "./components/Home/HomeIndex";
 import Navbar from "./components/Navbar/Navbar.js";
 import Fridge from "./containers/Fridge.js";
 import Friends from "./containers/Friends.js";
 import Shop from "./containers/Shop.js";
+import Signup from "./components/Navbar/Signup.js";
+import Login from "./components/Navbar/Login.js";
 
 class App extends Component {
   state = {
     shopItemArray: [],
     fridgeItemArray: [],
-    recipeArray: [],
-    cartItemArray: [],
+    // recipeArray: [],
+    // cartItemArray: [],
     user: null
   };
+
+  signupHandler = (userObj) => {
+    fetch("http://localhost:3000/api/v1/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "accepts": "application/json"
+      },
+      body: JSON.stringify({ user: userObj })
+    })
+      .then(resp => resp.json())
+      .then(console.log)
+  }
 
   componentDidMount() {
     const urls = [
       "http://localhost:3000/items",
-      "http://localhost:3000/fridge-items",
-      "http://localhost:3000/recipes",
-      "http://localhost:3000/user_carts/1",
+      // "http://localhost:3000/fridge-items",
+      // "http://localhost:3000/recipes",
+      // "http://localhost:3000/user_carts/1",
     ];
+
     // const promises = urls.map((url) => fetch(url));
-    Promise.all(urls.map((url) => fetch(url).then((resp) => resp.json()))).then(
-      (data) =>
-        this.setState({
-          shopItemArray: data[0],
-          fridgeItemArray: data[1],
-          recipeArray: data[2],
-          cartItemArray: data[3].cart.cart_item,
-        })
-    );
+
+      Promise.all(urls.map((url) => fetch(url).then((resp) => resp.json()))).then(
+        (data) =>
+          this.setState({
+            shopItemArray: data[0],
+            // fridgeItemArray: data[1],
+            // recipeArray: data[2],
+            // cartItemArray: data[3].cart.cart_item,
+          })
+      );
     //cartItemArray needs testing, haven't pulled updated db.json
   }
 
@@ -78,6 +95,20 @@ class App extends Component {
     }
   };
 
+  loginHandler = (userObj) => {
+    console.log("logging in: ", userObj)
+    fetch("http://localhost:3000/api/v1/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "accepts": "application/json"
+      },
+      body: JSON.stringify({ user: userObj })
+    })
+    .then(resp => resp.json())
+    .then(console.log)
+  }
+
   render() {
     return (
       <div
@@ -94,11 +125,20 @@ class App extends Component {
           <Navbar />
 
           <Switch class="header-switch">
+
+            <Route path="/signup">
+              <Signup submitHandler={this.signupHandler} />
+            </Route>  
+
+            <Route path="/login">
+              <Login submitHandler={this.loginHandler} />
+            </Route>  
+
             <Route path="/shop">
               <Shop
                 shopItemArray={this.state.shopItemArray}
                 moveToFridge={this.moveToFridge}
-                cartItemArray={this.state.cartItemArray}
+                // cartItemArray={this.state.cartItemArray}
                 itemClickHandler={this.itemClickHandler}
                 user={this.state.user}
               />
@@ -118,13 +158,15 @@ class App extends Component {
             </Route>
 
             <Route path="/">
-              <HomeIndex
+              {/* <HomeIndex
                 className="temporary-search-index"
                 fridgeItemArray={this.state.fridgeItemArray}
                 shopItemArray={this.state.shopItemArray}
                 recipeArray={this.state.recipeArray}
-              />
+              /> */}
             </Route>
+
+
           </Switch>
         </Router>
       </div>
