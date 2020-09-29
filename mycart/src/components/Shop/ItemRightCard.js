@@ -17,6 +17,7 @@ const ItemRightCard = (props) => {
         moveToFridge={props.moveToFridge}
         item={props.item.id}
         clickedItemIndex={props.clickedItemIndex}
+        //clickeditem index needs to come back or multiple items of the same ID will delete off the rightside if you press add to fridge
       /> 
 
 

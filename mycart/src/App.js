@@ -20,7 +20,7 @@ class App extends Component {
     userCartArray: [],
     user: {}
   }
- 
+
   componentDidMount() {
     const token = localStorage.getItem("token")
     if (token) {
@@ -55,7 +55,6 @@ class App extends Component {
     })
   }
   
-
   loginHandler = (userObj) => {
     fetch("http://localhost:3000/api/v1/login", {
       method: "POST",
@@ -80,12 +79,8 @@ class App extends Component {
     this.setState({ user: {} })
   }
 
-
-
   componentDidUpdate(prevProps, prevState) {
-    // looking for a change in editPizza
     if (prevState.user !== this.state.user ) {
-      // set the form values to match the editPizza props
         const urls = [
           "http://localhost:3000/api/v1/items",
           "http://localhost:3000/api/v1/fridge_items",
@@ -93,7 +88,6 @@ class App extends Component {
           "http://localhost:3000/api/v1/cart_items",
           "http://localhost:3000/api/v1/user_carts/1"
         ];
-        // const promises = urls.map((url) => fetch(url));
         Promise.all(urls.map((url) => fetch(url).then((resp) => resp.json()))).then(
           (data) =>
             this.setState({
@@ -108,37 +102,37 @@ class App extends Component {
   }
   
 
+  moveToFridge = (id, clickedItemIndex) => {
+    // Copy the object, so that we don't change any places it's being referenced
+    let foundObj = {
+      ...this.state.itemArray.find((el) => el.id === parseInt(id)),
+    };
+    delete foundObj.id; //deletes the store ID, letting newObj create new ID for fridgeitem so we don't get conflicts when trying to post
+    fetch("http://localhost:3000/api/v1/fridge-items", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(foundObj),
+    })
+      .then((res) => res.json())
+      .then((newObj) => {
+        const updatedArray = this.state.cartItemArray.filter(
+          (item, index) => index !== clickedItemIndex
+        );
+
+        this.setState({
+          fridgeItemArray: [...this.state.fridgeItemArray, newObj],
+          cartItemArray: updatedArray,
+        });
+      });
+  };
 
 
-
-
-  // moveToFridge = (id, clickedItemIndex) => {
-  //   // Copy the object, so that we don't change any places it's being referenced
-  //   let foundObj = {
-  //     ...this.state.itemArray.find((el) => el.id === parseInt(id)),
-  //   };
-  //   delete foundObj.id; //deletes the store ID, letting newObj create new ID for fridgeitem so we don't get conflicts when trying to post
-  //   fetch("http://localhost:3000/api/v1fridge-items", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Accept: "application/json",
-  //     },
-  //     body: JSON.stringify(foundObj),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((newObj) => {
-  //       const updatedArray = this.state.cartItemArray.filter(
-  //         (item, index) => index !== clickedItemIndex
-  //       );
-
-  //       this.setState({
-  //         fridgeItemArray: [...this.state.fridgeItemArray, newObj],
-  //         cartItemArray: updatedArray,
-  //       });
-  //     });
-  // };
-  itemClickHandler = (item) => {
+  //posts items to cart, //differentiate this with user_cart
+  //was previously cartItem w/o POST
+  cartItemClickHandler = (item) => {
     fetch("http://localhost:3000/api/v1/cart_items", {
       method: "POST",
       headers: {
@@ -157,7 +151,7 @@ class App extends Component {
     )
   };
 
-   deleteHandler = (cartId) => {
+   cartItemDeleteHandler = (cartId) => {
     let updatedArray = this.state.userCartArray.filter(el => el.id !== cartId)
     fetch(`http://localhost:3000/api/v1/cart_items/${cartId}`, {
       method: "DELETE"
@@ -208,20 +202,20 @@ class App extends Component {
               <Route path="/shop">
                 <Shop
                   shopItemArray={this.state.shopItemArray}
+                  moveToFridge={this.moveToFridge}
                   cartItemArray={this.state.cartItemArray}
                   userCartArray={this.state.userCartArray}
-                  moveToFridge={this.moveToFridge}
-                  itemClickHandler={this.itemClickHandler}
-                  deleteHandler={this.deleteHandler}
+                  itemClickHandler={this.cartItemClickHandler}
+                  deleteHandler={this.cartItemDeleteHandler}
                   userId={this.state.user.id}
                 /> 
               </Route>
 
-              {/* <Route path="/fridge">
+              <Route path="/fridge">
                 <Fridge 
                   item={this.state.fridgeItemArray}
                 />
-              </Route> */}
+              </Route>
 
               <Route path="/friends">
                 <Friends user={this.state.user}
@@ -229,12 +223,11 @@ class App extends Component {
               </Route>
 
               <Route path="/">
-                {/* <HomeIndex
-                  className="temporary-search-index"
+                <HomeIndex
                   fridgeItemArray={this.state.fridgeItemArray}
                   shopItemArray={this.state.shopItemArray}
                   recipeArray={this.state.recipeArray}
-                /> */}
+                />
               </Route>
 
 
