@@ -18,6 +18,7 @@ import { OtherCategory } from "../components/Shop/Subcategory-lists/Other.js";
 class Shop extends React.Component {
   state = {
     filteredItem: [],
+    clicked: false,
   };
 
   shopSideBarClicker = (e) => {
@@ -26,6 +27,7 @@ class Shop extends React.Component {
     );
     this.setState(() => ({
       filteredItem: [...filteredArray],
+      clicked: true,
     }));
   };
 
@@ -55,7 +57,11 @@ class Shop extends React.Component {
           <Accordion.Collapse eventKey="0">
             <ListGroup>
               {category.map((item) => (
-                <ListGroup.Item key={item.id} onClick={this.shopSideBarClicker}>
+                <ListGroup.Item
+                  key={item.id}
+                  onClick={this.shopSideBarClicker}
+                  style={{ cursor: "pointer" }}
+                >
                   {item.subcategory}
                 </ListGroup.Item>
               ))}
@@ -70,15 +76,19 @@ class Shop extends React.Component {
         <div style={{ width: "250px" }}>{ShopMap}</div>
 
         <ShopMain
-          itemArray={this.props.itemArray}
+          itemArray={this.props.shopItemArray}
           item={this.state.filteredItem}
           itemClickHandler={this.props.itemClickHandler}
-          clicked={this.props.clickedArray}
+          clicked={this.state.clicked}
         />
-        <ShopRight
-          moveToFridge={this.props.moveToFridge}
-          cartItemArray={this.props.cartItemArray}
-        />
+
+        {this.props.userCartArray.length > 0 ? (
+          <ShopRight
+            moveToFridge={this.props.moveToFridge}
+            userCartArray={this.props.userCartArray}
+            deleteHandler={this.props.deleteHandler}
+          />
+        ) : null}
       </div>
     );
   }

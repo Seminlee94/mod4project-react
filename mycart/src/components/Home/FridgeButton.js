@@ -2,6 +2,8 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 
 const FridgeButton = (props) => {
+
+  
   const onClick = (e) => {
     return props.moveToFridge(props.item, props.clickedItemIndex);
   };
@@ -14,9 +16,9 @@ const FridgeButton = (props) => {
       <Button variant="info" onClick={onClick} style={{ marginRight: "5px" }}>
         Add to Fridge
       </Button>
-      <Button variant="success" onClick={onClick}>
+      {/* <Button variant="success" onClick={onClick}>
         Add to Checkout
-      </Button>
+      </Button> */}
     </>
   );
 };

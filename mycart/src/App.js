@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Switch, Route } from "react-router-dom";
-import { BrowserRouter as Router } from "react-router-dom";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
 import HomeIndex from "./components/Home/HomeIndex";
 import Navbar from "./components/Navbar/Navbar.js";
 import Fridge from "./containers/Fridge.js";
@@ -9,6 +8,7 @@ import Friends from "./containers/Friends.js";
 import Shop from "./containers/Shop.js";
 import Signup from "./components/Navbar/Signup.js";
 import Login from "./components/Navbar/Login.js";
+import Logout from "./components/Navbar/Logout.js";
 
 class App extends Component {
   state = {
@@ -16,8 +16,23 @@ class App extends Component {
     fridgeItemArray: [],
     recipeArray: [],
     cartItemArray: [],
-    user: null,
+    userCartArray: [],
+    user: {},
   };
+
+  componentDidMount() {
+    const token = localStorage.getItem("token");
+    if (token) {
+      fetch("http://localhost:3000/api/v1/profile", {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((resp) => resp.json())
+        .then((data) => {
+          this.setState(() => ({ user: data.user }));
+        });
+    }
+  }
 
   signupHandler = (userObj) => {
     fetch("http://localhost:3000/api/v1/users", {
@@ -29,26 +44,61 @@ class App extends Component {
       body: JSON.stringify({ user: userObj }),
     })
       .then((resp) => resp.json())
-      .then(console.log);
+      .then((data) => {
+        // this.setState({ user: data.user })
+        localStorage.setItem("token", data.jwt);
+        localStorage.setItem("userId", data.user.id);
+        this.setState({ user: data.user });
+
+        // this.setState({ user: data.user }, () => this.props.history.push('/fridge'))
+      });
   };
 
-  componentDidMount() {
-    const urls = [
-      "http://localhost:3007/items",
-      "http://localhost:3007/fridge-items",
-      "http://localhost:3007/recipes",
-      "http://localhost:3007/item_carts",
-    ];
-    const promises = urls.map((url) => fetch(url));
-    Promise.all(urls.map((url) => fetch(url).then((resp) => resp.json()))).then(
-      (data) =>
+  loginHandler = (userObj) => {
+    fetch("http://localhost:3000/api/v1/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        accepts: "application/json",
+      },
+      body: JSON.stringify({ user: userObj }),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        localStorage.setItem("token", data.jwt);
+        localStorage.setItem("userId", data.user.id);
+        console.log(data.user.id);
+        this.setState({ user: data.user });
+        // this.setState({ user: data.user }, () => this.props.history.push('/fridge'))
+      });
+  };
+
+  logoutHandler = () => {
+    localStorage.removeItem("token");
+    this.setState({ user: {} });
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.user !== this.state.user) {
+      const urls = [
+        "http://localhost:3000/api/v1/items",
+        "http://localhost:3000/api/v1/fridge_items",
+        "http://localhost:3000/api/v1/recipes",
+        "http://localhost:3000/api/v1/cart_items",
+        "http://localhost:3000/api/v1/user_carts/1",
+      ];
+      Promise.all(
+        urls.map((url) => fetch(url).then((resp) => resp.json()))
+      ).then((data) =>
         this.setState({
           shopItemArray: data[0],
           fridgeItemArray: data[1],
           recipeArray: data[2],
-          cartItemArray: data[3], //is nested map through for element.item
+          cartItemArray: data[3],
+          userCartArray: data[4].cart.cart_item,
         })
-    );
+      );
+    }
   }
 
   moveToFridge = (id, clickedItemIndex) => {
@@ -57,7 +107,7 @@ class App extends Component {
       ...this.state.shopItemArray.find((el) => el.id === parseInt(id)),
     };
     delete foundObj.id; //deletes the store ID, letting newObj create new ID for fridgeitem so we don't get conflicts when trying to post
-    fetch("http://localhost:3007/fridge-items/", {
+    fetch("http://localhost:3000/api/v1/fridge-items", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -78,51 +128,66 @@ class App extends Component {
       });
   };
 
-  itemClickHandler = (id) => {
-    // console.log("clicked: ", id);
-    console.log("clicked");
-    let newArray = this.state.cartItemArray;
-    let foundObj = this.state.shopItemArray.find(
-      (el) => el.id === parseInt(id)
-    );
-    if (newArray.includes(foundObj) === false) {
-      this.setState(() => ({
-        cartItemArray: [...newArray, foundObj],
-      }));
-    }
-  };
-
-  loginHandler = (userObj) => {
-    console.log("logging in: ", userObj);
-    fetch("http://localhost:3000/api/v1/login", {
+  //posts items to cart, //differentiate this with user_cart
+  //was previously cartItem w/o POST
+  cartItemClickHandler = (item) => {
+    fetch("http://localhost:3000/api/v1/cart_items", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         accepts: "application/json",
       },
-      body: JSON.stringify({ user: userObj }),
+      body: JSON.stringify({
+        cart_id: 1,
+        item_id: item.id,
+      }),
     })
       .then((resp) => resp.json())
-      .then(console.log);
+      .then((data) =>
+        this.setState(() => ({
+          userCartArray: [...this.state.userCartArray, data],
+        }))
+      );
+  };
+
+  cartItemDeleteHandler = (cartId) => {
+    let updatedArray = this.state.userCartArray.filter(
+      (el) => el.id !== cartId
+    );
+    fetch(`http://localhost:3000/api/v1/cart_items/${cartId}`, {
+      method: "DELETE",
+    })
+      .then((resp) => resp.json())
+      .then(this.setState({ userCartArray: updatedArray }));
   };
 
   render() {
-    // const cartItems = this.state.cartItemArray.map((element) => element.item);
-    // console.log(cartItems);
-    console.log(this.state.recipeArray);
+    let auth_link;
+    if (!this.state.user || Object.keys(this.state.user).length === 0) {
+      auth_link = (
+        <>
+          <Signup submitHandler={this.signupHandler} />
+          <Login submitHandler={this.loginHandler} />{" "}
+        </>
+      );
+    } else {
+      auth_link = <Logout logoutHandler={this.logoutHandler} />;
+    }
+
     return (
-      <div
-        className="App"
-        style={{
-          height: "100%",
-          position: "absolute",
-          left: "0px",
-          width: "100%",
-          overflow: "scroll",
-        }}
-      >
-        <Router>
+      <BrowserRouter>
+        <div
+          className="App"
+          style={{
+            height: "100%",
+            position: "absolute",
+            left: "0px",
+            width: "100%",
+            overflow: "scroll",
+          }}
+        >
           <Navbar />
+          <div>{auth_link}</div>
 
           <Switch class="header-switch">
             <Route path="/signup">
@@ -138,17 +203,15 @@ class App extends Component {
                 shopItemArray={this.state.shopItemArray}
                 moveToFridge={this.moveToFridge}
                 cartItemArray={this.state.cartItemArray}
-                itemClickHandler={this.itemClickHandler}
-                user={this.state.user}
+                userCartArray={this.state.userCartArray}
+                itemClickHandler={this.cartItemClickHandler}
+                deleteHandler={this.cartItemDeleteHandler}
+                userId={this.state.user.id}
               />
             </Route>
 
             <Route path="/fridge">
-              <Fridge
-                item={this.state.fridgeItemArray}
-                // user={this.state.user}
-                user="test"
-              />
+              <Fridge item={this.state.fridgeItemArray} />
             </Route>
 
             <Route path="/friends">
@@ -163,8 +226,8 @@ class App extends Component {
               />
             </Route>
           </Switch>
-        </Router>
-      </div>
+        </div>
+      </BrowserRouter>
     );
   }
 }

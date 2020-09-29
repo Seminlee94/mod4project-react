@@ -5,6 +5,17 @@ import "../components/Fridge/Fridge.css";
 import Shelf from "../components/Shelf";
 
 class Fridge extends React.Component {
+
+  // state = {
+
+  // }
+
+  // componentDidMount() {
+  //   fetch("http://localhost:3000/api/v1/users")
+  //     .then(resp => resp.json())
+  //     .then(data => this.setState({ userArray: data }))
+  // }
+
   filter = (Category) => {
     let filteredItems = this.props.item.filter(
       (item) => item.category === Category

@@ -59,8 +59,6 @@ class ShopMain extends React.Component {
   };
 
   render() {
-    this.state.itemArray = this.props.itemArray;
-
     return (
       <div className="shop-main">
         <div className="item-search">
