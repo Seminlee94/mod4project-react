@@ -1,19 +1,17 @@
 import React from "react";
+import Card from "react-bootstrap/Card";
 
 class HomeRecipes extends React.Component {
   render() {
     return (
-      <div>
-        <h2>{this.props.recipe.name}</h2>
-        <p>
-          <div className="item-description"></div>
-          <img
-            className="item-image"
-            alt={this.props.recipe.name}
-            src={this.props.recipe.picture}
-          />
-        </p>
-      </div>
+      <Card>
+        <Card.Img
+          alt={this.props.recipe.title}
+          src={this.props.recipe.picture}
+          style={{ width: "200px" }}
+        />
+        <Card.Body>{this.props.recipe.title}</Card.Body>
+      </Card>
     );
   }
 }

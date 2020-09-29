@@ -43,13 +43,14 @@ class HomeIndex extends Component {
 
   render() {
     const frontPageObj = [
-      { shelf: this.fridge() },
-      { shelf: this.recipe() },
-      { shelf: this.shop() },
+      { title: "Fridge", shelf: this.fridge() },
+      { title: "Recipes", shelf: this.recipe() },
+      { title: "Shop", shelf: this.shop() },
     ];
 
-    const frontPage = frontPageObj.map(({ shelf }) => (
-      <div>
+    const frontPage = frontPageObj.map(({ title, shelf }) => (
+      <div style={{ marginBottom: "30px" }}>
+        <h1>{title}</h1>
         <Shelf category={shelf} />
       </div>
     ));
