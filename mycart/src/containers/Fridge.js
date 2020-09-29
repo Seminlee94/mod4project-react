@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import FridgeItem from "../components/Fridge/FridgeItem.js";
 import "../components/Fridge/Fridge.css";
 // import MoreButton from "../components/Home/MoreButton.js";
@@ -42,6 +42,7 @@ class Fridge extends React.Component {
       </div>
     ));
 
+    console.log("current user:", this.props.user)
     return (
 
       <>
