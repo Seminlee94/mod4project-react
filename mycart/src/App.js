@@ -17,21 +17,41 @@ class App extends Component {
     recipeArray: [],
     cartItemArray: [],
     userCartArray: [],
-    user: {},
-  };
+    friendArray: [],
+    user: {}
+  }
 
   componentDidMount() {
     const token = localStorage.getItem("token");
     if (token) {
       fetch("http://localhost:3000/api/v1/profile", {
         method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${token}`}
+      })
+      .then(resp => resp.json())
+      .then(data => {
+        localStorage.setItem("userId", data.user.id);
+        this.setState(() => ({ user: data.user }), ()=>this.userFollowees())
       })
         .then((resp) => resp.json())
         .then((data) => {
           this.setState(() => ({ user: data.user }));
         });
     }
+  }
+
+  userFollowees = () => {
+    fetch(`http://localhost:3000/api/v1/users/${this.state.user.user.id}/followees`, {
+
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+        'Content-type': 'application/json',
+        'Accepts': 'application/json'
+      }
+    })
+      .then(resp => resp.json())
+      .then(friend => this.setState(() => ({ friendArray: friend.followers }) ))
   }
 
   signupHandler = (userObj) => {
@@ -61,7 +81,16 @@ class App extends Component {
         "Content-Type": "application/json",
         accepts: "application/json",
       },
-      body: JSON.stringify({ user: userObj }),
+      body: JSON.stringify({ user: userObj })
+    })
+    .then(resp => resp.json())
+    .then(data => {
+      localStorage.setItem("token", data.jwt);
+      localStorage.setItem("userId", data.user.id);
+      this.setState({ 
+        user: data.user
+      })
+      // this.setState({ user: data.user }, () => this.props.history.push('/fridge'))
     })
       .then((resp) => resp.json())
       .then((data) => {
@@ -79,26 +108,27 @@ class App extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.user !== this.state.user) {
-      const urls = [
-        "http://localhost:3000/api/v1/items",
-        "http://localhost:3000/api/v1/fridge_items",
-        "http://localhost:3000/api/v1/recipes",
-        "http://localhost:3000/api/v1/cart_items",
-        "http://localhost:3000/api/v1/user_carts/1",
-      ];
-      Promise.all(
-        urls.map((url) => fetch(url).then((resp) => resp.json()))
-      ).then((data) =>
-        this.setState({
-          shopItemArray: data[0],
-          fridgeItemArray: data[1],
-          recipeArray: data[2],
-          cartItemArray: data[3],
-          userCartArray: data[4].cart.cart_item,
-        })
-      );
-    }
+    if (prevState.user !== this.state.user ) {
+        const urls = [
+          "http://localhost:3000/api/v1/items",
+          "http://localhost:3000/api/v1/fridge_items",
+          "http://localhost:3000/api/v1/recipes",
+          "http://localhost:3000/api/v1/cart_items",
+          "http://localhost:3000/api/v1/user_carts/1",
+          // `http://localhost:3000/api/v1/users/${this.state.user.id}/followees`
+
+        ];
+        Promise.all(urls.map((url) => fetch(url).then((resp) => resp.json()))).then(
+          (data) =>
+            this.setState({
+              shopItemArray: data[0],
+              fridgeItemArray: data[1],
+              recipeArray: data[2],
+              cartItemArray: data[3],
+              userCartArray: data[4].cart.cart_item
+            })
+        );
+     }
   }
 
   moveToFridge = (id, clickedItemIndex) => {
@@ -157,12 +187,36 @@ class App extends Component {
     fetch(`http://localhost:3000/api/v1/cart_items/${cartId}`, {
       method: "DELETE",
     })
-      .then((resp) => resp.json())
-      .then(this.setState({ userCartArray: updatedArray }));
-  };
+    .then(resp => resp.json())
+    .then(this.setState({ userCartArray: updatedArray }))
+
+  }
+
+  addFriendHandler = (id) => {
+    fetch(`http://localhost:3000/api/v1/users/${id}/follow`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+        "accepts": "application/json"
+      },
+      body: JSON.stringify({ follow: { follower_id: id, followee_id: this.state.user.user.id } })
+    })
+    .then(resp => resp.json())
+    .then(data => console.log(data)
+    //   this.setState(()=> ({
+    //   friendArray: [...this.state.friendArray, data]
+    // }))
+    )
+
+  }
+
 
   render() {
-    let auth_link;
+
+    // console.log(this.state.friendArray)
+
+    let auth_link
     if (!this.state.user || Object.keys(this.state.user).length === 0) {
       auth_link = (
         <>
@@ -186,47 +240,59 @@ class App extends Component {
             overflow: "scroll",
           }}
         >
-          <Navbar />
-          <div>{auth_link}</div>
+            <Navbar  />
+            <div>
+              {auth_link}
+            </div>
 
-          <Switch class="header-switch">
-            <Route path="/signup">
-              <Signup submitHandler={this.signupHandler} />
-            </Route>
 
-            <Route path="/login">
-              <Login submitHandler={this.loginHandler} />
-            </Route>
+            <Switch class="header-switch">
 
-            <Route path="/shop">
-              <Shop
-                shopItemArray={this.state.shopItemArray}
-                moveToFridge={this.moveToFridge}
-                cartItemArray={this.state.cartItemArray}
-                userCartArray={this.state.userCartArray}
-                itemClickHandler={this.cartItemClickHandler}
-                deleteHandler={this.cartItemDeleteHandler}
-                userId={this.state.user.id}
-              />
-            </Route>
+              <Route path="/signup">
+                <Signup submitHandler={this.signupHandler} />
+              </Route>  
 
-            <Route path="/fridge">
-              <Fridge item={this.state.fridgeItemArray} />
-            </Route>
+              <Route path="/login">
+                <Login submitHandler={this.loginHandler} />
+              </Route>  
 
-            <Route path="/friends">
-              <Friends user={this.state.user} />
-            </Route>
+              <Route path="/shop">
+                <Shop
+                  shopItemArray={this.state.shopItemArray}
+                  moveToFridge={this.moveToFridge}
+                  cartItemArray={this.state.cartItemArray}
+                  userCartArray={this.state.userCartArray}
+                  itemClickHandler={this.cartItemClickHandler}
+                  deleteHandler={this.cartItemDeleteHandler}
+                  userId={this.state.user.id}
+                /> 
+              </Route>
 
-            <Route path="/">
-              <HomeIndex
-                fridgeItemArray={this.state.fridgeItemArray}
-                shopItemArray={this.state.shopItemArray}
-                recipeArray={this.state.recipeArray}
-              />
-            </Route>
-          </Switch>
-        </div>
+              <Route path="/fridge">
+                <Fridge 
+                  item={this.state.fridgeItemArray}
+                />
+              </Route>
+
+              <Route path="/friends">
+                <Friends 
+                  user={this.state.user}
+                  friends={this.state.friendArray}
+                  addFriendHandler={this.addFriendHandler}
+                />
+              </Route>
+
+              <Route path="/">
+                <HomeIndex
+                  fridgeItemArray={this.state.fridgeItemArray}
+                  shopItemArray={this.state.shopItemArray}
+                  // recipeArray={this.state.recipeArray}
+                />
+              </Route>
+
+
+            </Switch>
+          </div>
       </BrowserRouter>
     );
   }
