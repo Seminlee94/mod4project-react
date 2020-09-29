@@ -18,24 +18,20 @@ import { OtherCategory } from "../components/Shop/Subcategory-lists/Other.js";
 class Shop extends React.Component {
   state = {
     filteredItem: [],
-    clicked: false
+    clicked: false,
   };
 
-
   shopSideBarClicker = (e) => {
-    let filteredArray = this.state.itemArray.filter(
+    let filteredArray = this.props.shopItemArray.filter(
       (item) => item.sub_category === e.target.textContent
     );
     this.setState(() => ({
       filteredItem: [...filteredArray],
-      clicked: true
+      clicked: true,
     }));
   };
 
- 
-
   render() {
-
     const ShopMapper = [
       { title: "Bread", category: BreadCategory },
       { title: "Meat", category: MeatCategory },
@@ -61,7 +57,11 @@ class Shop extends React.Component {
           <Accordion.Collapse eventKey="0">
             <ListGroup>
               {category.map((item) => (
-                <ListGroup.Item key={item.id} onClick={this.shopSideBarClicker} style={{ cursor:"pointer" }} >
+                <ListGroup.Item
+                  key={item.id}
+                  onClick={this.shopSideBarClicker}
+                  style={{ cursor: "pointer" }}
+                >
                   {item.subcategory}
                 </ListGroup.Item>
               ))}
@@ -70,7 +70,6 @@ class Shop extends React.Component {
         </Card>
       </Accordion>
     ));
-
 
     return (
       <div className="dd-wrapper" style={{ display: "flex" }}>
@@ -82,18 +81,15 @@ class Shop extends React.Component {
           itemClickHandler={this.props.itemClickHandler}
           clicked={this.state.clicked}
         />
-        
-        {this.props.userCartArray.length > 0 ? <ShopRight
-          // moveToFridge={this.props.moveToFridge}
-          userCartArray={this.props.userCartArray}
-          deleteHandler={this.props.deleteHandler}
-          />
-          :
-          null
-        }
-        
-      </div>
 
+        {this.props.userCartArray.length > 0 ? (
+          <ShopRight
+            moveToFridge={this.props.moveToFridge}
+            userCartArray={this.props.userCartArray}
+            deleteHandler={this.props.deleteHandler}
+          />
+        ) : null}
+      </div>
     );
   }
 }

@@ -3,21 +3,21 @@ import ListGroup from "react-bootstrap/ListGroup";
 import ItemRightCard from "./ItemRightCard.js";
 
 class ShopRight extends React.Component {
-  
+  // cartItems = this.props.cartItemArray.map((element) => element.item);
   clickedItems = () => {
-    return this.props.userCartArray.map((cartItem) => (
+    return this.props.userCartArray.map((cartItem, index) => (
       <ListGroup.Item action>
         <ItemRightCard
           cartId={cartItem.id}
           key={cartItem.item.id}
           item={cartItem.item}
           moveToFridge={this.props.moveToFridge}
-          // clickedItemIndex={index}
+          clickedItemIndex={index} //add index back in, it deletes stuff properly in the right
           deleteHandler={this.props.deleteHandler}
         />
       </ListGroup.Item>
-    ))  
-  }
+    ));
+  };
 
   render() {
     return (

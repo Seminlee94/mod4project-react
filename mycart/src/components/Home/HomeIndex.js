@@ -2,77 +2,77 @@ import React, { Component } from "react";
 import HomeStore from "./HomeStore";
 // import HomeRecipes from "./HomeRecipes";
 import HomeFridge from "./HomeFridge";
+import Shelf from "../../components/Shelf";
 
 class HomeIndex extends Component {
-  state = {
-    itemCount: 0,
-    recipeCount: 0,
-    fridgeCount: 0,
+  fridge = () => {
+    return this.props.fridgeItemArray.map((el) => (
+      <HomeFridge fridgeItem={el} />
+    ));
   };
-
-  rightItemToggle = () => {
-    this.setState({ itemCount: this.state.itemCount + 4 });
+  recipe = () => {
+    return this.props.recipeArray.map((el) => <HomeRecipes recipe={el} />);
   };
-  leftItemToggle = () => {
-    this.setState({ itemCount: this.state.itemCount - 4 });
-  };
-  rightRecipeToggle = () => {
-    this.setState({ recipeCount: this.state.recipeCount + 4 });
-  };
-  leftRecipeToggle = () => {
-    this.setState({ recipeCount: this.state.recipeCount - 4 });
-  };
-  rightFridgeToggle = () => {
-    this.setState({ fridgeCount: this.state.fridgeCount + 4 });
-  };
-  leftFridgeToggle = () => {
-    this.setState({ fridgeCount: this.state.fridgeCount - 4 });
+  shop = () => {
+    return this.props.shopItemArray.map((el) => <HomeStore item={el} />);
   };
 
   render() {
-    const itemCount = this.state.itemCount;
-    const itemMapper = this.props.shopItemArray.map(
-      (item, currentItemIndex) =>
-        itemCount <= currentItemIndex &&
-        currentItemIndex < itemCount + 4 && (
-          <HomeStore
-            item={item}
-            rightItemToggle={this.rightItemToggle}
-            leftItemToggle={this.leftItemToggle}
-          />
-        )
-    );
-    // const recipeCount = this.state.recipeCount;
-    // const recipeMapper = this.props.recipeArray.map(
-    //   (recipe, currentItemIndex) =>
-    //     recipeCount <= currentItemIndex &&
-    //     currentItemIndex < recipeCount + 4 && (
-    //       <HomeRecipes
-    //         recipe={recipe}
-    //         rightRecipeToggle={this.rightRecipeToggle}
-    //         leftRecipeToggle={this.leftRecipeToggle}
+    // const itemCount = this.state.itemCount;
+    // const itemMapper = this.props.shopItemArray.map(
+    //   (item, currentItemIndex) =>
+    //     itemCount <= currentItemIndex &&
+    //     currentItemIndex < itemCount + 4 && (
+    //       <HomeStore
+    //         item={item}
+    //         rightItemToggle={this.rightItemToggle}
+    //         leftItemToggle={this.leftItemToggle}
     //       />
     //     )
     // );
-    const fridgeCount = this.state.fridgeCount;
-    const fridgeMapper = this.props.fridgeItemArray.map(
-      (fridge, currentItemIndex) =>
-        fridgeCount <= currentItemIndex &&
-        currentItemIndex < fridgeCount + 4 && (
-          <HomeFridge
-            fridgeItem={fridge}
-            rightFridgeToggle={this.rightFridgeToggle}
-            leftFridgeToggle={this.leftFridgeToggle}
-          />
-        )
-    );
-    return (
-      <div className="app">
-        {fridgeMapper}
-        {/* {recipeMapper} */}
-        {itemMapper}
+    // // const recipeCount = this.state.recipeCount;
+    // // const recipeMapper = this.props.recipeArray.map(
+    // //   (recipe, currentItemIndex) =>
+    // //     recipeCount <= currentItemIndex &&
+    // //     currentItemIndex < recipeCount + 4 && (
+    // //       <HomeRecipes
+    // //         recipe={recipe}
+    // //         rightRecipeToggle={this.rightRecipeToggle}
+    // //         leftRecipeToggle={this.leftRecipeToggle}
+    // //       />
+    // //     )
+    // // );
+    // const fridgeCount = this.state.fridgeCount;
+    // const fridgeMapper = this.props.fridgeItemArray.map(
+    //   (fridge, currentItemIndex) =>
+    //     fridgeCount <= currentItemIndex &&
+    //     currentItemIndex < fridgeCount + 4 && (
+    //       <HomeFridge
+    //         fridgeItem={fridge}
+    //         rightFridgeToggle={this.rightFridgeToggle}
+    //         leftFridgeToggle={this.leftFridgeToggle}
+    //       />
+    //     )
+    // );
+    // return (
+    //   <div className="app">
+    //     {fridgeMapper}
+    //     {/* {recipeMapper} */}
+    //     {itemMapper}
+    const frontPageObj = [
+      { title: "Fridge", shelf: this.fridge() },
+      { title: "Recipes", shelf: this.recipe() },
+      { title: "Shop", shelf: this.shop() },
+    ];
+
+    const frontPage = frontPageObj.map(({ title, shelf }) => (
+      <div style={{ marginBottom: "30px", textAlign: "center" }}>
+        <h1>{title}</h1>
+        <Shelf category={shelf} />
       </div>
-    );
+    ));
+
+    return <div className="app">{frontPage}</div>;
   }
 }
 

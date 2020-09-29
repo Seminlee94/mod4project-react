@@ -11,7 +11,6 @@ import Login from "./components/Navbar/Login.js";
 import Logout from "./components/Navbar/Logout.js";
 
 class App extends Component {
-  
   state = {
     shopItemArray: [],
     fridgeItemArray: [],
@@ -23,9 +22,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem("token");
     if (token) {
-      fetch('http://localhost:3000/api/v1/profile', {
+      fetch("http://localhost:3000/api/v1/profile", {
         method: "GET",
         headers: { Authorization: `Bearer ${token}`}
       })
@@ -34,6 +33,10 @@ class App extends Component {
         localStorage.setItem("userId", data.user.id);
         this.setState(() => ({ user: data.user }), ()=>this.userFollowees())
       })
+        .then((resp) => resp.json())
+        .then((data) => {
+          this.setState(() => ({ user: data.user }));
+        });
     }
   }
 
@@ -56,27 +59,27 @@ class App extends Component {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "accepts": "application/json"
+        accepts: "application/json",
       },
-      body: JSON.stringify({ user: userObj })
+      body: JSON.stringify({ user: userObj }),
     })
-      .then(resp => resp.json())
-      .then(data => {
+      .then((resp) => resp.json())
+      .then((data) => {
         // this.setState({ user: data.user })
         localStorage.setItem("token", data.jwt);
         localStorage.setItem("userId", data.user.id);
-        this.setState({ user: data.user })
+        this.setState({ user: data.user });
 
         // this.setState({ user: data.user }, () => this.props.history.push('/fridge'))
-    })
-  }
-  
+      });
+  };
+
   loginHandler = (userObj) => {
     fetch("http://localhost:3000/api/v1/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "accepts": "application/json"
+        accepts: "application/json",
       },
       body: JSON.stringify({ user: userObj })
     })
@@ -89,12 +92,20 @@ class App extends Component {
       })
       // this.setState({ user: data.user }, () => this.props.history.push('/fridge'))
     })
-  }
+      .then((resp) => resp.json())
+      .then((data) => {
+        localStorage.setItem("token", data.jwt);
+        localStorage.setItem("userId", data.user.id);
+        console.log(data.user.id);
+        this.setState({ user: data.user });
+        // this.setState({ user: data.user }, () => this.props.history.push('/fridge'))
+      });
+  };
 
   logoutHandler = () => {
-    localStorage.removeItem("token")
-    this.setState({ user: {} })
-  }
+    localStorage.removeItem("token");
+    this.setState({ user: {} });
+  };
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.user !== this.state.user ) {
@@ -119,12 +130,11 @@ class App extends Component {
         );
      }
   }
-  
 
   moveToFridge = (id, clickedItemIndex) => {
     // Copy the object, so that we don't change any places it's being referenced
     let foundObj = {
-      ...this.state.itemArray.find((el) => el.id === parseInt(id)),
+      ...this.state.shopItemArray.find((el) => el.id === parseInt(id)),
     };
     delete foundObj.id; //deletes the store ID, letting newObj create new ID for fridgeitem so we don't get conflicts when trying to post
     fetch("http://localhost:3000/api/v1/fridge-items", {
@@ -148,7 +158,6 @@ class App extends Component {
       });
   };
 
-
   //posts items to cart, //differentiate this with user_cart
   //was previously cartItem w/o POST
   cartItemClickHandler = (item) => {
@@ -156,24 +165,27 @@ class App extends Component {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "accepts": "application/json"
+        accepts: "application/json",
       },
       body: JSON.stringify({
         cart_id: 1,
-        item_id: item.id
-      })
+        item_id: item.id,
+      }),
     })
-    .then(resp => resp.json())
-    .then(data => this.setState(()=> ({
-      userCartArray: [...this.state.userCartArray, data]
-    }))
-    )
+      .then((resp) => resp.json())
+      .then((data) =>
+        this.setState(() => ({
+          userCartArray: [...this.state.userCartArray, data],
+        }))
+      );
   };
 
   cartItemDeleteHandler = (cartId) => {
-    let updatedArray = this.state.userCartArray.filter(el => el.id !== cartId)
+    let updatedArray = this.state.userCartArray.filter(
+      (el) => el.id !== cartId
+    );
     fetch(`http://localhost:3000/api/v1/cart_items/${cartId}`, {
-      method: "DELETE"
+      method: "DELETE",
     })
     .then(resp => resp.json())
     .then(this.setState({ userCartArray: updatedArray }))
@@ -206,10 +218,15 @@ class App extends Component {
 
     let auth_link
     if (!this.state.user || Object.keys(this.state.user).length === 0) {
-      auth_link = <><Signup submitHandler={this.signupHandler}/><Login submitHandler={this.loginHandler}/> </> } else {
-        auth_link = <Logout logoutHandler={this.logoutHandler} />
+      auth_link = (
+        <>
+          <Signup submitHandler={this.signupHandler} />
+          <Login submitHandler={this.loginHandler} />{" "}
+        </>
+      );
+    } else {
+      auth_link = <Logout logoutHandler={this.logoutHandler} />;
     }
-    
 
     return (
       <BrowserRouter>

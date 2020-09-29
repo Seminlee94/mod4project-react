@@ -4,16 +4,14 @@ import { MenuItems } from "./MenuItems.js";
 
 class Navbar extends Component {
   state = {
-    clicked: false
-  }
+    clicked: false,
+  };
 
   clickHandler = () => {
     this.setState((previousState) => ({
-      clicked: !previousState.clicked
-    }))
-  }
-
-
+      clicked: !previousState.clicked,
+    }));
+  };
 
   render() {
     return (
@@ -27,12 +25,11 @@ class Navbar extends Component {
         <ul className={this.state.clicked ? "nav-menu active" : "nav-menu"}>
           {MenuItems.map((item, index) => {
             return (
-                <li key={index}>
-                  <a className={item.cName} href={item.url}>
-                    {item.title}
-                  </a>
-                </li>
-
+              <li key={index}>
+                <a className={item.cName} href={item.url}>
+                  {item.title}
+                </a>
+              </li>
             );
           })}
         </ul>
