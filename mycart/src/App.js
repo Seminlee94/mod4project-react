@@ -15,91 +15,90 @@ class App extends Component {
     shopItemArray: [],
     fridgeItemArray: [],
     recipeArray: [],
-    cartItemArray: [],
+    // cartItemArray: [],
     userCartArray: [],
-    user: {},
+    // user: {},
   };
 
+  // componentDidMount() {
+  //   const token = localStorage.getItem("token");
+  //   if (token) {
+  //     fetch("http://localhost:3005/profile", {
+  //       method: "GET",
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     })
+  //       .then((resp) => resp.json())
+  //       .then((data) => {
+  //         this.setState(() => ({ user: data.user }));
+  //       });
+  //   }
+  // }
+
+  // signupHandler = (userObj) => {
+  //   fetch("http://localhost:3005/users", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       accepts: "application/json",
+  //     },
+  //     body: JSON.stringify({ user: userObj }),
+  //   })
+  //     .then((resp) => resp.json())
+  //     .then((data) => {
+  //       // this.setState({ user: data.user })
+  //       localStorage.setItem("token", data.jwt);
+  //       localStorage.setItem("userId", data.user.id);
+  //       this.setState({ user: data.user });
+
+  //       // this.setState({ user: data.user }, () => this.props.history.push('/fridge'))
+  //     });
+  // };
+
+  // loginHandler = (userObj) => {
+  //   fetch("http://localhost:3005/login", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       accepts: "application/json",
+  //     },
+  //     body: JSON.stringify({ user: userObj }),
+  //   })
+  //     .then((resp) => resp.json())
+  //     .then((data) => {
+  //       localStorage.setItem("token", data.jwt);
+  //       localStorage.setItem("userId", data.user.id);
+  //       console.log(data.user.id);
+  //       this.setState({ user: data.user });
+  //       // this.setState({ user: data.user }, () => this.props.history.push('/fridge'))
+  //     });
+  // };
+
+  // logoutHandler = () => {
+  //   localStorage.removeItem("token");
+  //   this.setState({ user: {} });
+  // };
+
+  // componentUpdate(prevProps, prevState) {
+  //   if (prevState.user !== this.state.user) {
   componentDidMount() {
-    const token = localStorage.getItem("token");
-    if (token) {
-      fetch("http://localhost:3000/api/v1/profile", {
-        method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
-      })
-        .then((resp) => resp.json())
-        .then((data) => {
-          this.setState(() => ({ user: data.user }));
-        });
-    }
-  }
-
-  signupHandler = (userObj) => {
-    fetch("http://localhost:3000/api/v1/users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        accepts: "application/json",
-      },
-      body: JSON.stringify({ user: userObj }),
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        // this.setState({ user: data.user })
-        localStorage.setItem("token", data.jwt);
-        localStorage.setItem("userId", data.user.id);
-        this.setState({ user: data.user });
-
-        // this.setState({ user: data.user }, () => this.props.history.push('/fridge'))
-      });
-  };
-
-  loginHandler = (userObj) => {
-    fetch("http://localhost:3000/api/v1/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        accepts: "application/json",
-      },
-      body: JSON.stringify({ user: userObj }),
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        localStorage.setItem("token", data.jwt);
-        localStorage.setItem("userId", data.user.id);
-        console.log(data.user.id);
-        this.setState({ user: data.user });
-        // this.setState({ user: data.user }, () => this.props.history.push('/fridge'))
-      });
-  };
-
-  logoutHandler = () => {
-    localStorage.removeItem("token");
-    this.setState({ user: {} });
-  };
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.user !== this.state.user) {
-      const urls = [
-        "http://localhost:3000/api/v1/items",
-        "http://localhost:3000/api/v1/fridge_items",
-        "http://localhost:3000/api/v1/recipes",
-        "http://localhost:3000/api/v1/cart_items",
-        "http://localhost:3000/api/v1/user_carts/1",
-      ];
-      Promise.all(
-        urls.map((url) => fetch(url).then((resp) => resp.json()))
-      ).then((data) =>
+    const urls = [
+      "http://localhost:3005/items",
+      "http://localhost:3005/fridge-items",
+      "http://localhost:3005/recipes",
+    ];
+    Promise.all(urls.map((url) => fetch(url).then((resp) => resp.json()))).then(
+      (data) =>
         this.setState({
           shopItemArray: data[0],
           fridgeItemArray: data[1],
           recipeArray: data[2],
-          cartItemArray: data[3],
-          userCartArray: data[4].cart.cart_item,
         })
-      );
-    }
+    );
   }
+  // userCartArray: data[3].cart.cart_item,
+  // "http://localhost:3005/user_carts/1",
+  // "http://localhost:3005/cart_items/1",
+  // cartItemArray: data[3],
 
   moveToFridge = (id, clickedItemIndex) => {
     // Copy the object, so that we don't change any places it's being referenced
@@ -107,7 +106,7 @@ class App extends Component {
       ...this.state.shopItemArray.find((el) => el.id === parseInt(id)),
     };
     delete foundObj.id; //deletes the store ID, letting newObj create new ID for fridgeitem so we don't get conflicts when trying to post
-    fetch("http://localhost:3000/api/v1/fridge-items", {
+    fetch("http://localhost:3005/fridge-items", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -131,7 +130,7 @@ class App extends Component {
   //posts items to cart, //differentiate this with user_cart
   //was previously cartItem w/o POST
   cartItemClickHandler = (item) => {
-    fetch("http://localhost:3000/api/v1/cart_items", {
+    fetch("http://localhost:3005/cart_items", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -154,26 +153,26 @@ class App extends Component {
     let updatedArray = this.state.userCartArray.filter(
       (el) => el.id !== cartId
     );
-    fetch(`http://localhost:3000/api/v1/cart_items/${cartId}`, {
+    fetch(`http://localhost:3005/cart_items/${cartId}`, {
       method: "DELETE",
     })
       .then((resp) => resp.json())
       .then(this.setState({ userCartArray: updatedArray }));
   };
 
-  render() {
-    let auth_link;
-    if (!this.state.user || Object.keys(this.state.user).length === 0) {
-      auth_link = (
-        <>
-          <Signup submitHandler={this.signupHandler} />
-          <Login submitHandler={this.loginHandler} />{" "}
-        </>
-      );
-    } else {
-      auth_link = <Logout logoutHandler={this.logoutHandler} />;
-    }
+  // let auth_link;
+  // if (!this.state.user || Object.keys(this.state.user).length === 0) {
+  //   auth_link = (
+  //     <>
+  //       <Signup submitHandler={this.signupHandler} />
+  //       <Login submitHandler={this.loginHandler} />{" "}
+  //     </>
+  //   );
+  // } else {
+  //   auth_link = <Logout logoutHandler={this.logoutHandler} />;
 
+  render() {
+    console.log(this.state.userCartArray);
     return (
       <BrowserRouter>
         <div
@@ -187,7 +186,7 @@ class App extends Component {
           }}
         >
           <Navbar />
-          <div>{auth_link}</div>
+          {/* <div>{auth_link}</div> */}
 
           <Switch class="header-switch">
             <Route path="/signup">
@@ -206,7 +205,7 @@ class App extends Component {
                 userCartArray={this.state.userCartArray}
                 itemClickHandler={this.cartItemClickHandler}
                 deleteHandler={this.cartItemDeleteHandler}
-                userId={this.state.user.id}
+                // userId={this.state.user.id}
               />
             </Route>
 
