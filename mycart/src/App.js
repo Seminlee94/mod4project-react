@@ -16,33 +16,33 @@ class App extends Component {
     cartItemArray: [],
   };
 
+  portNumber = 3007;
   componentDidMount() {
     const urls = [
-      "http://localhost:3000/items",
-      "http://localhost:3000/fridge-items",
-      "http://localhost:3000/recipes",
-      // "http://localhost:3000/user_carts/1",
+      "http://localhost:3007/items",
+      "http://localhost:3007/fridge-items",
+      "http://localhost:3007/recipes",
+      "http://localhost:3007/item_carts",
     ];
-    // const promises = urls.map((url) => fetch(url));
+    const promises = urls.map((url) => fetch(url));
     Promise.all(urls.map((url) => fetch(url).then((resp) => resp.json()))).then(
       (data) =>
         this.setState({
           shopItemArray: data[0],
           fridgeItemArray: data[1],
           recipeArray: data[2],
-          //   cartItemArray: data[3].cart.cart_item,
+          cartItemArray: data[3],
         })
     );
-    //cartItemArray needs testing, haven't pulled updated db.json
   }
 
   moveToFridge = (id, clickedItemIndex) => {
     // Copy the object, so that we don't change any places it's being referenced
     let foundObj = {
-      ...this.state.itemArray.find((el) => el.id === parseInt(id)),
+      ...this.state.shopItemArray.find((el) => el.id === parseInt(id)),
     };
     delete foundObj.id; //deletes the store ID, letting newObj create new ID for fridgeitem so we don't get conflicts when trying to post
-    fetch("http://localhost:8000/fridge-items", {
+    fetch("http://localhost:3007/fridge-items/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -78,6 +78,8 @@ class App extends Component {
   };
 
   render() {
+    // const cartItems = this.state.cartItemArray.map((element) => element.item);
+    // console.log(cartItems);
     return (
       <div
         className="App"
