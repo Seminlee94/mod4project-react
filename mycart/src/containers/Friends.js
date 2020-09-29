@@ -22,7 +22,7 @@ class Friends extends React.Component {
 
   searchUser = () => {
     let findUser = this.state.userArray.find(el => el.username.toLowerCase()===this.state.searchTerm.toLowerCase())
-    return <SearchUserCard user={findUser} />
+    return <SearchUserCard user={findUser} addFriendHandler={this.props.addFriendHandler} />
   }
 
   submitHandler = (term) => {
@@ -34,7 +34,6 @@ class Friends extends React.Component {
 
   render(){
 
-
     return (
       <>
         {this.props.user ? 
@@ -44,7 +43,7 @@ class Friends extends React.Component {
               <SearchUserForm value={this.state.searchTerm} submitHandler={this.submitHandler} />
             </div>
             <div className="user-container" style={{ display:"flex" }} >
-              <MyFriends friend={this.state.userArray} />
+              <MyFriends friend={this.props.friends} />
               {/* <SearchedUsers user={this.searchUser()} /> */}
               <div className="searched-users">{this.state.searchTerm==="" ? null : this.searchUser()}</div>
             </div>

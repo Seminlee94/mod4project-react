@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import HomeStore from "./HomeStore";
-import HomeRecipes from "./HomeRecipes";
+// import HomeRecipes from "./HomeRecipes";
 import HomeFridge from "./HomeFridge";
 
 class HomeIndex extends Component {
@@ -42,18 +42,18 @@ class HomeIndex extends Component {
           />
         )
     );
-    const recipeCount = this.state.recipeCount;
-    const recipeMapper = this.props.recipeArray.map(
-      (recipe, currentItemIndex) =>
-        recipeCount <= currentItemIndex &&
-        currentItemIndex < recipeCount + 4 && (
-          <HomeRecipes
-            recipe={recipe}
-            rightRecipeToggle={this.rightRecipeToggle}
-            leftRecipeToggle={this.leftRecipeToggle}
-          />
-        )
-    );
+    // const recipeCount = this.state.recipeCount;
+    // const recipeMapper = this.props.recipeArray.map(
+    //   (recipe, currentItemIndex) =>
+    //     recipeCount <= currentItemIndex &&
+    //     currentItemIndex < recipeCount + 4 && (
+    //       <HomeRecipes
+    //         recipe={recipe}
+    //         rightRecipeToggle={this.rightRecipeToggle}
+    //         leftRecipeToggle={this.leftRecipeToggle}
+    //       />
+    //     )
+    // );
     const fridgeCount = this.state.fridgeCount;
     const fridgeMapper = this.props.fridgeItemArray.map(
       (fridge, currentItemIndex) =>
@@ -69,7 +69,7 @@ class HomeIndex extends Component {
     return (
       <div className="app">
         {fridgeMapper}
-        {recipeMapper}
+        {/* {recipeMapper} */}
         {itemMapper}
       </div>
     );

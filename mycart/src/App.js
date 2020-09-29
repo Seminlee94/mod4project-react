@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
-// import HomeIndex from "./components/Home/HomeIndex";
+import HomeIndex from "./components/Home/HomeIndex";
 import Navbar from "./components/Navbar/Navbar.js";
 import Fridge from "./containers/Fridge.js";
 import Friends from "./containers/Friends.js";
@@ -18,6 +18,7 @@ class App extends Component {
     recipeArray: [],
     cartItemArray: [],
     userCartArray: [],
+    friendArray: [],
     user: {}
   }
 
@@ -30,9 +31,24 @@ class App extends Component {
       })
       .then(resp => resp.json())
       .then(data => {
-        this.setState(() => ({ user: data.user }))
+        localStorage.setItem("userId", data.user.id);
+        this.setState(() => ({ user: data.user }), ()=>this.userFollowees())
       })
     }
+  }
+
+  userFollowees = () => {
+    fetch(`http://localhost:3000/api/v1/users/${this.state.user.user.id}/followees`, {
+
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+        'Content-type': 'application/json',
+        'Accepts': 'application/json'
+      }
+    })
+      .then(resp => resp.json())
+      .then(friend => this.setState(() => ({ friendArray: friend.followers }) ))
   }
 
   signupHandler = (userObj) => {
@@ -68,8 +84,9 @@ class App extends Component {
     .then(data => {
       localStorage.setItem("token", data.jwt);
       localStorage.setItem("userId", data.user.id);
-      console.log(data.user.id)
-      this.setState({ user: data.user })
+      this.setState({ 
+        user: data.user
+      })
       // this.setState({ user: data.user }, () => this.props.history.push('/fridge'))
     })
   }
@@ -86,7 +103,9 @@ class App extends Component {
           "http://localhost:3000/api/v1/fridge_items",
           "http://localhost:3000/api/v1/recipes",
           "http://localhost:3000/api/v1/cart_items",
-          "http://localhost:3000/api/v1/user_carts/1"
+          "http://localhost:3000/api/v1/user_carts/1",
+          // `http://localhost:3000/api/v1/users/${this.state.user.id}/followees`
+
         ];
         Promise.all(urls.map((url) => fetch(url).then((resp) => resp.json()))).then(
           (data) =>
@@ -151,7 +170,7 @@ class App extends Component {
     )
   };
 
-   cartItemDeleteHandler = (cartId) => {
+  cartItemDeleteHandler = (cartId) => {
     let updatedArray = this.state.userCartArray.filter(el => el.id !== cartId)
     fetch(`http://localhost:3000/api/v1/cart_items/${cartId}`, {
       method: "DELETE"
@@ -161,8 +180,29 @@ class App extends Component {
 
   }
 
+  addFriendHandler = (id) => {
+    fetch(`http://localhost:3000/api/v1/users/${id}/follow`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+        "accepts": "application/json"
+      },
+      body: JSON.stringify({ follow: { follower_id: id, followee_id: this.state.user.user.id } })
+    })
+    .then(resp => resp.json())
+    .then(data => console.log(data)
+    //   this.setState(()=> ({
+    //   friendArray: [...this.state.friendArray, data]
+    // }))
+    )
+
+  }
+
 
   render() {
+
+    // console.log(this.state.friendArray)
 
     let auth_link
     if (!this.state.user || Object.keys(this.state.user).length === 0) {
@@ -218,7 +258,10 @@ class App extends Component {
               </Route>
 
               <Route path="/friends">
-                <Friends user={this.state.user}
+                <Friends 
+                  user={this.state.user}
+                  friends={this.state.friendArray}
+                  addFriendHandler={this.addFriendHandler}
                 />
               </Route>
 
@@ -226,7 +269,7 @@ class App extends Component {
                 <HomeIndex
                   fridgeItemArray={this.state.fridgeItemArray}
                   shopItemArray={this.state.shopItemArray}
-                  recipeArray={this.state.recipeArray}
+                  // recipeArray={this.state.recipeArray}
                 />
               </Route>
 
