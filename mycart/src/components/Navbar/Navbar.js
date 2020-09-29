@@ -7,13 +7,9 @@ import { MenuItems } from "./MenuItems.js";
 class Navbar extends Component {
   state = {
     clicked: false,
-<<<<<<< HEAD
-  };
-=======
     username: "",
     password: ""
   }
->>>>>>> master
 
   clickHandler = () => {
     this.setState((previousState) => ({
@@ -51,24 +47,6 @@ class Navbar extends Component {
           })}
         </ul>
 
-<<<<<<< HEAD
-        <div className="dropdown">
-          <button className="dropbtn">Sign In</button>
-          <div className="dropdown-content">
-            <h4>SIGN IN</h4>
-            <div className="sign-in-form">
-              <form>
-                <input
-                  type="text"
-                  id="sign-in-username"
-                  placeholder="Enter Username"
-                />
-                <input
-                  type="text"
-                  id="sign-in-password"
-                  placeholder="Enter Password"
-                />
-=======
         <div class="dropdown">
             <button class="dropbtn">Sign In</button>
             <div class="dropdown-content">
@@ -82,7 +60,6 @@ class Navbar extends Component {
                 </div>
                 <h6>OR</h6>
                 <h6>New User? SIGN UP!!</h6>
->>>>>>> master
                 <div>
                   <button>SIGN IN</button>
                 </div>
