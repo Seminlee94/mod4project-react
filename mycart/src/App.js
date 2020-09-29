@@ -13,13 +13,14 @@ import Logout from "./components/Navbar/Logout.js";
 class App extends Component {
   
   state = {
-    // shopItemArray: [],
-    // fridgeItemArray: [],
-    // recipeArray: [],
-    // cartItemArray: [],
+    shopItemArray: [],
+    fridgeItemArray: [],
+    recipeArray: [],
+    cartItemArray: [],
+    userCartArray: [],
     user: {}
   }
-  
+ 
   componentDidMount() {
     const token = localStorage.getItem("token")
     if (token) {
@@ -78,24 +79,36 @@ class App extends Component {
     this.setState({ user: {} })
   }
 
-  // componentWillMount() {
-  //   const urls = [
-  //     "http://localhost:3000/api/v1/items",
-  //     "http://localhost:3000/api/v1/fridge-items",
-  //     "http://localhost:3000/api/v1/recipes",
-  //     "http://localhost:3000/api/v1/item_carts",
-  //   ];
-  //   // const promises = urls.map((url) => fetch(url));
-  //   Promise.all(urls.map((url) => fetch(url).then((resp) => resp.json()))).then(
-  //     (data) =>
-  //       this.setState({
-  //         shopItemArray: data[0],
-  //         fridgeItemArray: data[1],
-  //         recipeArray: data[2],
-  //         cartItemArray: data[3],
-  //       })
-  //   );
-  // }
+
+
+  componentDidUpdate(prevProps, prevState) {
+    // looking for a change in editPizza
+    if (prevState.user !== this.state.user ) {
+      // set the form values to match the editPizza props
+        const urls = [
+          "http://localhost:3000/api/v1/items",
+          "http://localhost:3000/api/v1/fridge_items",
+          "http://localhost:3000/api/v1/recipes",
+          "http://localhost:3000/api/v1/cart_items",
+          "http://localhost:3000/api/v1/user_carts/1"
+        ];
+        // const promises = urls.map((url) => fetch(url));
+        Promise.all(urls.map((url) => fetch(url).then((resp) => resp.json()))).then(
+          (data) =>
+            this.setState({
+              shopItemArray: data[0],
+              fridgeItemArray: data[1],
+              recipeArray: data[2],
+              cartItemArray: data[3],
+              userCartArray: data[4].cart.cart_item
+            })
+        );
+     }
+  }
+  
+
+
+
 
 
   // moveToFridge = (id, clickedItemIndex) => {
@@ -124,25 +137,37 @@ class App extends Component {
   //       });
   //     });
   // };
+  itemClickHandler = (item) => {
+    fetch("http://localhost:3000/api/v1/cart_items", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "accepts": "application/json"
+      },
+      body: JSON.stringify({
+        cart_id: 1,
+        item_id: item.id
+      })
+    })
+    .then(resp => resp.json())
+    .then(data => this.setState(()=> ({
+      userCartArray: [...this.state.userCartArray, data]
+    }))
+    )
+  };
 
-  // itemClickHandler = (id) => {
-  //   // console.log("clicked: ", id);
-  //   console.log("clicked");
-  //   let newArray = this.state.cartItemArray;
-  //   let foundObj = this.state.shopItemArray.find(
-  //     (el) => el.id === parseInt(id)
-  //   );
-  //   if (newArray.includes(foundObj) === false) {
-  //     this.setState(() => ({
-  //       cartItemArray: [...newArray, foundObj],
-  //     }));
-  //   }
-  // };
+   deleteHandler = (cartId) => {
+    let updatedArray = this.state.userCartArray.filter(el => el.id !== cartId)
+    fetch(`http://localhost:3000/api/v1/cart_items/${cartId}`, {
+      method: "DELETE"
+    })
+    .then(resp => resp.json())
+    .then(this.setState({ userCartArray: updatedArray }))
 
+  }
 
 
   render() {
-    // console.log(this.state.user)
     // console.log([this.state.user.user]["id"])
     let auth_link
     if (!this.state.user || Object.keys(this.state.user).length === 0) {
@@ -150,7 +175,6 @@ class App extends Component {
         auth_link = <Logout logoutHandler={this.logoutHandler} />
     }
     
-
 
     return (
       <BrowserRouter>
@@ -164,7 +188,6 @@ class App extends Component {
             overflow: "scroll",
           }}
         >
-          {/* <div className="NavbarItems"> */}
             <Navbar  />
             <div>
               {auth_link}
@@ -181,21 +204,23 @@ class App extends Component {
                 <Login submitHandler={this.loginHandler} />
               </Route>  
 
-              <Route path="/shop" component={Shop} />
-                {/* <Shop
+              <Route path="/shop">
+                <Shop
                   shopItemArray={this.state.shopItemArray}
-                  moveToFridge={this.moveToFridge}
                   cartItemArray={this.state.cartItemArray}
+                  userCartArray={this.state.userCartArray}
+                  moveToFridge={this.moveToFridge}
                   itemClickHandler={this.itemClickHandler}
+                  deleteHandler={this.deleteHandler}
                   userId={this.state.user.id}
-                /> */}
-              {/* </Route> */}
-
-              <Route path="/fridge">
-                <Fridge 
-                  // item={this.state.fridgeItemArray}
-                />
+                /> 
               </Route>
+
+              {/* <Route path="/fridge">
+                <Fridge 
+                  item={this.state.fridgeItemArray}
+                />
+              </Route> */}
 
               <Route path="/friends">
                 <Friends 
@@ -214,8 +239,6 @@ class App extends Component {
 
             </Switch>
           </div>
-
-        {/* </div> */}
       </BrowserRouter>
     );
   }

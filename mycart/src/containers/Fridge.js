@@ -11,11 +11,11 @@ class Fridge extends React.Component {
 
   // }
 
-  componentDidMount() {
-    fetch("http://localhost:8001/users")
-      .then(resp => resp.json())
-      .then(data => this.setState({ userArray: data }))
-  }
+  // componentDidMount() {
+  //   fetch("http://localhost:3000/api/v1/users")
+  //     .then(resp => resp.json())
+  //     .then(data => this.setState({ userArray: data }))
+  // }
 
   filter = (Category) => {
     let filteredItems = this.props.item.filter(
@@ -32,7 +32,7 @@ class Fridge extends React.Component {
       { category: "Seafood", shelf: this.filter("Seafood") },
     ];
     const fridgeRightArray = [
-      // { category: "Liqours", shelf: this.filter("Liqours") },
+      { category: "Liqours", shelf: this.filter("Liquors") },
       {
         category: "PreparedFoods",
         shelf: this.filter("PreparedFoods"),

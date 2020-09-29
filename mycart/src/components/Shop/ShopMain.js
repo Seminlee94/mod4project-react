@@ -19,7 +19,6 @@ class ShopMain extends React.Component {
   };
 
   itemArray = () => {
-    // console.log("render")
     return this.props.itemArray.map((item) => (
       <ItemCard
         key={item.id}
@@ -60,7 +59,7 @@ class ShopMain extends React.Component {
   };
 
   render() {
-    this.state.itemArray = this.props.itemArray;
+    // this.state.itemArray = this.props.itemArray;
 
     return (
       <div className="shop-main">

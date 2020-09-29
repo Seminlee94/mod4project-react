@@ -3,18 +3,21 @@ import ListGroup from "react-bootstrap/ListGroup";
 import ItemRightCard from "./ItemRightCard.js";
 
 class ShopRight extends React.Component {
+  
   clickedItems = () => {
-    return this.props.cartItemArray.map((cartItem) => (
+    return this.props.userCartArray.map((cartItem) => (
       <ListGroup.Item action>
         <ItemRightCard
+          cartId={cartItem.id}
           key={cartItem.item.id}
           item={cartItem.item}
           moveToFridge={this.props.moveToFridge}
           // clickedItemIndex={index}
+          deleteHandler={this.props.deleteHandler}
         />
       </ListGroup.Item>
-    ));
-  };
+    ))  
+  }
 
   render() {
     return (
