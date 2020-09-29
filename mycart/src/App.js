@@ -46,7 +46,7 @@ class App extends Component {
           shopItemArray: data[0],
           fridgeItemArray: data[1],
           recipeArray: data[2],
-          cartItemArray: data[3],
+          cartItemArray: data[3], //is nested map through for element.item
         })
     );
   }
@@ -109,6 +109,7 @@ class App extends Component {
   render() {
     // const cartItems = this.state.cartItemArray.map((element) => element.item);
     // console.log(cartItems);
+    console.log(this.state.recipeArray);
     return (
       <div
         className="App"
@@ -136,7 +137,7 @@ class App extends Component {
               <Shop
                 shopItemArray={this.state.shopItemArray}
                 moveToFridge={this.moveToFridge}
-                // cartItemArray={this.state.cartItemArray}
+                cartItemArray={this.state.cartItemArray}
                 itemClickHandler={this.itemClickHandler}
                 user={this.state.user}
               />
@@ -146,6 +147,7 @@ class App extends Component {
               <Fridge
                 item={this.state.fridgeItemArray}
                 user={this.state.user}
+                // user="test"
               />
             </Route>
 
@@ -154,12 +156,11 @@ class App extends Component {
             </Route>
 
             <Route path="/">
-              {/* <HomeIndex
-                className="temporary-search-index"
+              <HomeIndex
                 fridgeItemArray={this.state.fridgeItemArray}
                 shopItemArray={this.state.shopItemArray}
                 recipeArray={this.state.recipeArray}
-              /> */}
+              />
             </Route>
           </Switch>
         </Router>

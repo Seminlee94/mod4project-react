@@ -20,7 +20,7 @@ class Fridge extends React.Component {
       { category: "Seafood", shelf: this.filter("Seafood") },
     ];
     const fridgeRightArray = [
-      // { category: "Liqours", shelf: this.filter("Liqours") },
+      { category: "Liqours", shelf: this.filter("Liquors") },
       {
         category: "PreparedFoods",
         shelf: this.filter("PreparedFoods"),
@@ -41,26 +41,20 @@ class Fridge extends React.Component {
       </div>
     ));
 
-    console.log("current user:", this.props.user)
+    console.log("current user:", this.props.user);
     return (
-
       <>
-        {this.props.user ? 
-
-            <div className="fridge-container">
+        {this.props.user ? (
+          <div className="fridge-container">
             <div className="fridge-container-left">{fridgeLeft}</div>
-    
+
             <div className="fridge-blank"></div>
-    
+
             <div className="fridge-container-right">{fridgeRight}</div>
           </div>
-        
-        :
-        
-         <Redirect to="/" />
-        
-        }
-
+        ) : (
+          <Redirect to="/" />
+        )}
       </>
     );
   }

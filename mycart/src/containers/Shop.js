@@ -20,16 +20,6 @@ class Shop extends React.Component {
     filteredItem: [],
   };
 
-  // componentDidMount() {
-  //   fetch("http://localhost:3000/user_carts/1")
-  //     .then((resp) => resp.json())
-  //     .then((data) =>
-  //       this.setState(() => ({
-  //         cartItem: data.cart.cart_item,
-  //       }))
-  //     );
-  // }
-
   shopSideBarClicker = (e) => {
     let filteredArray = this.props.shopItemArray.filter(
       (item) => item.sub_category === e.target.textContent
