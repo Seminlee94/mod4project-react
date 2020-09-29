@@ -49,7 +49,7 @@ class App extends Component {
         // this.setState({ user: data.user })
         localStorage.setItem("token", data.jwt);
         localStorage.setItem("userId", data.user.id);
-        // this.setState({ user: data.user })
+        this.setState({ user: data.user })
 
         // this.setState({ user: data.user }, () => this.props.history.push('/fridge'))
     })
@@ -69,6 +69,7 @@ class App extends Component {
     .then(data => {
       localStorage.setItem("token", data.jwt);
       localStorage.setItem("userId", data.user.id);
+      console.log(data.user.id)
       this.setState({ user: data.user })
       // this.setState({ user: data.user }, () => this.props.history.push('/fridge'))
     })
@@ -168,7 +169,7 @@ class App extends Component {
 
 
   render() {
-    // console.log([this.state.user.user]["id"])
+
     let auth_link
     if (!this.state.user || Object.keys(this.state.user).length === 0) {
       auth_link = <><Signup submitHandler={this.signupHandler}/><Login submitHandler={this.loginHandler}/> </> } else {
@@ -223,7 +224,7 @@ class App extends Component {
               </Route> */}
 
               <Route path="/friends">
-                <Friends 
+                <Friends user={this.state.user}
                 />
               </Route>
 

@@ -5,7 +5,7 @@ const UserCard = (props) => {
     return (
         <div className="user-card"  style={{ display: "flex" }}>
             <h3>{props.user.name}</h3>
-            <button>Delete Friend</button>
+            <button>Add User</button>
         </div>
         
     )
