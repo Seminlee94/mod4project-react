@@ -19,6 +19,7 @@ class ShopMain extends React.Component {
   };
 
   itemArray = () => {
+    // console.log("render")
     return this.props.itemArray.map((item) => (
       <ItemCard
         key={item.id}
@@ -72,7 +73,7 @@ class ShopMain extends React.Component {
           />
         </div>
         <div className="item-container">
-          {this.state.searchTerm === "" && this.props.clicked === false
+          {((this.state.searchTerm === "") && (this.props.clicked === false))
             ? this.itemArray()
             : null}
           {this.state.searchTerm === "" ? this.items() : this.showItemArray()}

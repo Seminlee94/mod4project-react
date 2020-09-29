@@ -6,6 +6,7 @@ const ItemRightCard = (props) => {
     <div className="item-right-card">
       <img 
         src={props.item.image}
+        alt={props.item.name}
         style={{ width:"70px", height:"50px" }}  />
       <div 
         className="item-right-price">

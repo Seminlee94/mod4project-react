@@ -4,7 +4,7 @@ import ItemRightCard from "./ItemRightCard.js";
 
 class ShopRight extends React.Component {
   clickedItems = () => {
-    return this.props.cartItemArray.map((cartItem, index) => (
+    return this.props.cartItemArray.map((cartItem) => (
       <ListGroup.Item action>
         <ItemRightCard
           key={cartItem.item.id}

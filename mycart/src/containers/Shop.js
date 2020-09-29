@@ -18,24 +18,64 @@ import { OtherCategory } from "../components/Shop/Subcategory-lists/Other.js";
 class Shop extends React.Component {
   state = {
     filteredItem: [],
+    userCartArray: [],
+    itemArray: [],
+    cartItemArray: [],
+    clicked: false
   };
 
-  // componentDidMount() {
-  //   fetch("http://localhost:3000/user_carts/1")
-  //     .then((resp) => resp.json())
-  //     .then((data) =>
-  //       this.setState(() => ({
-  //         cartItem: data.cart.cart_item,
-  //       }))
-  //     );
-  // }
+  itemClickHandler = (item) => {
+    // console.log("clicked: ", id);
+    // console.log("clicked");
+    // let newArray = this.state.cartItemArray;
+    // let foundObj = this.state.itemArray.find(
+    //   (el) => el.id === parseInt(id)
+    // );
+    // if (newArray.includes(foundObj) === false) {
+    //   this.setState(() => ({
+    //     cartItemArray: [...newArray, foundObj],
+    //   }));
+    // }
+    fetch("http://localhost:3000/api/v1/cart_items", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "accepts": "application/json"
+      },
+      body: JSON.stringify({
+        cart_id: 1,
+        item_id: item.id
+      })
+    })
+    .then(resp => resp.json())
+    .then(data => this.setState(()=> ({
+      userCartArray: [...this.state.userCartArray, data]
+    }))
+    )
+  };
+
+  componentDidMount() {
+    const urls = [
+      "http://localhost:3000/api/v1/items",
+      "http://localhost:3000/api/v1/user_carts/1",
+    ];
+    // const promises = urls.map((url) => fetch(url));
+    Promise.all(urls.map((url) => fetch(url).then((resp) => resp.json()))).then(
+      (data) =>
+        this.setState({
+          itemArray: data[0],
+          userCartArray: data[1].cart.cart_item,
+        })
+    );
+  }
 
   shopSideBarClicker = (e) => {
-    let filteredArray = this.props.shopItemArray.filter(
+    let filteredArray = this.state.itemArray.filter(
       (item) => item.sub_category === e.target.textContent
     );
     this.setState(() => ({
       filteredItem: [...filteredArray],
+      clicked: true
     }));
   };
 
@@ -65,7 +105,7 @@ class Shop extends React.Component {
           <Accordion.Collapse eventKey="0">
             <ListGroup>
               {category.map((item) => (
-                <ListGroup.Item key={item.id} onClick={this.shopSideBarClicker}>
+                <ListGroup.Item key={item.id} onClick={this.shopSideBarClicker} style={{ cursor:"pointer" }} >
                   {item.subcategory}
                 </ListGroup.Item>
               ))}
@@ -80,16 +120,17 @@ class Shop extends React.Component {
         <div style={{ width: "250px" }}>{ShopMap}</div>
 
         <ShopMain
-          itemArray={this.props.itemArray}
+          itemArray={this.state.itemArray}
           item={this.state.filteredItem}
-          itemClickHandler={this.props.itemClickHandler}
-          clicked={this.props.clickedArray}
+          itemClickHandler={this.itemClickHandler}
+          clicked={this.state.clicked}
         />
         <ShopRight
-          moveToFridge={this.props.moveToFridge}
-          cartItemArray={this.props.cartItemArray}
+          // moveToFridge={this.props.moveToFridge}
+          cartItemArray={this.state.userCartArray}
         />
       </div>
+
     );
   }
 }

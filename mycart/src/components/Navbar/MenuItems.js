@@ -6,22 +6,27 @@ export const MenuItems = [
     },
     {
         title: "Shop",
-        url: "shop",
+        url: "/shop",
         cName: "nav-links"
     },
     {
         title: "Fridge",
-        url: "fridge",
+        url: "/fridge",
         cName: "nav-links"
     },
     {
         title: "Friends",
-        url: "friends",
+        url: "/friends",
         cName: "nav-links"
     },
     {
         title: "Sign up",
-        url: "sign-up",
-        cName: "nav-links-mobile"
+        url: "/signup",
+        cName: "nav-links"
+    },
+    {
+        title: "Log In",
+        url: "/login",
+        cName: "nav-links"
     }
 ]
