@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import HomeIndex from "./components/Home/HomeIndex";
 import Navbar from "./components/Navbar/Navbar.js";
 import Fridge from "./containers/Fridge.js";
 import Friends from "./containers/Friends.js";
 import Shop from "./containers/Shop.js";
+import Signup from "./components/Navbar/Signup.js";
+import Login from "./components/Navbar/Login.js";
 
 class App extends Component {
   state = {
@@ -14,9 +16,22 @@ class App extends Component {
     fridgeItemArray: [],
     recipeArray: [],
     cartItemArray: [],
+    user: null,
   };
 
-  portNumber = 3007;
+  signupHandler = (userObj) => {
+    fetch("http://localhost:3000/api/v1/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        accepts: "application/json",
+      },
+      body: JSON.stringify({ user: userObj }),
+    })
+      .then((resp) => resp.json())
+      .then(console.log);
+  };
+
   componentDidMount() {
     const urls = [
       "http://localhost:3007/items",
@@ -77,6 +92,20 @@ class App extends Component {
     }
   };
 
+  loginHandler = (userObj) => {
+    console.log("logging in: ", userObj);
+    fetch("http://localhost:3000/api/v1/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        accepts: "application/json",
+      },
+      body: JSON.stringify({ user: userObj }),
+    })
+      .then((resp) => resp.json())
+      .then(console.log);
+  };
+
   render() {
     // const cartItems = this.state.cartItemArray.map((element) => element.item);
     // console.log(cartItems);
@@ -95,30 +124,42 @@ class App extends Component {
           <Navbar />
 
           <Switch class="header-switch">
+            <Route path="/signup">
+              <Signup submitHandler={this.signupHandler} />
+            </Route>
+
+            <Route path="/login">
+              <Login submitHandler={this.loginHandler} />
+            </Route>
+
             <Route path="/shop">
               <Shop
                 shopItemArray={this.state.shopItemArray}
                 moveToFridge={this.moveToFridge}
-                cartItemArray={this.state.cartItemArray}
+                // cartItemArray={this.state.cartItemArray}
                 itemClickHandler={this.itemClickHandler}
+                user={this.state.user}
               />
             </Route>
 
             <Route path="/fridge">
-              <Fridge item={this.state.fridgeItemArray} />
+              <Fridge
+                item={this.state.fridgeItemArray}
+                user={this.state.user}
+              />
             </Route>
 
             <Route path="/friends">
-              <Friends />
+              <Friends user={this.state.user} />
             </Route>
 
             <Route path="/">
-              <HomeIndex
+              {/* <HomeIndex
                 className="temporary-search-index"
                 fridgeItemArray={this.state.fridgeItemArray}
                 shopItemArray={this.state.shopItemArray}
                 recipeArray={this.state.recipeArray}
-              />
+              /> */}
             </Route>
           </Switch>
         </Router>
