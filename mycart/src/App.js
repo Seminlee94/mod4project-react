@@ -146,8 +146,8 @@ class App extends Component {
             <Route path="/fridge">
               <Fridge
                 item={this.state.fridgeItemArray}
-                user={this.state.user}
-                // user="test"
+                // user={this.state.user}
+                user="test"
               />
             </Route>
 
