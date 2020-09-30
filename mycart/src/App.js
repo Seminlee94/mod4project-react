@@ -8,6 +8,7 @@ import Friends from "./containers/Friends.js";
 import Shop from "./containers/Shop.js";
 import Signup from "./components/Navbar/Signup.js";
 import Login from "./components/Navbar/Login.js";
+import { Redirect } from "react-router-dom";
 
 class App extends Component {
   state = {
@@ -219,6 +220,7 @@ class App extends Component {
 
 
   render() {
+    
 
     return (
       <BrowserRouter>

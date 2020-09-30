@@ -3,6 +3,7 @@ import HomeStore from "./HomeStore";
 // import HomeRecipes from "./HomeRecipes";
 import HomeFridge from "./HomeFridge";
 import Shelf from "../../components/Shelf";
+import { Redirect } from "react-router-dom";
 
 class HomeIndex extends Component {
   fridge = () => {
@@ -72,7 +73,14 @@ class HomeIndex extends Component {
       </div>
     ));
 
-    return <div className="app">{frontPage}</div>;
+    if (typeof this.props.user != "undefined") {
+
+      return <div className="app">{frontPage}</div>;
+    } else {
+      return (
+        <Redirect to="/login" />
+      )
+    }
   }
 }
 

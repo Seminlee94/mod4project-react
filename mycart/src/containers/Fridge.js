@@ -53,21 +53,23 @@ class Fridge extends React.Component {
     ));
 
     console.log("current user:", this.props.user);
-    return (
-      <>
-        {this.props.user ? (
-          <div className="fridge-container">
-            <div className="fridge-container-left">{fridgeLeft}</div>
+    if (typeof this.props.user != "undefined") {
 
-            <div className="fridge-blank"></div>
-
-            <div className="fridge-container-right">{fridgeRight}</div>
-          </div>
-        ) : (
-          <Redirect to="/" />
-        )}
-      </>
-    );
+      return (
+        <div className="fridge-container">
+          <div className="fridge-container-left">{fridgeLeft}</div>
+  
+          <div className="fridge-blank"></div>
+  
+          <div className="fridge-container-right">{fridgeRight}</div>
+        </div>
+   
+      );
+    } else {
+      return (
+        <Redirect to="/login" />
+      )
+    }
   }
 }
 export default Fridge;
