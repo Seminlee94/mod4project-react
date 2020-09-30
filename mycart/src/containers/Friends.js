@@ -30,37 +30,42 @@ class Friends extends React.Component {
 
 
   render(){
+    console.log("current user:", this.props.user);
+    if ( this.props.user ) {
 
     return (
-      <>
-        {this.props.user ? (
-          <>
-            <div>
+    
+        <>
+          <div>
 
-              <SearchUserForm
-                value={this.state.searchTerm}
-                submitHandler={this.submitHandler}
-              />
-            </div>
-            <div>
-              <div className="user-container" style={{ display:"flex" }} >
-                <div className="friend-container">
-                  <MyFriends friend={this.props.friends} deleteFriendHandler={this.props.deleteFriendHandler} />  
-                </div>
-
-                <div className="searched-users">
-                    {this.state.searchTerm === "" ? null : this.searchUser()}
-                </div>
-
+            <SearchUserForm
+              value={this.state.searchTerm}
+              submitHandler={this.submitHandler}
+            />
+          </div>
+          <div>
+            <div className="user-container" style={{ display:"flex" }} >
+              <div className="friend-container">
+                <MyFriends friend={this.props.friends} deleteFriendHandler={this.props.deleteFriendHandler} />  
               </div>
-            </div>
-          </>
-        ) : (
-          <Redirect to="/" />
-        )}
-      </>
-    );
-  }
-}
 
-export default Friends;
+              <div className="searched-users">
+                  {this.state.searchTerm === "" ? null : this.searchUser()}
+              </div>
+
+            </div>
+          </div>
+        </>
+      
+
+      );
+    } else {
+      
+      return (
+        <Redirect to="/login" />
+      )
+
+      }
+    }
+  }
+  export default Friends;
