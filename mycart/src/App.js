@@ -8,6 +8,7 @@ import Friends from "./containers/Friends.js";
 import Shop from "./containers/Shop.js";
 import Signup from "./components/Navbar/Signup.js";
 import Login from "./components/Navbar/Login.js";
+import RecipeMain from "./components/Recipe/RecipeMain";
 import Logout from "./components/Navbar/Logout.js";
 
 class App extends Component {
@@ -170,9 +171,23 @@ class App extends Component {
   //   );
   // } else {
   //   auth_link = <Logout logoutHandler={this.logoutHandler} />;
+  recipeSubmit = (recipeInput) => {
+    fetch("http://localhost:3005/recipes", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json",
+      },
+      body: JSON.stringify(recipeInput),
+    })
+      .then((res) => res.json())
+      .then((newObj) =>
+        this.setState({ recipeArray: [newObj, ...this.state.recipeArray] })
+      );
+  };
 
   render() {
-    console.log(this.state.userCartArray);
+    // console.log(this.state.userCartArray);
     return (
       <BrowserRouter>
         <div
@@ -216,7 +231,12 @@ class App extends Component {
             <Route path="/friends">
               <Friends user={this.state.user} />
             </Route>
-            <Route path="/recipes"></Route>
+            <Route path="/recipes">
+              <RecipeMain
+                recipes={this.state.recipeArray}
+                recipeSubmit={this.recipeSubmit}
+              />
+            </Route>
 
             <Route path="/">
               <HomeIndex

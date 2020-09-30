@@ -1,14 +1,10 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 
-const Recipes = (props) => {
+const RightRecipeDisplay = (props) => {
+  console.log(props);
   return (
-    <Card
-      style={{ width: "200px" }}
-      onClick={(e) => {
-        props.recipeClickListener(props.recipe);
-      }}
-    >
+    <Card style={{ width: "200px" }}>
       <Card.Img
         style={{ height: "200px", objectFit: "cover", width: "100%" }}
         src={props.recipe.picture}
@@ -27,8 +23,9 @@ const Recipes = (props) => {
           {props.recipe.title}
         </div>
       </Card.ImgOverlay>
+      INGREDIENTS:PEEPEE (props.ingredients) SOURCE WEBSITE (props.sourceUrl)
     </Card>
   );
 };
 
-export default Recipes;
+export default RightRecipeDisplay;
