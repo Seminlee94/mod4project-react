@@ -85,6 +85,7 @@ class App extends Component {
     const urls = [
       "http://localhost:3005/items",
       "http://localhost:3005/fridge-items",
+      "http://localhost:3005/user_carts/1",
       "http://localhost:3005/recipes",
     ];
     Promise.all(urls.map((url) => fetch(url).then((resp) => resp.json()))).then(
@@ -93,11 +94,10 @@ class App extends Component {
           shopItemArray: data[0],
           fridgeItemArray: data[1],
           recipeArray: data[2],
+          userCartArray: data[3],
         })
     );
   }
-  // userCartArray: data[3].cart.cart_item,
-  // "http://localhost:3005/user_carts/1",
   // "http://localhost:3005/cart_items/1",
   // cartItemArray: data[3],
 
@@ -235,6 +235,7 @@ class App extends Component {
               <RecipeMain
                 recipes={this.state.recipeArray}
                 recipeSubmit={this.recipeSubmit}
+                fridgeContent={this.state.fridgeItemArray}
               />
             </Route>
 

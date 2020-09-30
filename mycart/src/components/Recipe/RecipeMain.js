@@ -1,7 +1,5 @@
 import { render } from "@testing-library/react";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+
 import React from "react";
 import Recipe from "./Recipe";
 import RightRecipeDisplay from "./RightRecipeDisplay";
@@ -50,7 +48,10 @@ class RecipeMain extends React.Component {
         </div>
         <div style={{ top: "0px", position: "sticky" }}>
           {this.state.displayedRecipe && (
-            <RightRecipeDisplay recipe={this.state.displayedRecipe} />
+            <RightRecipeDisplay
+              recipe={this.state.displayedRecipe}
+              fridgeContent={this.props.fridgeContent}
+            />
           )}
           <div>
             {/* <RecipeForm recipeSubmit={() => {}} /> */}
