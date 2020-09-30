@@ -74,7 +74,7 @@ class Shop extends React.Component {
     ));
 
 
-    if (typeof this.props.user != "undefined") {
+    // if (typeof this.props.user != "undefined") {
 
       return (
         <div className="dd-wrapper" style={{ display: "flex" }}>
@@ -96,11 +96,11 @@ class Shop extends React.Component {
           ) : null}
         </div>
       );
-    } else {
-      return (
-        <Redirect to="/login" />
-      )
-    }
+    // } else {
+    //   return (
+    //     <Redirect to="/login" />
+    //   )
+    // }
   }
 }
 

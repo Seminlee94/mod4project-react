@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Switch, Route, BrowserRouter } from "react-router-dom";
+import { Switch, Route, BrowserRouter, withRouter } from "react-router-dom";
 import HomeIndex from "./components/Home/HomeIndex";
 import Navbar from "./components/Navbar/Navbar.js";
 import Fridge from "./containers/Fridge.js";
@@ -71,6 +71,7 @@ class App extends Component {
   };
 
   loginHandler = (userObj) => {
+    const { history } = this.props
     fetch("http://localhost:3000/api/v1/login", {
       method: "POST",
       headers: {
@@ -83,10 +84,10 @@ class App extends Component {
     .then(data => {
       localStorage.setItem("token", data.jwt);
       localStorage.setItem("userId", data.user.id);
+      // this.setState({ user: data.user }, () => history.push('/'))
       this.setState({ 
         user: data.user
       })
-      // this.setState({ user: data.user }, () => this.props.history.push('/fridge'))
     })
   };
 
@@ -221,6 +222,7 @@ class App extends Component {
 
   render() {
     
+    console.log(this.props)
 
     return (
       <BrowserRouter>

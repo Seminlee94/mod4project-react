@@ -73,14 +73,14 @@ class HomeIndex extends Component {
       </div>
     ));
 
-    if (typeof this.props.user != "undefined") {
+    // if (typeof this.props.user != "undefined") {
 
       return <div className="app">{frontPage}</div>;
-    } else {
-      return (
-        <Redirect to="/login" />
-      )
-    }
+    // } else {
+    //   return (
+    //     <Redirect to="/login" />
+    //   )
+    // }
   }
 }
 

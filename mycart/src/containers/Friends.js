@@ -30,18 +30,11 @@ class Friends extends React.Component {
 
 
   render(){
-    console.log("current user:", Object.keys(this.props.user).length);
-    if ( Object.keys(this.props.user).length === 0) {
+    console.log("current user:", this.props.user);
+    if ( this.props.user ) {
 
     return (
     
-      <Redirect to="/login" />
-
-      );
-    } else {
-      
-      return (
-
         <>
           <div>
 
@@ -63,6 +56,13 @@ class Friends extends React.Component {
             </div>
           </div>
         </>
+      
+
+      );
+    } else {
+      
+      return (
+        <Redirect to="/login" />
       )
 
       }

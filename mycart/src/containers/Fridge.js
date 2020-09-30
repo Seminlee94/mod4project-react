@@ -53,7 +53,7 @@ class Fridge extends React.Component {
     ));
 
     console.log("current user:", this.props.user);
-    if (typeof this.props.user != "undefined") {
+    // if (typeof this.props.user != "undefined") {
 
       return (
         <div className="fridge-container">
@@ -65,11 +65,11 @@ class Fridge extends React.Component {
         </div>
    
       );
-    } else {
-      return (
-        <Redirect to="/login" />
-      )
-    }
+    // } else {
+    //   return (
+    //     <Redirect to="/login" />
+    //   )
+    // }
   }
 }
 export default Fridge;
