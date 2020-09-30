@@ -33,7 +33,6 @@ class Shop extends React.Component {
   };
 
   render() {
-    console.log("current user: ", this.props.user)
     const ShopMapper = [
       { title: "Bread", category: BreadCategory },
       { title: "Meat", category: MeatCategory },
