@@ -18,11 +18,41 @@ class Login extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.submitHandler}>
-                <input type="text" name="username" placeholder="username" value={this.state.username} onChange={this.changeHandler}   />
-                <input type="text" name="password" placeholder="password" value={this.state.password} onChange={this.changeHandler}   />
-                <input type="submit" value="Log in" />
-            </form>
+            <div className="login-container" style={{ display: "flex" }} >
+                <div className="app-description">
+                    <h3>Welcome to Cart-in!</h3> 
+                    <h5>Our app includes:</h5> 
+                    <ol className="app-description-list">
+                        <li>Shop for groceries</li>
+                        <li>Add items to the fridge</li>
+                        <li>Look up recipes with items in the fridge</li>
+                        <li>Add friend to the friend list</li>
+                        <li>Add up to 2 friends to your cart so you and your friends can save delivery fee, tip fee, etc.</li>
+
+                    </ol>
+                    
+                    Please sign in to look around!
+                </div> 
+                <div className="login-container-right">
+                    <div className="login-container-top">
+                        <h2>SIGN IN</h2>
+                    </div>
+                    <div className="login-container-form">
+                        <form onSubmit={this.submitHandler}>
+                            <p><input type="text" name="username" placeholder="Enter your username" value={this.state.username} onChange={this.changeHandler} /></p>
+                            <p><input type="text" name="password" placeholder="Enter your password" value={this.state.password} onChange={this.changeHandler} /></p>
+                            <input type="submit" value="Log in" />
+                        </form>
+                    </div>
+                    <div className="login-container-bottom">
+
+                        Not signed up yet? 
+                        <a className="login-signup-button" href="/signup">
+                            Sign up
+                        </a>
+                    </div>
+                </div>
+            </div>
         )
     }
 
