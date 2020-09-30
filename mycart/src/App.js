@@ -235,6 +235,7 @@ class App extends Component {
               <RecipeMain
                 recipes={this.state.recipeArray}
                 recipeSubmit={this.recipeSubmit}
+                fridgeContent={this.state.fridgeItemArray}
               />
             </Route>
 
