@@ -31,24 +31,15 @@ class App extends Component {
         method: "GET",
         headers: { Authorization: `Bearer ${token}`}
       })
-      // .then(resp => resp.json())
-      // .then(data => {
-      //   localStorage.setItem("userId", data.id);
-      //   this.setState(() => ({ user: data.user }), () => this.userFollowees())
-      // })
         .then((resp) => resp.json())
-        .then((data) => {
+        .then(data => { 
           localStorage.setItem("userId", data.user.id);
-          this.setState(
-            () => ({ user: data.user }),
-            () => this.userFollowees()
-          );
-        });
+          this.setState(() => ({ user: data.user }), () => this.userFollowees())
+      })
     }
   }
 
   userFollowees = () => {
-    console.log(this.state.user.id)
     fetch(
       `http://localhost:3000/api/v1/users/${this.state.user.id}/followees`,
       {
@@ -105,15 +96,6 @@ class App extends Component {
         user: data.user
       })
     })
-      .then((resp) => resp.json())
-      .then((data) => {
-        localStorage.setItem("token", data.jwt);
-        localStorage.setItem("userId", data.user.id);
-        // this.setState({ user: data.user }, () => history.push('/'))
-        this.setState({
-          user: data.user,
-        });
-      });
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -286,7 +268,7 @@ class App extends Component {
                   userCartArray={this.state.userCartArray}
                   itemClickHandler={this.cartItemClickHandler}
                   deleteHandler={this.cartItemDeleteHandler}
-                  userId={this.state.user.id}
+                  // userId={this.state.user.id}
                 /> 
               </Route>
 

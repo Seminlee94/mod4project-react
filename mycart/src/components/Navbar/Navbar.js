@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./Navbar.css";
-
-
+// import Logout from "./Logout.js";
 class Navbar extends Component {
   state = {
     clicked: false,
@@ -13,8 +12,10 @@ class Navbar extends Component {
     }));
   };
 
-
   render() {
+
+    console.log(Object.keys(this.props.user).length)
+    console.log(this.props.user)
     return (
       <nav className="NavbarItems">
         <h1 className="NavbarLogo">Cart-In</h1>
@@ -51,19 +52,16 @@ class Navbar extends Component {
             </a>
           </li>
       
-          {(Object.keys(this.props.user).length === 0)
+          {(Object.keys(this.props.user).length===0)
           
             ? 
             
-            <>
               <li>
                 <a className="nav-links" href="/login">
                   Log in
                 </a>
               </li>
 
-            </>
-           
             
             : 
 
