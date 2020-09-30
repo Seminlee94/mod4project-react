@@ -2,7 +2,6 @@ import React from "react";
 import MyFriends from "../components/Friend/MyFriends";
 import { Redirect } from "react-router-dom";
 import SearchUserForm from "../components/Friend/SearchUserForm";
-// import SearchedUsers from "../components/Friend/SearchedUsers"
 import SearchUserCard from "../components/Friend/SearchUserCard";
 import "../components/Friend/friend.css";
 
@@ -35,21 +34,27 @@ class Friends extends React.Component {
     return (
       <>
         {this.props.user ? (
-          <div>
+          <>
             <div>
+
               <SearchUserForm
                 value={this.state.searchTerm}
                 submitHandler={this.submitHandler}
               />
             </div>
-            <div className="user-container" style={{ display:"flex" }} >
-              <MyFriends friend={this.props.friends} />
-              {/* <SearchedUsers user={this.searchUser()} /> */}
-              <div className="searched-users">
-                {this.state.searchTerm === "" ? null : this.searchUser()}
+            <div>
+              <div className="user-container" style={{ display:"flex" }} >
+                <div className="friend-container">
+                  <MyFriends friend={this.props.friends} deleteFriendHandler={this.props.deleteFriendHandler} />  
+                </div>
+
+                <div className="searched-users">
+                    {this.state.searchTerm === "" ? null : this.searchUser()}
+                </div>
+
               </div>
             </div>
-          </div>
+          </>
         ) : (
           <Redirect to="/" />
         )}

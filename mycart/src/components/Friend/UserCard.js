@@ -1,11 +1,25 @@
 import React from "react"
 
 const UserCard = (props) => {
-
     return (
-        <div className="user-card"  style={{ display: "flex" }}>
-            <h3>{props.user.name}</h3>
-            <button>Delete Friend</button>
+        <div className="user-card">
+            
+            <div className="user-card-info">
+                <div>
+                    {props.user.user.username}
+                </div>
+                <div>
+                    {props.user.user.name}
+                </div>
+            </div>
+            <div className="user-card-buttons">
+                <div className="join-cart-button">
+                    <button>Join Cart</button>
+                </div>
+                <div>
+                    <button onClick={()=>props.deleteFriendHandler(props.user.user.id)}>Delete Friend</button>
+                </div>
+            </div>
         </div>
         
     )

@@ -8,7 +8,6 @@ import Friends from "./containers/Friends.js";
 import Shop from "./containers/Shop.js";
 import Signup from "./components/Navbar/Signup.js";
 import Login from "./components/Navbar/Login.js";
-import Logout from "./components/Navbar/Logout.js";
 
 class App extends Component {
   state = {
@@ -33,10 +32,6 @@ class App extends Component {
         localStorage.setItem("userId", data.user.id);
         this.setState(() => ({ user: data.user }), ()=>this.userFollowees())
       })
-        .then((resp) => resp.json())
-        .then((data) => {
-          this.setState(() => ({ user: data.user }));
-        });
     }
   }
 
@@ -92,20 +87,12 @@ class App extends Component {
       })
       // this.setState({ user: data.user }, () => this.props.history.push('/fridge'))
     })
-      .then((resp) => resp.json())
-      .then((data) => {
-        localStorage.setItem("token", data.jwt);
-        localStorage.setItem("userId", data.user.id);
-        console.log(data.user.id);
-        this.setState({ user: data.user });
-        // this.setState({ user: data.user }, () => this.props.history.push('/fridge'))
-      });
   };
 
-  logoutHandler = () => {
-    localStorage.removeItem("token");
-    this.setState({ user: {} });
-  };
+  // logoutHandler = () => {
+  //   localStorage.removeItem("token");
+  //   this.setState({ user: {} });
+  // };
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.user !== this.state.user ) {
@@ -115,7 +102,7 @@ class App extends Component {
           "http://localhost:3000/api/v1/recipes",
           "http://localhost:3000/api/v1/cart_items",
           "http://localhost:3000/api/v1/user_carts/1",
-          // `http://localhost:3000/api/v1/users/${this.state.user.id}/followees`
+          // `http://localhost:3000/api/v1/user_carts/${this.state.user.user.id}`,
 
         ];
         Promise.all(urls.map((url) => fetch(url).then((resp) => resp.json()))).then(
@@ -125,7 +112,8 @@ class App extends Component {
               fridgeItemArray: data[1],
               recipeArray: data[2],
               cartItemArray: data[3],
-              userCartArray: data[4].cart.cart_item
+              // userCartArray: data[4]
+              userCartArray: data[4].cart.cart_item,
             })
         );
      }
@@ -193,6 +181,11 @@ class App extends Component {
   }
 
   addFriendHandler = (id) => {
+    console.log(this.state.userCartArray)
+
+    let findObj = this.state.friendArray.some(el => el.user.id === id); 
+    return (findObj) ? null :
+
     fetch(`http://localhost:3000/api/v1/users/${id}/follow`, {
       method: "POST",
       headers: {
@@ -200,33 +193,32 @@ class App extends Component {
         "Content-Type": "application/json",
         "accepts": "application/json"
       },
-      body: JSON.stringify({ follow: { follower_id: id, followee_id: this.state.user.user.id } })
+      body: JSON.stringify({ follow: { follower_id: this.state.user.user.id, followee_id: id } })
     })
     .then(resp => resp.json())
-    .then(data => console.log(data)
-    //   this.setState(()=> ({
-    //   friendArray: [...this.state.friendArray, data]
-    // }))
-    )
+    .then(data => this.setState({ friendArray: [...this.state.friendArray, data] }))
+    // .then(this.forceUpdate())
+    
+  }
 
+  deleteFriendHandler = (userId) => {
+    let updatedArray = this.state.friendArray.filter(
+      (el) => el.user.id !== userId );      
+    fetch(`http://localhost:3000/api/v1/users/${userId}/unfollow`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+        "accepts": "application/json"
+      },
+      body: JSON.stringify({ follow: { follower_id: this.state.user.user.id, followee_id: userId } })
+    })
+    .then(resp => resp.json())
+    .then(this.setState(()=> ({ friendArray: updatedArray })))
   }
 
 
   render() {
-
-    // console.log(this.state.friendArray)
-
-    let auth_link
-    if (!this.state.user || Object.keys(this.state.user).length === 0) {
-      auth_link = (
-        <>
-          <Signup submitHandler={this.signupHandler} />
-          <Login submitHandler={this.loginHandler} />{" "}
-        </>
-      );
-    } else {
-      auth_link = <Logout logoutHandler={this.logoutHandler} />;
-    }
 
     return (
       <BrowserRouter>
@@ -240,11 +232,7 @@ class App extends Component {
             overflow: "scroll",
           }}
         >
-            <Navbar  />
-            <div>
-              {auth_link}
-            </div>
-
+            <Navbar user={this.state.user} />
 
             <Switch class="header-switch">
 
@@ -279,6 +267,7 @@ class App extends Component {
                   user={this.state.user}
                   friends={this.state.friendArray}
                   addFriendHandler={this.addFriendHandler}
+                  deleteFriendHandler={this.deleteFriendHandler}
                 />
               </Route>
 

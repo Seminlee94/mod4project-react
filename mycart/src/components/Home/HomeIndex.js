@@ -10,9 +10,9 @@ class HomeIndex extends Component {
       <HomeFridge fridgeItem={el} />
     ));
   };
-  recipe = () => {
-    return this.props.recipeArray.map((el) => <HomeRecipes recipe={el} />);
-  };
+  // recipe = () => {
+  //   return this.props.recipeArray.map((el) => <HomeRecipes recipe={el} />);
+  // };
   shop = () => {
     return this.props.shopItemArray.map((el) => <HomeStore item={el} />);
   };
@@ -61,7 +61,7 @@ class HomeIndex extends Component {
     //     {itemMapper}
     const frontPageObj = [
       { title: "Fridge", shelf: this.fridge() },
-      { title: "Recipes", shelf: this.recipe() },
+      // { title: "Recipes", shelf: this.recipe() },
       { title: "Shop", shelf: this.shop() },
     ];
 
