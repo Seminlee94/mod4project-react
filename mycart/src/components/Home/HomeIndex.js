@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import HomeStore from "./HomeStore";
-// import HomeRecipes from "./HomeRecipes";
+import HomeRecipes from "./HomeRecipes";
 import HomeFridge from "./HomeFridge";
 import Shelf from "../../components/Shelf";
 // import { Redirect } from "react-router-dom";
@@ -11,9 +11,9 @@ class HomeIndex extends Component {
       <HomeFridge fridgeItem={el} />
     ));
   };
-  // recipe = () => {
-  //   return this.props.recipeArray.map((el) => <HomeRecipes recipe={el} />);
-  // };
+  recipe = () => {
+    return this.props.recipeArray.map((el) => <HomeRecipes recipe={el} />);
+  };
   shop = () => {
     return this.props.shopItemArray.map((el) => <HomeStore item={el} />);
   };
@@ -62,7 +62,7 @@ class HomeIndex extends Component {
     //     {itemMapper}
     const frontPageObj = [
       { title: "Fridge", shelf: this.fridge() },
-      // { title: "Recipes", shelf: this.recipe() },
+      { title: "Recipes", shelf: this.recipe() },
       { title: "Shop", shelf: this.shop() },
     ];
 

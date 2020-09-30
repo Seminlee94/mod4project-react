@@ -41,6 +41,11 @@ class Navbar extends Component {
             </a>
           </li>
           <li>
+            <a className="nav-links" href="/recipes">
+              Recipes
+            </a>
+          </li>
+          <li>
             <a className="nav-links" href="/friends">
               Friends
             </a>
