@@ -85,8 +85,8 @@ class App extends Component {
     const urls = [
       "http://localhost:3005/items",
       "http://localhost:3005/fridge-items",
-      "http://localhost:3005/user_carts/1",
       "http://localhost:3005/recipes",
+      "http://localhost:3005/user_carts/",
     ];
     Promise.all(urls.map((url) => fetch(url).then((resp) => resp.json()))).then(
       (data) =>
@@ -131,7 +131,7 @@ class App extends Component {
   //posts items to cart, //differentiate this with user_cart
   //was previously cartItem w/o POST
   cartItemClickHandler = (item) => {
-    fetch("http://localhost:3005/cart_items", {
+    fetch("http://localhost:3005/user_carts/1", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -154,7 +154,7 @@ class App extends Component {
     let updatedArray = this.state.userCartArray.filter(
       (el) => el.id !== cartId
     );
-    fetch(`http://localhost:3005/cart_items/${cartId}`, {
+    fetch(`http://localhost:3005/user_carts/${cartId}`, {
       method: "DELETE",
     })
       .then((resp) => resp.json())
@@ -187,7 +187,7 @@ class App extends Component {
   };
 
   render() {
-    // console.log(this.state.userCartArray);
+    console.log(this.state.userCartArray);
     return (
       <BrowserRouter>
         <div

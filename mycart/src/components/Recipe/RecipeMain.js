@@ -71,6 +71,7 @@ class RecipeMain extends React.Component {
             </Button>
 
             <RecipeForm
+              recipeSubmit={this.props.recipeSubmit}
               show={this.state.modalShow}
               onHide={() => this.setModalShow(false)}
             />

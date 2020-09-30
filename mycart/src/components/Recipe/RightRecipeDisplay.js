@@ -8,14 +8,19 @@ class RightRecipeDisplay extends React.Component {
   //for loop set everything to a string to lowercase
   missingIngredients = () => {
     let missingIngredientsArray = this.props.fridgeContent.filter(
-      (fridgeIngred) => console.log(fridgeIngred.name)
+      (fridgeIngred) =>
+        typeof fridgeIngred.name === "string" &&
+        fridgeIngred.name
+          .toLowerCase()
+          .includes(
+            !this.props.recipe.ingredients.toLowerCase() ||
+              !this.props.recipe.ingredients.sub_category.toLowerCase()
+          )
     );
+    // console.log(missingIngredientsArray);
     // this.setState({ missing: missingIngredientsArray });
   };
 
-  // .toLowerCase()
-  // .includes(!this.props.recipe.ingredients.toLowerCase())
-  // || !this.props.recipe.ingredients.sub_category.toLowerCase()
   missingIngredientMap = () => {
     let currentState = this.state.missing;
     console.log("currentState:", currentState);
@@ -56,7 +61,7 @@ class RightRecipeDisplay extends React.Component {
             {/* {this.missingIngredients()} */}
           </div>
         </Card.ImgOverlay>
-        {/* {this.missingIngredients()} */}
+        {this.missingIngredients()}
       </Card>
     );
   }

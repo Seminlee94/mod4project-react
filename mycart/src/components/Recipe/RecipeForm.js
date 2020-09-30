@@ -14,7 +14,7 @@ class RecipeForm extends React.Component {
 
   recipeSubmitHandler = (e) => {
     e.preventDefault();
-    // this.props.recipeSubmit(this.state);
+    this.props.recipeSubmit(this.state);
     this.setState({
       name: "",
       image: "",
@@ -57,7 +57,7 @@ class RecipeForm extends React.Component {
               size="lg"
               type="text"
               placeholder="Recipe Name"
-              name="name"
+              name="title"
               value={this.state.name}
               onChange={this.recipeFormHandler}
               className="form-input"
@@ -66,7 +66,7 @@ class RecipeForm extends React.Component {
               size="lg"
               type="text"
               placeholder="Recipe Image"
-              name="image"
+              name="picture"
               value={this.state.image}
               onChange={this.recipeFormHandler}
               className="form-input"
@@ -75,7 +75,7 @@ class RecipeForm extends React.Component {
               size="lg"
               type="text"
               placeholder="Recipe URL-Bookmark"
-              name="url"
+              name="sourceUrl"
               value={this.state.url}
               onChange={this.recipeFormHandler}
               className="form-input"
