@@ -6,10 +6,10 @@ const UserCard = (props) => {
             
             <div className="user-card-info">
                 <div>
-                    {props.user.user.username}
+                    {props.user.username}
                 </div>
                 <div>
-                    {props.user.user.name}
+                    {props.user.name}
                 </div>
             </div>
             <div className="user-card-buttons">
@@ -17,7 +17,7 @@ const UserCard = (props) => {
                     <button>Join Cart</button>
                 </div>
                 <div>
-                    <button onClick={()=>props.deleteFriendHandler(props.user.user.id)}>Delete Friend</button>
+                    <button onClick={()=>props.deleteFriendHandler(props.user.id)}>Delete Friend</button>
                 </div>
             </div>
         </div>

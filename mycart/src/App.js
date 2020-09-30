@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Switch, Route, BrowserRouter, withRouter } from "react-router-dom";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
+// import { Switch, Route, BrowserRouter, withRouter } from "react-router-dom";
 import HomeIndex from "./components/Home/HomeIndex";
 import Navbar from "./components/Navbar/Navbar.js";
 import Fridge from "./containers/Fridge.js";
@@ -8,7 +9,6 @@ import Friends from "./containers/Friends.js";
 import Shop from "./containers/Shop.js";
 import Signup from "./components/Navbar/Signup.js";
 import Login from "./components/Navbar/Login.js";
-import { Redirect } from "react-router-dom";
 
 class App extends Component {
   state = {
@@ -30,8 +30,8 @@ class App extends Component {
       })
       .then(resp => resp.json())
       .then(data => {
-        localStorage.setItem("userId", data.user.id);
-        this.setState(() => ({ user: data.user }), ()=>this.userFollowees())
+        localStorage.setItem("userId", data.id);
+        this.setState(() => ({ user: data }), ()=>this.userFollowees())
       })
     }
   }
@@ -47,7 +47,7 @@ class App extends Component {
       }
     })
       .then(resp => resp.json())
-      .then(friend => this.setState(() => ({ friendArray: friend.followers }) ))
+      .then(data => this.setState(() => ({ friendArray: data.followers }) ))
   }
 
   signupHandler = (userObj) => {
@@ -63,7 +63,7 @@ class App extends Component {
       .then((data) => {
         // this.setState({ user: data.user })
         localStorage.setItem("token", data.jwt);
-        localStorage.setItem("userId", data.user.id);
+        localStorage.setItem("userId", data.id);
         this.setState({ user: data.user });
 
         // this.setState({ user: data.user }, () => this.props.history.push('/fridge'))
@@ -71,7 +71,6 @@ class App extends Component {
   };
 
   loginHandler = (userObj) => {
-    const { history } = this.props
     fetch("http://localhost:3000/api/v1/login", {
       method: "POST",
       headers: {
@@ -83,18 +82,13 @@ class App extends Component {
     .then(resp => resp.json())
     .then(data => {
       localStorage.setItem("token", data.jwt);
-      localStorage.setItem("userId", data.user.id);
+      localStorage.setItem("userId", data.id);
       // this.setState({ user: data.user }, () => history.push('/'))
       this.setState({ 
         user: data.user
       })
     })
   };
-
-  // logoutHandler = () => {
-  //   localStorage.removeItem("token");
-  //   this.setState({ user: {} });
-  // };
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.user !== this.state.user ) {
@@ -114,7 +108,6 @@ class App extends Component {
               fridgeItemArray: data[1],
               recipeArray: data[2],
               cartItemArray: data[3],
-              // userCartArray: data[4]
               userCartArray: data[4].cart.cart_item,
             })
         );
@@ -183,9 +176,7 @@ class App extends Component {
   }
 
   addFriendHandler = (id) => {
-    console.log(this.state.userCartArray)
-
-    let findObj = this.state.friendArray.some(el => el.user.id === id); 
+    let findObj = this.state.friendArray.some(el => el.id === id); 
     return (findObj) ? null :
 
     fetch(`http://localhost:3000/api/v1/users/${id}/follow`, {
@@ -195,17 +186,16 @@ class App extends Component {
         "Content-Type": "application/json",
         "accepts": "application/json"
       },
-      body: JSON.stringify({ follow: { follower_id: this.state.user.user.id, followee_id: id } })
+      body: JSON.stringify({ follow: { follower_id: this.state.user.id, followee_id: id } })
     })
     .then(resp => resp.json())
-    .then(data => this.setState({ friendArray: [...this.state.friendArray, data] }))
-    // .then(this.forceUpdate())
+    .then(data => this.setState({ friendArray: [...this.state.friendArray, data.user] }))
     
   }
 
   deleteFriendHandler = (userId) => {
     let updatedArray = this.state.friendArray.filter(
-      (el) => el.user.id !== userId );      
+      (el) => el.id !== userId );      
     fetch(`http://localhost:3000/api/v1/users/${userId}/unfollow`, {
       method: "DELETE",
       headers: {
@@ -213,17 +203,20 @@ class App extends Component {
         "Content-Type": "application/json",
         "accepts": "application/json"
       },
-      body: JSON.stringify({ follow: { follower_id: this.state.user.user.id, followee_id: userId } })
+      body: JSON.stringify({ follow: { follower_id: this.state.user.id, followee_id: userId } })
     })
     .then(resp => resp.json())
     .then(this.setState(()=> ({ friendArray: updatedArray })))
   }
 
+  logoutHandler = () => {
+    localStorage.removeItem("token");
+    this.setState({ user: {} });
+  };
+
 
   render() {
     
-    console.log(this.props)
-
     return (
       <BrowserRouter>
         <div
@@ -236,7 +229,7 @@ class App extends Component {
             overflow: "scroll",
           }}
         >
-            <Navbar user={this.state.user} />
+            <Navbar user={this.state.user} logoutHandler={this.logoutHandler}/>
 
             <Switch class="header-switch">
 

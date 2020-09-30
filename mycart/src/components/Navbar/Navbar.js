@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Navbar.css";
-// import Logout from "./Logout.js";
+
+
 class Navbar extends Component {
   state = {
     clicked: false,
@@ -12,13 +13,8 @@ class Navbar extends Component {
     }));
   };
 
-  logoutHandler = () => {
-    localStorage.removeItem("token");
-    this.props.setState({ user: {} });
-  };
 
   render() {
-    console.log(this.props.user.user)
     return (
       <nav className="NavbarItems">
         <h1 className="NavbarLogo">Cart-In</h1>
@@ -50,32 +46,28 @@ class Navbar extends Component {
             </a>
           </li>
       
-          {this.props.user.user 
+          {(Object.keys(this.props.user).length === 0)
           
             ? 
             
-            <li>
-              <a className="nav-links" href="/" onClick={this.logoutHandler} >
-                Log out
-              </a>
-            </li>
-            
-            : 
-
             <>
               <li>
                 <a className="nav-links" href="/login">
                   Log in
                 </a>
               </li>
-{/* 
-              <li>
-                <a className="nav-links" href="/signup">
-                  Sign up
-                </a>
-              </li> */}
 
             </>
+           
+            
+            : 
+
+            <li>
+              <a className="nav-links" href="/" onClick={this.props.logoutHandler} >
+                Log out
+              </a>
+            </li>
+
           
           }
 

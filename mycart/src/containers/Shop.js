@@ -14,7 +14,7 @@ import { SeafoodCategory } from "../components/Shop/Subcategory-lists/Seafood.js
 import { LiquorCategory } from "../components/Shop/Subcategory-lists/Liquor.js";
 import { PreparedfoodCategory } from "../components/Shop/Subcategory-lists/Preparedfood.js";
 import { OtherCategory } from "../components/Shop/Subcategory-lists/Other.js";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 
 class Shop extends React.Component {
   state = {

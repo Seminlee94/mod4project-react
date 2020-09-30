@@ -3,7 +3,7 @@ import HomeStore from "./HomeStore";
 // import HomeRecipes from "./HomeRecipes";
 import HomeFridge from "./HomeFridge";
 import Shelf from "../../components/Shelf";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 
 class HomeIndex extends Component {
   fridge = () => {

@@ -1,8 +1,8 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
 import FridgeItem from "../components/Fridge/FridgeItem.js";
 import "../components/Fridge/Fridge.css";
 import Shelf from "../components/Shelf";
+// import { Redirect } from "react-router-dom";
 
 class Fridge extends React.Component {
 
