@@ -20,13 +20,27 @@ class Signup extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.submitHandler}>
-                <input type="text" name="username" placeholder="username" value={this.state.username} onChange={this.changeHandler}   />
-                <input type="text" name="password" placeholder="password" value={this.state.password} onChange={this.changeHandler}   />
-                <input type="text" name="name" placeholder="name" value={this.state.name} onChange={this.changeHandler}   />
-                <input type="text" name="address" placeholder="address" value={this.state.address} onChange={this.changeHandler}   />
-                <input type="submit" value="Sign Up" />
-            </form>
+            <div className="signup-container">
+                <div className="signup-container-top">
+                    <h2>SIGN UP</h2>
+                </div>
+                <div className="signup-container-form">
+                    <form onSubmit={this.submitHandler}>
+                        <p><input type="text" name="username" placeholder="Enter your username" value={this.state.username} onChange={this.changeHandler}   /></p>
+                        <p><input type="text" name="password" placeholder="Enter your password" value={this.state.password} onChange={this.changeHandler}   /></p>
+                        <p><input type="text" name="name" placeholder="Enter your name" value={this.state.name} onChange={this.changeHandler}   /></p>
+                        <p><input type="text" name="address" placeholder="Enter your address" value={this.state.address} onChange={this.changeHandler}   /></p>
+                        <p><input type="submit" value="Sign Up" /></p>
+                    </form>
+                </div>
+                <div className="signup-container-bottom">
+                    Have an account? 
+                    <a className="login-signup-button" href="/login">
+                        Log in
+                    </a>
+                </div>
+
+            </div>
         )
     }
 

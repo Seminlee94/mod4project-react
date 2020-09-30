@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./Navbar.css";
-import { MenuItems } from "./MenuItems.js";
-
+// import Logout from "./Logout.js";
 class Navbar extends Component {
   state = {
     clicked: false,
@@ -13,7 +12,13 @@ class Navbar extends Component {
     }));
   };
 
+  logoutHandler = () => {
+    localStorage.removeItem("token");
+    this.props.setState({ user: {} });
+  };
+
   render() {
+    console.log(this.props.user.user)
     return (
       <nav className="NavbarItems">
         <h1 className="NavbarLogo">Cart-In</h1>
@@ -23,15 +28,58 @@ class Navbar extends Component {
           ></i>
         </div>
         <ul className={this.state.clicked ? "nav-menu active" : "nav-menu"}>
-          {MenuItems.map((item, index) => {
-            return (
-              <li key={index}>
-                <a className={item.cName} href={item.url}>
-                  {item.title}
+
+          <li>
+            <a className="nav-links" href="/">
+              Home
+            </a>
+          </li>
+          <li>
+            <a className="nav-links" href="/shop">
+              Shop
+            </a>
+          </li>
+          <li>
+            <a className="nav-links" href="/fridge">
+              Fridge
+            </a>
+          </li>
+          <li>
+            <a className="nav-links" href="/friends">
+              Friends
+            </a>
+          </li>
+      
+          {this.props.user.user 
+          
+            ? 
+            
+            <li>
+              <a className="nav-links" href="/" onClick={this.logoutHandler} >
+                Log out
+              </a>
+            </li>
+            
+            : 
+
+            <>
+              <li>
+                <a className="nav-links" href="/login">
+                  Log in
                 </a>
               </li>
-            );
-          })}
+{/* 
+              <li>
+                <a className="nav-links" href="/signup">
+                  Sign up
+                </a>
+              </li> */}
+
+            </>
+          
+          }
+
+
         </ul>
       </nav>
     );
@@ -39,3 +87,4 @@ class Navbar extends Component {
 }
 
 export default Navbar;
+

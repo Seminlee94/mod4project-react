@@ -2,7 +2,6 @@ import React from "react";
 import MyFriends from "../components/Friend/MyFriends";
 import { Redirect } from "react-router-dom";
 import SearchUserForm from "../components/Friend/SearchUserForm";
-// import SearchedUsers from "../components/Friend/SearchedUsers"
 import SearchUserCard from "../components/Friend/SearchUserCard";
 import "../components/Friend/friend.css";
 
@@ -19,43 +18,54 @@ class Friends extends React.Component {
   }
 
   searchUser = () => {
-    let findUser = this.state.userArray.find(
-      (el) => el.username.toLowerCase() === this.state.searchTerm.toLowerCase()
-    );
-    return <SearchUserCard user={findUser} />;
-  };
+    let findUser = this.state.userArray.find(el => el.username.toLowerCase()===this.state.searchTerm.toLowerCase())
+    return <SearchUserCard user={findUser} addFriendHandler={this.props.addFriendHandler} />
+  }
 
   submitHandler = (term) => {
     this.setState({
-      searchTerm: term.searchTerm,
-    });
-  };
+      searchTerm: term.searchTerm
+    })
+  }
 
-  render() {
+
+  render(){
+    console.log("current user:", this.props.user);
+    if ( this.props.user ) {
+
     return (
-      <>
-        {this.props.user ? (
+    
+        <>
           <div>
-            <div>
-              <SearchUserForm
-                value={this.state.searchTerm}
-                submitHandler={this.submitHandler}
-              />
-            </div>
-            <div className="user-container" style={{ display: "flex" }}>
-              <MyFriends friend={this.state.userArray} />
-              {/* <SearchedUsers user={this.searchUser()} /> */}
-              <div className="searched-users">
-                {this.state.searchTerm === "" ? null : this.searchUser()}
+
+            <SearchUserForm
+              value={this.state.searchTerm}
+              submitHandler={this.submitHandler}
+            />
+          </div>
+          <div>
+            <div className="user-container" style={{ display:"flex" }} >
+              <div className="friend-container">
+                <MyFriends friend={this.props.friends} deleteFriendHandler={this.props.deleteFriendHandler} />  
               </div>
+
+              <div className="searched-users">
+                  {this.state.searchTerm === "" ? null : this.searchUser()}
+              </div>
+
             </div>
           </div>
-        ) : (
-          <Redirect to="/" />
-        )}
-      </>
-    );
-  }
-}
+        </>
+      
 
-export default Friends;
+      );
+    } else {
+      
+      return (
+        <Redirect to="/login" />
+      )
+
+      }
+    }
+  }
+  export default Friends;

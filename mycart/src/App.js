@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Switch, Route, BrowserRouter } from "react-router-dom";
+import { Switch, Route, BrowserRouter, withRouter } from "react-router-dom";
 import HomeIndex from "./components/Home/HomeIndex";
 import Navbar from "./components/Navbar/Navbar.js";
 import Fridge from "./containers/Fridge.js";
@@ -10,6 +10,7 @@ import Signup from "./components/Navbar/Signup.js";
 import Login from "./components/Navbar/Login.js";
 import RecipeMain from "./components/Recipe/RecipeMain";
 import Logout from "./components/Navbar/Logout.js";
+import { Redirect } from "react-router-dom";
 
 class App extends Component {
   state = {
@@ -18,88 +19,115 @@ class App extends Component {
     recipeArray: [],
     // cartItemArray: [],
     userCartArray: [],
-    // user: {},
+    friendArray: [],
+    user: {},
   };
 
-  // componentDidMount() {
-  //   const token = localStorage.getItem("token");
-  //   if (token) {
-  //     fetch("http://localhost:3005/profile", {
-  //       method: "GET",
-  //       headers: { Authorization: `Bearer ${token}` },
-  //     })
-  //       .then((resp) => resp.json())
-  //       .then((data) => {
-  //         this.setState(() => ({ user: data.user }));
-  //       });
-  //   }
+  componentDidMount() {
+    const token = localStorage.getItem("token");
+    if (token) {
+      fetch("http://localhost:3000/api/v1/profile", {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((resp) => resp.json())
+        .then((data) => {
+          localStorage.setItem("userId", data.user.id);
+          this.setState(
+            () => ({ user: data.user }),
+            () => this.userFollowees()
+          );
+        });
+    }
+  }
+
+  userFollowees = () => {
+    fetch(
+      `http://localhost:3000/api/v1/users/${this.state.user.user.id}/followees`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-type": "application/json",
+          Accepts: "application/json",
+        },
+      }
+    )
+      .then((resp) => resp.json())
+      .then((friend) =>
+        this.setState(() => ({ friendArray: friend.followers }))
+      );
+  };
+
+  signupHandler = (userObj) => {
+    fetch("http://localhost:3000/api/v1/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        accepts: "application/json",
+      },
+      body: JSON.stringify({ user: userObj }),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        // this.setState({ user: data.user })
+        localStorage.setItem("token", data.jwt);
+        localStorage.setItem("userId", data.user.id);
+        this.setState({ user: data.user });
+      });
+  };
+  //       // this.setState({ user: data.user }, () => this.props.history.push('/fridge'))
+  //     });
   // }
 
-  // signupHandler = (userObj) => {
-  //   fetch("http://localhost:3005/users", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       accepts: "application/json",
-  //     },
-  //     body: JSON.stringify({ user: userObj }),
-  //   })
-  //     .then((resp) => resp.json())
-  //     .then((data) => {
-  //       // this.setState({ user: data.user })
-  //       localStorage.setItem("token", data.jwt);
-  //       localStorage.setItem("userId", data.user.id);
-  //       this.setState({ user: data.user });
+  loginHandler = (userObj) => {
+    const { history } = this.props;
+    fetch("http://localhost:3000/api/v1/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        accepts: "application/json",
+      },
+      body: JSON.stringify({ user: userObj }),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        localStorage.setItem("token", data.jwt);
+        localStorage.setItem("userId", data.user.id);
+        // this.setState({ user: data.user }, () => history.push('/'))
+        this.setState({
+          user: data.user,
+        });
+      });
+  };
 
-  //       // this.setState({ user: data.user }, () => this.props.history.push('/fridge'))
-  //     });
-  // };
+  logoutHandler = () => {
+    localStorage.removeItem("token");
+    this.setState({ user: {} });
+  };
 
-  // loginHandler = (userObj) => {
-  //   fetch("http://localhost:3005/login", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       accepts: "application/json",
-  //     },
-  //     body: JSON.stringify({ user: userObj }),
-  //   })
-  //     .then((resp) => resp.json())
-  //     .then((data) => {
-  //       localStorage.setItem("token", data.jwt);
-  //       localStorage.setItem("userId", data.user.id);
-  //       console.log(data.user.id);
-  //       this.setState({ user: data.user });
-  //       // this.setState({ user: data.user }, () => this.props.history.push('/fridge'))
-  //     });
-  // };
-
-  // logoutHandler = () => {
-  //   localStorage.removeItem("token");
-  //   this.setState({ user: {} });
-  // };
-
-  // componentUpdate(prevProps, prevState) {
-  //   if (prevState.user !== this.state.user) {
-  componentDidMount() {
-    const urls = [
-      "http://localhost:3005/items",
-      "http://localhost:3005/fridge-items",
-      "http://localhost:3005/recipes",
-    ];
-    Promise.all(urls.map((url) => fetch(url).then((resp) => resp.json()))).then(
-      (data) =>
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.user !== this.state.user) {
+      const urls = [
+        "http://localhost:3000/api/v1/items",
+        "http://localhost:3000/api/v1/fridge_items",
+        "http://localhost:3000/api/v1/recipes",
+        "http://localhost:3000/api/v1/cart_items",
+        "http://localhost:3000/api/v1/user_carts/1",
+      ];
+      Promise.all(
+        urls.map((url) => fetch(url).then((resp) => resp.json()))
+      ).then((data) =>
         this.setState({
           shopItemArray: data[0],
           fridgeItemArray: data[1],
           recipeArray: data[2],
+          cartItemArray: data[3],
+          userCartArray: data[4].cart.cart_item,
         })
-    );
+      );
+    }
   }
-  // userCartArray: data[3].cart.cart_item,
-  // "http://localhost:3005/user_carts/1",
-  // "http://localhost:3005/cart_items/1",
-  // cartItemArray: data[3],
 
   moveToFridge = (id, clickedItemIndex) => {
     // Copy the object, so that we don't change any places it's being referenced
@@ -107,7 +135,7 @@ class App extends Component {
       ...this.state.shopItemArray.find((el) => el.id === parseInt(id)),
     };
     delete foundObj.id; //deletes the store ID, letting newObj create new ID for fridgeitem so we don't get conflicts when trying to post
-    fetch("http://localhost:3005/fridge-items", {
+    fetch("http://localhost:3000/api/v1/fridge-items", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -128,10 +156,8 @@ class App extends Component {
       });
   };
 
-  //posts items to cart, //differentiate this with user_cart
-  //was previously cartItem w/o POST
   cartItemClickHandler = (item) => {
-    fetch("http://localhost:3005/cart_items", {
+    fetch("http://localhost:3000/api/v1/cart_items", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -161,16 +187,49 @@ class App extends Component {
       .then(this.setState({ userCartArray: updatedArray }));
   };
 
-  // let auth_link;
-  // if (!this.state.user || Object.keys(this.state.user).length === 0) {
-  //   auth_link = (
-  //     <>
-  //       <Signup submitHandler={this.signupHandler} />
-  //       <Login submitHandler={this.loginHandler} />{" "}
-  //     </>
-  //   );
-  // } else {
-  //   auth_link = <Logout logoutHandler={this.logoutHandler} />;
+  addFriendHandler = (id) => {
+    console.log(this.state.userCartArray);
+
+    let findObj = this.state.friendArray.some((el) => el.user.id === id);
+    return findObj
+      ? null
+      : fetch(`http://localhost:3000/api/v1/users/${id}/follow`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+            accepts: "application/json",
+          },
+          body: JSON.stringify({
+            follow: { follower_id: this.state.user.user.id, followee_id: id },
+          }),
+        })
+          .then((resp) => resp.json())
+          .then((data) =>
+            this.setState({ friendArray: [...this.state.friendArray, data] })
+          );
+    // .then(this.forceUpdate())
+  };
+
+  deleteFriendHandler = (userId) => {
+    let updatedArray = this.state.friendArray.filter(
+      (el) => el.user.id !== userId
+    );
+    fetch(`http://localhost:3000/api/v1/users/${userId}/unfollow`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+        accepts: "application/json",
+      },
+      body: JSON.stringify({
+        follow: { follower_id: this.state.user.user.id, followee_id: userId },
+      }),
+    })
+      .then((resp) => resp.json())
+      .then(this.setState(() => ({ friendArray: updatedArray })));
+  };
+
   recipeSubmit = (recipeInput) => {
     fetch("http://localhost:3005/recipes", {
       method: "POST",
@@ -200,8 +259,7 @@ class App extends Component {
             overflow: "scroll",
           }}
         >
-          <Navbar />
-          {/* <div>{auth_link}</div> */}
+          <Navbar user={this.state.user} />
 
           <Switch class="header-switch">
             <Route path="/signup">
@@ -220,7 +278,7 @@ class App extends Component {
                 userCartArray={this.state.userCartArray}
                 itemClickHandler={this.cartItemClickHandler}
                 deleteHandler={this.cartItemDeleteHandler}
-                // userId={this.state.user.id}
+                userId={this.state.user.id}
               />
             </Route>
 
@@ -229,8 +287,14 @@ class App extends Component {
             </Route>
 
             <Route path="/friends">
-              <Friends user={this.state.user} />
+              <Friends
+                user={this.state.user}
+                friends={this.state.friendArray}
+                addFriendHandler={this.addFriendHandler}
+                deleteFriendHandler={this.deleteFriendHandler}
+              />
             </Route>
+
             <Route path="/recipes">
               <RecipeMain
                 recipes={this.state.recipeArray}
