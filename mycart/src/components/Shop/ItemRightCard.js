@@ -4,7 +4,8 @@ import FridgeButton from "../Home/FridgeButton";
 const ItemRightCard = (props) => {
   return (
     <div className="item-right-card">
-      {/* <button onClick={() => props.deleteHandler(props.cartId, props.item.id)}>
+      {console.log(props)}
+      <button onClick={() => props.deleteHandler(props.cartId, props.item.id)}>
         X
       </button>
       <img
@@ -18,7 +19,7 @@ const ItemRightCard = (props) => {
         item={props.item.id}
         clickedItemIndex={props.clickedItemIndex}
         //clickeditem index needs to come back or multiple items of the same ID will delete off the rightside if you press add to fridge
-      /> */}
+      />
     </div>
   );
 };
