@@ -14,8 +14,8 @@ class Navbar extends Component {
 
   render() {
 
-    console.log(Object.keys(this.props.user).length)
-    console.log(this.props.user)
+    // console.log(Object.keys(this.props.user).length)
+    // console.log(this.props.user)
     return (
       <nav className="NavbarItems">
         <h1 className="NavbarLogo">Cart-In</h1>
@@ -54,7 +54,7 @@ class Navbar extends Component {
       
           {(Object.keys(this.props.user).length===0)
           
-            ? 
+             ? 
             
               <li>
                 <a className="nav-links" href="/login">
@@ -63,7 +63,7 @@ class Navbar extends Component {
               </li>
 
             
-            : 
+             : 
 
             <li>
               <a className="nav-links" href="/" onClick={this.props.logoutHandler} >
@@ -72,7 +72,7 @@ class Navbar extends Component {
             </li>
 
           
-          }
+          } 
 
 
         </ul>

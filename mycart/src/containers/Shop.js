@@ -14,7 +14,7 @@ import { SeafoodCategory } from "../components/Shop/Subcategory-lists/Seafood.js
 import { LiquorCategory } from "../components/Shop/Subcategory-lists/Liquor.js";
 import { PreparedfoodCategory } from "../components/Shop/Subcategory-lists/Preparedfood.js";
 import { OtherCategory } from "../components/Shop/Subcategory-lists/Other.js";
-// import { Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 class Shop extends React.Component {
   state = {
@@ -71,36 +71,40 @@ class Shop extends React.Component {
         </Card>
       </Accordion>
     ));
+        return (
+        
+          <>
+            {this.props.userId 
+            
+            ? 
+            <div className="dd-wrapper" style={{ display: "flex" }}>
+              <div style={{ width: "250px" }}>{ShopMap}</div>
 
+              <ShopMain
+                itemArray={this.props.shopItemArray}
+                item={this.state.filteredItem}
+                itemClickHandler={this.props.itemClickHandler}
+                clicked={this.state.clicked}
+              />
 
-    // if (typeof this.props.user != "undefined") {
+              {this.props.userCartArray.length > 0 ? (
+                <ShopRight
+                  moveToFridge={this.props.moveToFridge}
+                  userCartArray={this.props.userCartArray}
+                  deleteHandler={this.props.deleteHandler}
+                />
+                ) : null}
+            </div>
+            
+            :
 
-      return (
-        <div className="dd-wrapper" style={{ display: "flex" }}>
-          <div style={{ width: "250px" }}>{ShopMap}</div>
+                <Redirect to="/login" />
+            }
 
-          <ShopMain
-            itemArray={this.props.shopItemArray}
-            item={this.state.filteredItem}
-            itemClickHandler={this.props.itemClickHandler}
-            clicked={this.state.clicked}
-          />
-
-          {this.props.userCartArray.length > 0 ? (
-            <ShopRight
-              moveToFridge={this.props.moveToFridge}
-              userCartArray={this.props.userCartArray}
-              deleteHandler={this.props.deleteHandler}
-            />
-          ) : null}
-        </div>
-      );
-    // } else {
-    //   return (
-    //     <Redirect to="/login" />
-    //   )
-    // }
-  }
+          </>
+        );
+      }
+  
 }
 
 export default Shop;
