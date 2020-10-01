@@ -1,6 +1,8 @@
 import React from "react"
 
 const UserCard = (props) => {
+
+    console.log(props)
     return (
         <div className="user-card">
             
@@ -14,7 +16,7 @@ const UserCard = (props) => {
             </div>
             <div className="user-card-buttons">
                 <div className="join-cart-button">
-                    <button>Join Cart</button>
+                    <button onClick={()=>props.addFriendtoCartHandler(props.user)}>Join Cart</button>
                 </div>
                 <div>
                     <button onClick={()=>props.deleteFriendHandler(props.user.id)}>Delete Friend</button>

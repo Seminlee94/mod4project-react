@@ -22,8 +22,7 @@ class ShopRight extends React.Component {
   render() {
     return (
       <div className="shop-right">
-        <h3>Cart</h3>
-        <ListGroup>{this.clickedItems()}</ListGroup>;
+        <ListGroup>{this.clickedItems()}</ListGroup>
       </div>
     );
   }

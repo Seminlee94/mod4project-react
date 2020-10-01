@@ -64,14 +64,20 @@ class Navbar extends Component {
 
             
              : 
+            <>
 
-            <li>
-              <a className="nav-links" href="/" onClick={this.props.logoutHandler} >
-                Log out
-              </a>
-            </li>
+              <li>
+                <a className="nav-links" href="/" onClick={this.props.logoutHandler} >
+                  Log out
+                </a>
+              </li>
 
-          
+              <li>
+                <a className="nav-links">
+                    {this.props.user.username}
+                </a>
+              </li>
+            </>
           } 
 
 

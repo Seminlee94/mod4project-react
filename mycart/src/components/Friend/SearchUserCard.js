@@ -1,7 +1,6 @@
 import React from "react"
 
 const SearchUserCard = (props) => {
-    console.log(props.user)
     return (
         <div className="search-user-card">
             <div className="search-user-info">
