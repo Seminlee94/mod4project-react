@@ -72,8 +72,8 @@ class Shop extends React.Component {
     ));
 
     return (
-      <div className="dd-wrapper" style={{ display: "flex" }}>
-        <div style={{ width: "250px" }}>{ShopMap}</div>
+      <div className="dd-wrapper">
+        <div>{ShopMap}</div>
 
         <ShopMain
           itemArray={this.props.shopItemArray}

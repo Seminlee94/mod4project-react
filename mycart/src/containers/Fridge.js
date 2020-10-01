@@ -23,13 +23,11 @@ class Fridge extends React.Component {
   };
 
   render() {
-    const fridgeLeftArray = [
+    const fridgeCategories = [
       { category: "Bakery", shelf: this.filter("Bread") },
       { category: "Produce", shelf: this.filter("Produce") },
       { category: "Meat", shelf: this.filter("Meat") },
       { category: "Seafood", shelf: this.filter("Seafood") },
-    ];
-    const fridgeRightArray = [
       { category: "Liqours", shelf: this.filter("Liquors") },
       {
         category: "PreparedFoods",
@@ -38,27 +36,22 @@ class Fridge extends React.Component {
       { category: "Other", shelf: this.filter("Other") },
       { category: "Cheese", shelf: this.filter("Cheese") },
     ];
-    const fridgeLeft = fridgeLeftArray.map(({ category, shelf }) => (
-      <div className="fridge-shelf">
-        <div className="fridge-category">{category}</div>
-        <Shelf category={shelf} />
-      </div>
-    ));
-    const fridgeRight = fridgeRightArray.map(({ category, shelf }) => (
-      <div className="fridge-shelf">
-        <div className="fridge-category">{category}</div>
-        <Shelf category={shelf} />
-      </div>
-    ));
 
-    // console.log("current user:", this.props.user);
+    const fridge = fridgeCategories.map(
+      ({ category, shelf }) =>
+        // If there are no items on this shelf, don't show it
+        shelf.length > 0 && (
+          <div className="fridge-shelf">
+            <h3>{category}</h3>
+            <Shelf category={shelf} />
+          </div>
+        )
+    );
+
     return (
       <div className="fridge-container">
-        <div className="fridge-container-left">{fridgeLeft}</div>
-
-        <div className="fridge-blank"></div>
-
-        <div className="fridge-container-right">{fridgeRight}</div>
+        <h1>My Fridge</h1>
+        {fridge}
       </div>
     );
   }
