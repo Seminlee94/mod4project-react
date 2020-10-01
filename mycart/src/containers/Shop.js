@@ -22,6 +22,7 @@ class Shop extends React.Component {
     clicked: false,
   };
 
+
   shopSideBarClicker = (e) => {
     let filteredArray = this.props.shopItemArray.filter(
       (item) => item.sub_category === e.target.textContent
@@ -71,6 +72,7 @@ class Shop extends React.Component {
         </Card>
       </Accordion>
     ));
+
         return (
         
           <>
