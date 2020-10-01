@@ -31,7 +31,6 @@ class Friends extends React.Component {
 
 
   render(){
-    // if ( this.props.user ) {
 
     return (
     
@@ -49,7 +48,11 @@ class Friends extends React.Component {
             <div>
               <div className="user-container" style={{ display:"flex" }} >
                 <div className="friend-container">
-                  <MyFriends friend={this.props.friends} deleteFriendHandler={this.props.deleteFriendHandler} />  
+                  <MyFriends 
+                    friend={this.props.friends} 
+                    deleteFriendHandler={this.props.deleteFriendHandler} 
+                    addFriendtoCartHandler={this.props.addFriendtoCartHandler}
+                  />  
                 </div>
 
                 <div className="searched-users">

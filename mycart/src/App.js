@@ -19,12 +19,14 @@ class App extends Component {
     fridgeItemArray: [],
     recipeArray: [],
     // cartItemArray: [],
+    userCartArrays: [],
     friendArray: [],
+    followerArray: [],
+    OurCartArray: [],
     user: {},
     cart: {},
     userCarts: {},
-    userCartArrays: [],
-    userCartObj: {}
+    userCartObj: {},
     
   };
 
@@ -44,27 +46,37 @@ class App extends Component {
         .then((resp) => resp.json())
         .then(data => { 
           localStorage.setItem("userId", data.user.id);
-          this.setState(() => ({ user: data.user}), () => this.userFollowees());
+          this.setState(() => ({ user: data.user}), () => this.userFollows());
       })
     }
   }
 
-  userFollowees = () => {
-    fetch(
-      `http://localhost:3000/api/v1/users/${this.state.user.id}/followees`,
-      {
+  userFollows = () => {
+    fetch(`http://localhost:3000/api/v1/users/${this.state.user.id}/followees`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           "Content-type": "application/json",
-          Accepts: "application/json",
-        },
-      }
-    )
+          Accepts: "application/json"
+        }
+      })
       .then((resp) => resp.json())
-      .then((friend) =>
-        this.setState(() => ({ friendArray: friend.followers }))
-        );
+      .then((friend) => {
+        this.setState(() => ({ friendArray: friend.followers }));
+
+        fetch(`http://local:3000/api/v1/users/${this.state.user.id}/followers`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Contect-Type": "application/json",
+            Accepts: "appliation/json"
+          }
+        })
+          .then(resp => resp.json())
+          .then((follower) => {
+            this.setState(() => ({ followerArray: follower.followers}))
+          })
+      });
   };
 
   signupHandler = (userObj) => {
@@ -94,8 +106,6 @@ class App extends Component {
           .then(resp => resp.json())
           .then(cart => { 
             this.setState({ cart: cart })
-            console.log(cart.id)
-            console.log(data.user.id)
 
             fetch(`http://localhost:3000/api/v1/user_carts`, {
               method: "POST",
@@ -166,13 +176,16 @@ class App extends Component {
 
 
   findUserCart = () => {
-    console.log(this.state.userCarts)
     let foundCartObj = this.state.userCarts.filter(el => el.user_id === this.state.user.id )
-    console.log(foundCartObj)
     let userCartObjId = foundCartObj[0].id
     fetch(`http://localhost:3000/api/v1/user_carts/${userCartObjId}`)
       .then(resp => resp.json())
-      .then(data => this.setState(() => ({ userCartArrays: data.cart.cart_item, userCartObj: data }), ()=> console.log(data.cart_id)))
+      .then(data => this.setState(() => ({ userCartArrays: data.cart.cart_item, userCartObj: data }), ()=>this.OurCart()))
+  }
+
+  OurCart = () => {
+    let foundOurCartArray = this.state.userCarts.filter(el=>el.cart_id === this.state.userCartObj.cart_id)
+    this.setState(()=>({ OurCartArray: foundOurCartArray  }))
   }
 
 
@@ -253,6 +266,23 @@ class App extends Component {
     
   }
 
+  addFriendtoCartHandler = (user) => {
+    fetch("http://localhost:3000/api/v1/user_carts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "accepts": "application/json"
+      },
+      body: JSON.stringify({ 
+        user_id: user.id,
+        cart_id: this.state.userCartObj.cart_id
+       })
+    })
+      .then(resp => resp.json())
+      .then(newUser => this.setState(()=>({ userCarts: [...this.state.userCarts, newUser] })))
+  }
+
+
   deleteFriendHandler = (userId) => {
     let updatedArray = this.state.friendArray.filter(
       (el) => el.id !== userId );      
@@ -292,10 +322,10 @@ class App extends Component {
 
   render() {
     let userId = localStorage.getItem("userId")
-    console.log(this.state.user)
+    // console.log(this.state.user)
     // console.log(this.state.userCartArray)
     // console.log(this.state.userCartObj.id)
-    console.log(this.state.userCarts)
+    console.log(this.state)
     
 
     return (
@@ -325,12 +355,14 @@ class App extends Component {
               <Route path="/shop">
                 <Shop
                   shopItemArray={this.state.shopItemArray}
-                  moveToFridge={this.moveToFridge}
                   cartItemArray={this.state.cartItemArray}
                   userCartArray={this.state.userCartArrays}
+                  ourCartArray={this.state.OurCartArray}
                   itemClickHandler={this.cartItemClickHandler}
                   deleteHandler={this.cartItemDeleteHandler}
-                  userId = {userId}
+                  moveToFridge={this.moveToFridge}
+                  user = {this.state.user}
+                  userId={userId}
                 /> 
               </Route>
 
@@ -347,6 +379,7 @@ class App extends Component {
                   friends={this.state.friendArray}
                   addFriendHandler={this.addFriendHandler}
                   deleteFriendHandler={this.deleteFriendHandler}
+                  addFriendtoCartHandler={this.addFriendtoCartHandler}
                   userId = {userId}
                 />
               </Route>

@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import "../components/Shop/shop.css";
 import ShopMain from "../components/Shop/ShopMain";
 import ShopRight from "../components/Shop/ShopRight";
+import OurShopRight from "../components/Shop/OurShopRight";
 import { BreadCategory } from "../components/Shop/Subcategory-lists/Bread.js";
 import { MeatCategory } from "../components/Shop/Subcategory-lists/Meat.js";
 import { CheeseCategory } from "../components/Shop/Subcategory-lists/Cheese.js";
@@ -80,22 +81,49 @@ class Shop extends React.Component {
             
             ? 
             <div className="dd-wrapper" style={{ display: "flex" }}>
-              <div style={{ width: "250px" }}>{ShopMap}</div>
 
-              <ShopMain
-                itemArray={this.props.shopItemArray}
-                item={this.state.filteredItem}
-                itemClickHandler={this.props.itemClickHandler}
-                clicked={this.state.clicked}
-              />
+              <div className="sidebar">{ShopMap}</div>
+              
 
-              {this.props.userCartArray.length > 0 ? (
-                <ShopRight
-                  moveToFridge={this.props.moveToFridge}
-                  userCartArray={this.props.userCartArray}
-                  deleteHandler={this.props.deleteHandler}
+                <ShopMain
+                  itemArray={this.props.shopItemArray}
+                  item={this.state.filteredItem}
+                  itemClickHandler={this.props.itemClickHandler}
+                  clicked={this.state.clicked}
                 />
-                ) : null}
+
+              
+              <div className="shop-carts">
+
+                {this.props.userCartArray.length > 0 ? (
+                  <>
+                    <h3>My Cart</h3>
+                    <ShopRight
+
+                      moveToFridge={this.props.moveToFridge}
+                      userCartArray={this.props.userCartArray}
+                      deleteHandler={this.props.deleteHandler}
+                      />
+                    </>
+
+                  ) : null}
+
+                {this.props.ourCartArray.length > 0 ? (
+
+                  <>
+                    <h3>Our Cart</h3>
+                    <OurShopRight 
+
+                      deleteHandler={this.props.deleteHandler}
+                      ourCartArray={this.props.ourCartArray}
+                      moveToFridge={this.props.moveToFridge}
+                    
+                    />
+
+                  </>
+                  ) : null}
+
+              </div>
             </div>
             
             :
