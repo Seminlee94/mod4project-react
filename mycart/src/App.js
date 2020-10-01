@@ -19,17 +19,19 @@ class App extends Component {
     fridgeItemArray: [],
     recipeArray: [],
     // cartItemArray: [],
-    userCartArray: [],
     friendArray: [],
     user: {},
     cart: {},
-    userCart: {}
+    userCarts: {},
+    userCartArrays: [],
+    userCartObj: {}
     
   };
 
   componentDidMount() {
     // localStorage.clear()
     // localStorage.removeItem("token")
+    // localStorage.removeItem("userId")
     // this.state.user = {}
     const token = localStorage.getItem("token");
     if (token) {
@@ -42,7 +44,7 @@ class App extends Component {
         .then((resp) => resp.json())
         .then(data => { 
           localStorage.setItem("userId", data.user.id);
-          this.setState(() => ({ user: data.user}), () => this.userFollowees())    
+          this.setState(() => ({ user: data.user}), () => this.userFollowees());
       })
     }
   }
@@ -139,28 +141,40 @@ class App extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
+
     if (prevState.user !== this.state.user ) {
         const urls = [
           "http://localhost:3000/api/v1/items",
           "http://localhost:3000/api/v1/fridge_items",
-          "http://localhost:8000/recipes",
+          "http://localhost:3005/recipes",
           "http://localhost:3000/api/v1/cart_items",
-          "http://localhost:3000/api/v1/user_carts/1",
-          // `http://localhost:3000/api/v1/user_carts/${this.state.user.user.id}`,
+          "http://localhost:3000/api/v1/user_carts/",
 
         ];
         Promise.all(urls.map((url) => fetch(url).then((resp) => resp.json()))).then(
           (data) =>
-            this.setState({
+            this.setState(() =>  ({
               shopItemArray: data[0],
               fridgeItemArray: data[1],
               recipeArray: data[2],
               cartItemArray: data[3],
-              userCartArray: data[4].cart.cart_item,
-            })
-        );
+              userCarts: data[4]
+            }), () => this.findUserCart()
+        ));
      }
   }
+
+
+  findUserCart = () => {
+    console.log(this.state.userCarts)
+    let foundCartObj = this.state.userCarts.filter(el => el.user_id === this.state.user.id )
+    console.log(foundCartObj)
+    let userCartObjId = foundCartObj[0].id
+    fetch(`http://localhost:3000/api/v1/user_carts/${userCartObjId}`)
+      .then(resp => resp.json())
+      .then(data => this.setState(() => ({ userCartArrays: data.cart.cart_item, userCartObj: data }), ()=> console.log(data.cart_id)))
+  }
+
 
   moveToFridge = (id, clickedItemIndex) => {
     // Copy the object, so that we don't change any places it's being referenced
@@ -190,34 +204,35 @@ class App extends Component {
   };
 
   cartItemClickHandler = (item) => {
-    fetch("http://localhost:3000/api/v1/cart_items", {
+    // console.log(this.state.userCartObj.cart_id)
+    fetch("http://localhost:3000/api/v1/cart_items/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         accepts: "application/json",
       },
       body: JSON.stringify({
-        cart_id: 1,
+        cart_id: this.state.userCartObj.cart_id,
         item_id: item.id,
       }),
     })
       .then((resp) => resp.json())
       .then((data) =>
         this.setState(() => ({
-          userCartArray: [...this.state.userCartArray, data],
+          userCartArrays: [...this.state.userCartArrays, data],
         }))
       );
   };
 
   cartItemDeleteHandler = (cartId) => {
-    let updatedArray = this.state.userCartArray.filter(
+    let updatedArrays = this.state.userCartArrays.filter(
       (el) => el.id !== cartId
     );
     fetch(`http://localhost:3005/cart_items/${cartId}`, {
       method: "DELETE",
     })
       .then((resp) => resp.json())
-      .then(this.setState({ userCartArray: updatedArray }));
+      .then(this.setState({ userCartArrays: updatedArrays }));
   };
 
   addFriendHandler = (id) => {
@@ -277,6 +292,11 @@ class App extends Component {
 
   render() {
     let userId = localStorage.getItem("userId")
+    console.log(this.state.user)
+    // console.log(this.state.userCartArray)
+    // console.log(this.state.userCartObj.id)
+    console.log(this.state.userCarts)
+    
 
     return (
       <BrowserRouter>
@@ -307,7 +327,7 @@ class App extends Component {
                   shopItemArray={this.state.shopItemArray}
                   moveToFridge={this.moveToFridge}
                   cartItemArray={this.state.cartItemArray}
-                  userCartArray={this.state.userCartArray}
+                  userCartArray={this.state.userCartArrays}
                   itemClickHandler={this.cartItemClickHandler}
                   deleteHandler={this.cartItemDeleteHandler}
                   userId = {userId}
