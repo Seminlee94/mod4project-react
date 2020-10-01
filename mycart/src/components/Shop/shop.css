@@ -48,10 +48,16 @@
 
 .item-container {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   height: auto;
   width: 100%;
   grid-row-gap: 20px;
+}
+
+@media only screen and (max-width: 1200px) {
+  .item-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .item-card {

@@ -225,7 +225,7 @@ class App extends Component {
             </Route>
 
             <Route path="/fridge">
-              <Fridge item={this.state.fridgeItemArray} />
+            <Fridge item={this.state.fridgeItemArray} />
             </Route>
 
             <Route path="/friends">
