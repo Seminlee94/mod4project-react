@@ -64,7 +64,7 @@ class App extends Component {
       .then((friend) => {
         this.setState(() => ({ friendArray: friend.followers }));
 
-        fetch(`http://local:3000/api/v1/users/${this.state.user.id}/followers`, {
+        fetch(`http://localhost:3000/api/v1/users/${this.state.user.id}/followers`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -74,7 +74,7 @@ class App extends Component {
         })
           .then(resp => resp.json())
           .then((follower) => {
-            this.setState(() => ({ followerArray: follower.followers}))
+            this.setState(() => ({ followerArray: follower.followers }))
           })
       });
   };
