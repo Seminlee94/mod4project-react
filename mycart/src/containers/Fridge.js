@@ -2,7 +2,7 @@ import React from "react";
 import FridgeItem from "../components/Fridge/FridgeItem.js";
 import "../components/Fridge/Fridge.css";
 import Shelf from "../components/Shelf";
-// import { Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 class Fridge extends React.Component {
   // state = {
@@ -51,23 +51,35 @@ class Fridge extends React.Component {
       </div>
     ));
 
-    console.log("current user:", this.props.user);
-    // if (typeof this.props.user != "undefined") {
+   
 
     return (
-      <div className="fridge-container">
-        <div className="fridge-container-left">{fridgeLeft}</div>
 
-        <div className="fridge-blank"></div>
+      <>
+        {this.props.userId  
+        
+        
+        ?
+      
+        <div className="fridge-container">
+          <div className="fridge-container-left">{fridgeLeft}</div>
 
-        <div className="fridge-container-right">{fridgeRight}</div>
-      </div>
+          <div className="fridge-blank"></div>
+
+          <div className="fridge-container-right">{fridgeRight}</div>
+        </div>
+      
+        :
+      
+        <Redirect to="/login" />
+      
+      }
+
+
+      </>
     );
-    // } else {
-    //   return (
-    //     <Redirect to="/login" />
-    //   )
-    // }
+
+
   }
 }
 export default Fridge;
