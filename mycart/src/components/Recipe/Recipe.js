@@ -23,6 +23,7 @@ const Recipes = (props) => {
             position: "absolute",
             bottom: "0px",
             left: "0px",
+            width: "100%",
           }}
         >
           {props.recipe.title}

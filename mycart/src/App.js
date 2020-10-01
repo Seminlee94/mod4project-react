@@ -241,7 +241,7 @@ class App extends Component {
     let updatedArrays = this.state.userCartArrays.filter(
       (el) => el.id !== cartId
     );
-    fetch(`http://localhost:3005/cart_items/${cartId}`, {
+    fetch(`http://localhost:3000/cart_items/${cartId}`, {
       method: "DELETE",
     })
       .then((resp) => resp.json())
@@ -306,7 +306,7 @@ class App extends Component {
   };
     
   recipeSubmit = (recipeInput) => {
-    fetch("http://localhost:3005/recipes", {
+    fetch("http://localhost:3000/recipes", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -386,15 +386,15 @@ class App extends Component {
 
               <Route path="/recipes">
               <RecipeMain
-                  recipes={this.state.recipeArray}
-                  recipeSubmit={this.recipeSubmit}
-                  fridgeContent={this.state.fridgeItemArray}
-                  userId = {userId}
+                recipes={this.state.recipeArray}
+                recipeSubmit={this.recipeSubmit}
+                fridgeContent={this.state.fridgeItemArray} 
+                userId = {userId}
                 />
               </Route>
 
             <Route path="/">
-              <HomeIndex
+            <HomeIndex
                 fridgeItemArray={this.state.fridgeItemArray}
                 shopItemArray={this.state.shopItemArray}
                 recipeArray={this.state.recipeArray}

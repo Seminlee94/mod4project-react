@@ -9,7 +9,7 @@ class ShopRight extends React.Component {
       <ListGroup.Item action>
         <ItemRightCard
           cartId={cartItem.id}
-          key={cartItem.item.id}
+          key={cartItem.item_id}
           item={cartItem.item}
           moveToFridge={this.props.moveToFridge}
           clickedItemIndex={index} //add index back in, it deletes stuff properly in the right

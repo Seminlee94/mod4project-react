@@ -39,25 +39,27 @@
   margin-left: 250px;
   justify-content: center;
   text-align: center;
-  width: 70%;
 }
 
-/* .item-container{
-    display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
-    height: auto;
-    width: 80%;
-    margin-left: 5%;
-    margin-right: 5%;
-} */
+.dd-wrapper {
+  display: grid;
+  grid-template-columns: 250px 1fr 300px;
+  grid-column-gap: 40px;
+}
 
 .item-container {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   height: auto;
   width: 100%;
   grid-row-gap: 20px;
   overflow-y: scroll;
+}
+
+@media only screen and (max-width: 1200px) {
+  .item-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .item-card {

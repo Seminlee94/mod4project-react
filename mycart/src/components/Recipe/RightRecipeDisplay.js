@@ -2,53 +2,73 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 
 class RightRecipeDisplay extends React.Component {
-  state = { missing: "" };
-  // const missingIngredients = props.fridgeContent.filter(ing => ing.name.toLowerCase().includes(!props.ingredients)
+  state = { missing: "", user: {} };
+  //filter for ingredients inside of fridge that are not included
 
-  //   cardMissingIngredients = () => {
-  //     let missingIngredients = this.props.fridgeContent.filter(
-  //       (ing) =>
-  //         ing.name
-  //           .toLowerCase()
-  //           .includes(!this.props.ingredients.name.toLowerCase()) ||
-  //         !this.props.ingredients.sub_category.toLowerCase()
-  //     );
-  //     this.setState({ missing: missingIngredients });
-  //   };
+  missingIngredients = () => {
+    // console.log(this.props.fridgeContent);
+    let fridgeArray = [].concat(this.props.fridgeContent);
+    const lowercaseArray = [];
+
+    const splitCaseArray = [];
+    let num = [].concat(fridgeArray).length;
+    for (let i = 1; i < num; i++) {
+      lowercaseArray[i] = fridgeArray[i].sub_category.toLowerCase();
+      splitCaseArray.push(...lowercaseArray[i].split(", "));
+      // console.log();
+    }
+    // console.log(lowercaseArray);
+
+    lowercaseArray.shift();
+
+    let recipeArray = this.props.recipe.ingredients.split(", ");
+
+    let missing = recipeArray.filter(
+      (recipeIngred) => !splitCaseArray.includes(recipeIngred.toLowerCase())
+    );
+
+    return missing;
+  };
+
+  // missingIngredientMap = () => {
+  //   let currentState = this.state.missing;
+  //   console.log("currentState:", currentState);
+  //   console.log("fridgeContent:", this.props.fridgeContent);
+  //   console.log(
+  //     "props",
+  //     this.props.recipe.ingredients,
+  //     this.props.recipe.id,
+  //     this.props.recipe.title
+  //     // currentState.map((element)=><p>element. </p>)
+  //   );
+  // };
+
   render() {
-    console.log(this.state.missing);
+    const missingIngredients = this.missingIngredients();
+
     return (
       <Card
         style={{
-          width: "800px",
+          width: "400px",
           marginTop: "50px",
           marginRight: "50px",
         }}
       >
         <Card.Img
-          style={{ height: "600px", objectFit: "cover", width: "100%" }}
+          style={{ height: "550px", objectFit: "cover", width: "100%" }}
           src={this.props.recipe.picture}
           alt={this.props.recipe.title}
         />
-        <Card.ImgOverlay>
-          <div
-            style={{
-              background: "rgba(0, 0, 0, 0.4)",
-              color: "rgba(255, 255, 255, 1.0)",
-              position: "absolute",
-              bottom: "0px",
-              left: "0px",
-            }}
-          >
-            {this.props.recipe.title}
-            {this.cardMissingIngredients}
-            {this.state.missing}
-          </div>
-        </Card.ImgOverlay>
-        Missing Ingredients
+        <Card.Body>
+          <h3>Missing ingredients</h3>
+          <ul>
+            {missingIngredients.map((ingredient) => (
+              <li>{ingredient}</li>
+            ))}
+          </ul>
+        </Card.Body>
       </Card>
     );
   }
 }
-
 export default RightRecipeDisplay;
