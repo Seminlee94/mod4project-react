@@ -3,7 +3,6 @@ import HomeStore from "./HomeStore";
 import HomeRecipes from "./HomeRecipes";
 import HomeFridge from "./HomeFridge";
 import Shelf from "../../components/Shelf";
-import { Redirect } from "react-router-dom";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Container from "react-bootstrap/Container";
 
@@ -31,10 +30,10 @@ class HomeIndex extends Component {
     const frontPage = frontPageObj.map(({ title, shelf }) => (
       <div
         style={{
-        marginTop: "40px",
-        marginBottom: "30px",
-        textAlign: "center",
-      }}
+          marginTop: "40px",
+          marginBottom: "30px",
+          textAlign: "center",
+        }}
       >
         <h1 style={{ fontWeight: "1000" }}>{title}</h1>
         <Shelf category={shelf} />

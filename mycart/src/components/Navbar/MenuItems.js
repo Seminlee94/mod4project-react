@@ -9,38 +9,38 @@ import navSignup from "./navSignup";
 
 export const MenuItems = [
   {
-    title: "navHome",
+    title: navHome,
     url: "/",
     cName: "nav-links",
   },
   {
-    title: "navShop",
+    title: navShop,
     url: "/shop",
     cName: "nav-links",
   },
   {
-    title: "navFridge",
+    title: navFridge,
     url: "/fridge",
     cName: "nav-links",
   },
   {
-    title: "navRecipes",
+    title: navRecipe,
     url: "/recipes",
     cName: "nav-links",
   },
   {
-    title: "navFriends",
-    url: "/friends",
-    cName: "nav-links",
-  },
-  {
-    title: "navSignup",
+    title: navSignup,
     url: "/signup",
     cName: "nav-links",
   },
   {
-    title: "navLogIn",
+    title: navLogin,
     url: "/login",
+    cName: "nav-links",
+  },
+  {
+    title: navFriends,
+    url: "/friends",
     cName: "nav-links",
   },
 ];

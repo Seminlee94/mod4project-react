@@ -178,13 +178,16 @@ class App extends Component {
               recipeArray: data[1],
               cartItemArray: data[2],
               userCarts: data[3],
-              fridgeItemArray: data[4],
-              // fridgeItemArray: data[4].map((el) => el.item),
+              // fridgeItemArray: data[4],
+              fridgeItemArray: data[4].map((el) => el.item),
               fridgeArray: data[5]
             }), () => this.findUserCart()
         ));
      }
   }
+
+  // "http://localhost:3005/cart_items/1",
+  // cartItemArray: data[3],
 
 
   findUserCart = () => {
@@ -384,6 +387,8 @@ class App extends Component {
     // console.log(this.state.fridgeItemArray)
     
 
+    // console.log(this.state.fridgeItemArray);
+    // console.log(this.state.userCartArray);
     return (
       <BrowserRouter>
         <div
