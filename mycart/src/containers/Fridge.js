@@ -27,7 +27,7 @@ class Fridge extends React.Component {
 
   render() {
     const fridgeCategories = [
-      { category: "Bakery", shelf: this.filter("Bread") },
+      { category: "Bread", shelf: this.filter("Bread") },
       { category: "Produce", shelf: this.filter("Produce") },
       { category: "Meat", shelf: this.filter("Meat") },
       { category: "Seafood", shelf: this.filter("Seafood") },

@@ -11,7 +11,7 @@ class HomeFridge extends React.Component {
           src={this.props.fridgeItem.item.image}
           style={{ width: "100%" }}
         />
-        <Card.Body>{this.props.fridgeItem.name}</Card.Body>
+        <Card.Body>{this.props.fridgeItem.item.name}</Card.Body>
       </Card>
     );
   }

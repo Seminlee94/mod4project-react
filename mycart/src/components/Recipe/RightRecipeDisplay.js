@@ -6,33 +6,39 @@ class RightRecipeDisplay extends React.Component {
   //filter for ingredients inside of fridge that are not included
 
   missingIngredients = () => {
-   
     let fridgeArray = this.props.fridgeContent.map(el => el.item)
-
     console.log(fridgeArray)
+
     const lowercaseArray = [];
     // new array to lowercase
     // lowercase them 
     const splitCaseArray = [];
+    const newArray = [];
     
     let num = [].concat(fridgeArray).length;
+    console.log(num)
     for (let i = 1; i < num; i++) {
         if (fridgeArray[i].sub_category != null) {
         lowercaseArray[i] = fridgeArray[i].sub_category.toLowerCase();
+        newArray[i] = fridgeArray[i].name.toLowerCase();
         splitCaseArray.push(...lowercaseArray[i].split(", "));
+        splitCaseArray.push(...newArray[i].split(", "));
       }
     }
+
+    console.log(splitCaseArray)
 
     let recipeArray = this.props.recipe.ingredients.split(", ");
 
     let missing = recipeArray.filter(
       (recipeIngred) => !splitCaseArray.includes(recipeIngred.toLowerCase())
     );
+
+    console.log(missing)
     return missing;
   };
 
   render() {
-    console.log(this.props.fridgeContent)
     const missingIngredients = this.missingIngredients();
 
     return (
