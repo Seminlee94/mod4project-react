@@ -1,13 +1,10 @@
 import React from "react";
 import ItemCard from "./ItemCard.js";
 import Search from "./Search.js";
-
 class ShopMain extends React.Component {
   state = {
     searchTerm: "",
-    itemArray: [],
   };
-
   items = () => {
     return this.props.item.map((item) => (
       <ItemCard
@@ -17,7 +14,6 @@ class ShopMain extends React.Component {
       />
     ));
   };
-
   itemArray = () => {
     return this.props.itemArray.map((item) => (
       <ItemCard
@@ -27,9 +23,8 @@ class ShopMain extends React.Component {
       />
     ));
   };
-
   showItemArray() {
-    let findItems = this.state.itemArray.filter(
+    let findItems = this.props.itemArray.filter(
       (item) =>
         item.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()) ||
         item.description
@@ -42,7 +37,6 @@ class ShopMain extends React.Component {
           .toLowerCase()
           .includes(this.state.searchTerm.toLowerCase())
     );
-
     return findItems.map((item) => (
       <ItemCard
         key={item.id}
@@ -51,21 +45,18 @@ class ShopMain extends React.Component {
       />
     ));
   }
-
-  submitHandler = (term) => {
+  submitHandler = (searchValue) => {
     this.setState({
-      searchTerm: term.searchTerm,
+      searchTerm: searchValue,
     });
   };
-
   render() {
     return (
       <div className="shop-main">
         <div className="item-search">
           <Search
             className="searchBar"
-            searchTerm={this.state.searchTerm}
-            search={this.search}
+            searchValue={this.state.searchTerm}
             submitHandler={this.submitHandler}
           />
         </div>
@@ -79,5 +70,4 @@ class ShopMain extends React.Component {
     );
   }
 }
-
 export default ShopMain;

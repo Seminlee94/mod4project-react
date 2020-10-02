@@ -12,7 +12,7 @@ class OurShopRight extends React.Component {
                 cartId={cartObj.id}
                 key={cartObj.id}
                 item={cartObj}
-                moveToFridge={this.props.moveToFridge}
+                addToFridge={this.props.addToFridge}
                 clickedItemIndex={index} //add index back in, it deletes stuff properly in the right
                 deleteHandler={this.props.deleteHandler}
                 />

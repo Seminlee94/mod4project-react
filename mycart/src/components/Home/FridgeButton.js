@@ -5,7 +5,7 @@ const FridgeButton = (props) => {
 
   
   const onClick = (e) => {
-    return props.moveToFridge(props.item, props.clickedItemIndex);
+    return props.addToFridge(props.item.id, props.clickedItemIndex);
   };
 
   return (

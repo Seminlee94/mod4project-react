@@ -8,6 +8,7 @@ class RightRecipeDisplay extends React.Component {
   missingIngredients = () => {
    
     let fridgeArray = [].concat(this.props.fridgeContent);
+    console.log(this.props.fridgeContent)
     const lowercaseArray = [];
 
     const splitCaseArray = [];

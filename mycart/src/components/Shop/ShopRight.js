@@ -5,13 +5,13 @@ import ItemRightCard from "./ItemRightCard.js";
 class ShopRight extends React.Component {
   // cartItems = this.props.cartItemArray.map((element) => element.item);
   clickedItems = () => {
-    return this.props.userCartArray.map((cartItem, index) => (
+    return this.props.userCartArrays.map((cartItem, index) => (
       <ListGroup.Item action>
         <ItemRightCard
           cartId={cartItem.id}
           key={cartItem.item_id}
           item={cartItem.item}
-          moveToFridge={this.props.moveToFridge}
+          addToFridge={this.props.addToFridge}
           clickedItemIndex={index} //add index back in, it deletes stuff properly in the right
           deleteHandler={this.props.deleteHandler}
         />
