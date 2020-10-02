@@ -27,6 +27,8 @@ class RecipeMain extends React.Component {
   };
 
   render() {
+
+    console.log(this.props.fridgeContent)
     return (
       <div
         style={{

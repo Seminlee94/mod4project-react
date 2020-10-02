@@ -16,9 +16,11 @@ class Fridge extends React.Component {
 
 
   filter = (Category) => {
+    console.log(this.props.item)
     let filteredItems = this.props.item.filter(
       (item) => item.item.category === Category
     );
+
     return filteredItems.map((el) => <FridgeItem key={el.id} item={el.item} />);
   };
   render() {

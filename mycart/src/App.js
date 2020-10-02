@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Switch, Route, BrowserRouter } from "react-router-dom";
-// import { Switch, Route, BrowserRouter, withRouter } from "react-router-dom";
+import { Switch, Route, BrowserRouter, withRouter } from "react-router-dom";
 import HomeIndex from "./components/Home/HomeIndex";
 import Navbar from "./components/Navbar/Navbar.js";
-import Fridge from "./components/Shop/Fridge.js";
+import Fridge from "./containers/Fridge.js";
 import Friends from "./containers/Friends.js";
 import Shop from "./containers/Shop.js";
 import Signup from "./components/Navbar/Signup.js";
@@ -153,11 +152,11 @@ class App extends Component {
     .then(data => {
       localStorage.setItem("token", data.jwt);
       localStorage.setItem("userId", data.id);
-      // this.setState({ user: data.user }, () => this.props.history.push('/'))
-      this.setState({ 
-        user: data.user
+      this.setState({ user: data.user }, () => this.props.history.push('/shop'))
+      // this.setState({ 
+      //   user: data.user
 
-      })
+      // })
     })
   };
 
@@ -382,7 +381,7 @@ class App extends Component {
     // console.log(this.state)
     // console.log(this.state.userCartArray)
     // console.log(this.state.userCartObj.id)
-    console.log(this.state.fridgeItemArray)
+    // console.log(this.state.fridgeItemArray)
     
 
     return (
@@ -468,4 +467,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);
