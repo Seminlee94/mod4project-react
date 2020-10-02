@@ -21,7 +21,7 @@ const FridgeItem = (props) => {
     case "Seafood":
       icon = <SeafoodIcon className="item-icon" />;
       break;
-    case "Liquor":
+    case "Spirits":
       icon = <LiquorIcon className="item-icon" />;
       break;
     case "Cheese":
@@ -33,8 +33,9 @@ const FridgeItem = (props) => {
     case "Produce":
       icon = <ProduceIcon className="item-icon" />;
       break;
-    case "other":
+    case "Other":
       icon = <OtherIcon classname="item-icon" />;
+      break;
 
     default:
       icon = (

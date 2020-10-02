@@ -51,3 +51,20 @@ body {
   grid-area: rm;
   margin: auto;
 } */
+.jumbo {
+  margin-top: 25px;
+  /* background-image: url(https://images.unsplash.com/photo-1498579809087-ef1e558fd1da?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80); */
+  background-size: cover;
+  height: 400px;
+}
+.jumbo h1 {
+  margin-top: 220px;
+  font-size: 80px;
+  color: black;
+}
+
+.FP {
+  background-size: cover;
+  background-attachment: fixed;
+  background-image: url(https://images.unsplash.com/photo-1498579809087-ef1e558fd1da?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80);
+}

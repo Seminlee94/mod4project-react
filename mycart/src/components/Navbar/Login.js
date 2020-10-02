@@ -1,4 +1,5 @@
-import React from "react"
+import React from "react";
+import Form from "react-bootstrap/Form";
 
 class Login extends React.Component {
 
@@ -60,3 +61,40 @@ class Login extends React.Component {
 }
 
 export default Login
+
+
+
+
+//     render() {
+//         return(
+
+
+//           style={{
+//             width: "600px",
+//             margin: "auto",
+//             marginTop: "22px",
+//             marginBottom: "35px",
+//           }}
+//           onSubmit={this.submitHandler}
+//         >
+//           <Form.Control
+//             size="lg"
+//             type="text"
+//             name="username"
+//             placeholder="username"
+//             value={this.state.username}
+//             onChange={this.changeHandler}
+//           />
+//           <Form.Control
+//             size="lg"
+//             type="text"
+//             name="password"
+//             placeholder="password"
+//             value={this.state.password}
+//             onChange={this.changeHandler}
+//           />
+//           <input type="submit" value="Log in" />
+//         </Form>
+//       </div>
+//     );
+//   }

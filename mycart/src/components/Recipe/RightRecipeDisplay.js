@@ -19,6 +19,8 @@ class RightRecipeDisplay extends React.Component {
     
     }
  
+
+
     lowercaseArray.shift();
 
     let recipeArray = this.props.recipe.ingredients.split(", ");
@@ -26,7 +28,6 @@ class RightRecipeDisplay extends React.Component {
     let missing = recipeArray.filter(
       (recipeIngred) => !splitCaseArray.includes(recipeIngred.toLowerCase())
     );
-
     return missing;
   };
 

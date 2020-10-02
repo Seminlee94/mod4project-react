@@ -4,7 +4,7 @@ import { Switch, Route, BrowserRouter } from "react-router-dom";
 // import { Switch, Route, BrowserRouter, withRouter } from "react-router-dom";
 import HomeIndex from "./components/Home/HomeIndex";
 import Navbar from "./components/Navbar/Navbar.js";
-import Fridge from "./containers/Fridge.js";
+import Fridge from "./components/Shop/Fridge.js";
 import Friends from "./containers/Friends.js";
 import Shop from "./containers/Shop.js";
 import Signup from "./components/Navbar/Signup.js";
@@ -180,6 +180,7 @@ class App extends Component {
               cartItemArray: data[2],
               userCarts: data[3],
               fridgeItemArray: data[4],
+              // fridgeItemArray: data[4].map((el) => el.item),
               fridgeArray: data[5]
             }), () => this.findUserCart()
         ));
