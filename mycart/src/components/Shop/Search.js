@@ -1,8 +1,6 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 
-import React from "react";
-import Form from "react-bootstrap/Form";
 class Search extends React.Component {
   inputHandler = (e) => {
     e.preventDefault();

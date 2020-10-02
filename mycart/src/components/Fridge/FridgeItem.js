@@ -34,7 +34,7 @@ const FridgeItem = (props) => {
       icon = <ProduceIcon className="item-icon" />;
       break;
     case "Other":
-      icon = <OtherIcon classname="item-icon" />;
+      icon = <OtherIcon className="item-icon" />;
       break;
 
     default:
@@ -48,8 +48,9 @@ const FridgeItem = (props) => {
       break;
   }
 
+  
   return (
-    <div className="fridge-item">
+    <div className="fridge-item" onClick={()=>props.deleteItemfromFridge(props.fridgeItem_id)}>
       {icon}
       <div>{props.item.name}</div>
     </div>

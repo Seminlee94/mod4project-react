@@ -7,21 +7,21 @@ class RightRecipeDisplay extends React.Component {
 
   missingIngredients = () => {
    
-    let fridgeArray = [].concat(this.props.fridgeContent);
-    // console.log(this.props.fridgeContent)
-    const lowercaseArray = [];
+    let fridgeArray = this.props.fridgeContent.map(el => el.item)
 
+    console.log(fridgeArray)
+    const lowercaseArray = [];
+    // new array to lowercase
+    // lowercase them 
     const splitCaseArray = [];
+    
     let num = [].concat(fridgeArray).length;
     for (let i = 1; i < num; i++) {
-      lowercaseArray[i] = fridgeArray[i].sub_category.toLowerCase();
-      splitCaseArray.push(...lowercaseArray[i].split(", "));
-    
+        if (fridgeArray[i].sub_category != null) {
+        lowercaseArray[i] = fridgeArray[i].sub_category.toLowerCase();
+        splitCaseArray.push(...lowercaseArray[i].split(", "));
+      }
     }
- 
-
-
-    lowercaseArray.shift();
 
     let recipeArray = this.props.recipe.ingredients.split(", ");
 
@@ -32,6 +32,7 @@ class RightRecipeDisplay extends React.Component {
   };
 
   render() {
+    console.log(this.props.fridgeContent)
     const missingIngredients = this.missingIngredients();
 
     return (

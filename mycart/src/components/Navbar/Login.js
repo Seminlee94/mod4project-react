@@ -71,13 +71,6 @@ class Login extends React.Component {
                       />
                       <input type="submit" value="Log in" />
                     </Form>
-                    <div className="login-container-form">
-                        <form onSubmit={this.submitHandler}>
-                            <p><input type="text" name="username" placeholder="Enter your username" value={this.state.username} onChange={this.changeHandler} /></p>
-                            <p><input type="text" name="password" placeholder="Enter your password" value={this.state.password} onChange={this.changeHandler} /></p>
-                            <input type="submit" value="Log in" />
-                        </form>
-                    </div>
                     <div className="login-container-bottom">
 
                         Not signed up yet? 

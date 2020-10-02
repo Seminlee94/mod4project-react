@@ -3,9 +3,10 @@ import FridgeItem from "../components/Fridge/FridgeItem.js";
 import "../components/Fridge/Fridge.css";
 import Shelf from "../components/Shelf";
 import AddForm from "../components/Fridge/AddForm";
-import { Redirect } from "react-router-dom";
-import Modal from "react-bootstrap/Modal";
+// import { Redirect } from "react-router-dom";
+// import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+
 
 
 class Fridge extends React.Component {
@@ -16,20 +17,21 @@ class Fridge extends React.Component {
 
 
   filter = (Category) => {
-    console.log(this.props.item)
     let filteredItems = this.props.item.filter(
       (item) => item.item.category === Category
     );
 
-    return filteredItems.map((el) => <FridgeItem key={el.id} item={el.item} />);
+    return filteredItems.map((el) => <FridgeItem key={el.id} fridgeItem_id={el.id} item={el.item} deleteItemfromFridge={this.props.deleteItemfromFridge} />);
   };
+
+
   render() {
     const fridgeCategories = [
       { category: "Bakery", shelf: this.filter("Bread") },
       { category: "Produce", shelf: this.filter("Produce") },
       { category: "Meat", shelf: this.filter("Meat") },
       { category: "Seafood", shelf: this.filter("Seafood") },
-      { category: "Spirits", shelf: this.filter("Spirits") },
+      { category: "Liquor", shelf: this.filter("Liquor") },
       {
         category: "PreparedFoods",
         shelf: this.filter("PreparedFoods"),

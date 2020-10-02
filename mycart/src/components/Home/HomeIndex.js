@@ -3,8 +3,8 @@ import HomeStore from "./HomeStore";
 import HomeRecipes from "./HomeRecipes";
 import HomeFridge from "./HomeFridge";
 import Shelf from "../../components/Shelf";
-import Jumbotron from "react-bootstrap/Jumbotron";
-import Container from "react-bootstrap/Container";
+import { Redirect } from "react-router-dom"
+
 
 class HomeIndex extends Component {
   fridge = () => {

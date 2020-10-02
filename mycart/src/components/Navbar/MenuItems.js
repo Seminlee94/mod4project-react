@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import navFridge from "./navFridge";
 import navFriends from "./navFriends";
 import navHome from "./navHome";

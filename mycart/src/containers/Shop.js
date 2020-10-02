@@ -17,6 +17,7 @@ import { PreparedfoodCategory } from "../components/Shop/Subcategory-lists/Prepa
 import { OtherCategory } from "../components/Shop/Subcategory-lists/Other.js";
 import { Redirect } from "react-router-dom";
 
+
 class Shop extends React.Component {
   state = {
     filteredItem: [],

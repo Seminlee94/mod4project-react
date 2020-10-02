@@ -23,9 +23,10 @@ class ShopMain extends React.Component {
       />
     ));
   };
-  showItemArray() {
-    let findItems = this.props.itemArray.filter(
-      (item) =>
+  showItemArray() { 
+    let filteredItems = this.props.itemArray.filter(item=> item.sub_category != null )
+    let findItems = filteredItems.filter(
+      (item) => 
         item.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()) ||
         item.description
           .toLowerCase()

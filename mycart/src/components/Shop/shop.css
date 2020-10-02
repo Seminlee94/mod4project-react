@@ -37,6 +37,7 @@
   justify-content: center;
   text-align: center;
   margin-right: 90px;
+  width: 80%;
 }
 
 .dd-wrapper {
@@ -47,17 +48,21 @@
 
 .item-container {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   height: auto;
-  width: 100%;
+  width: 80%;
   grid-row-gap: 20px;
 }
 
-@media only screen and (max-width: 1200px) {
-  .item-container {
-    grid-template-columns: repeat(3, 1fr);
-  }
+.item-card {
+  display: inline-grid;
+  height: 300px;
+  width: 30.6%;
+  margin: 10px 10px 10px 10px;
+  border-style: solid;
 }
+
+
 
 .item-card {
   margin-right: 30px;
@@ -112,29 +117,20 @@
 .item-right-price {
   margin-top: 15px;
   font-size: 22px;
-  width: 35%;
-  margin-left: 20px;
+  width: 30;
+  margin-left: 5px;
+  margin-right: 5px
 }
 
 .item-right-card.img {
   width: "50px";
 }
 
-@media only screen and (max-width: 600px) {
-  .item-container {
-    display: grid;
-    grid-template-columns: 10px 10px 10px 10px;
-    grid-template-rows: auto;
-    height: auto;
-    width: auto;
-    border-style: solid;
-  }
+.item-right-card-add:hover {
+  background-color: #ff4500
+}
 
-  .item-card {
-    display: inline-grid;
-    height: 300px;
-    width: 30.6%;
-    margin: 10px 10px 10px 10px;
-    border-style: solid;
-  }
+
+.item-right-card-delete:hover {
+  background-color: #ff4500
 }
