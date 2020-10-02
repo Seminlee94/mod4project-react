@@ -44,7 +44,7 @@ class Shop extends React.Component {
     ];
 
     const ShopMap = ShopMapper.map(({ title, category }) => (
-      <Accordion>
+      <Accordion style={{ marginTop: "5px", marginLeft: "5px" }}>
         <Card style={{ border: 0, marginBottom: "5px" }}>
           <Accordion.Toggle
             as={Button}

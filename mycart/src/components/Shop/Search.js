@@ -1,4 +1,5 @@
 import React from "react";
+import Form from "react-bootstrap/Form";
 
 class Search extends React.Component {
   inputHandler = (e) => {
@@ -7,15 +8,22 @@ class Search extends React.Component {
   };
   render() {
     return (
-      <form className="search">
-        <input
+      <Form
+        style={{
+          width: "600px",
+          margin: "auto",
+          marginTop: "22px",
+          marginBottom: "35px",
+        }}
+      >
+        <Form.Control
           className="search-input"
           type="text"
-          placeholder="Search Item"
+          placeholder="Enter Search Here"
           value={this.props.searchValue}
           onChange={this.inputHandler}
-        ></input>
-      </form>
+        ></Form.Control>
+      </Form>
     );
   }
 }

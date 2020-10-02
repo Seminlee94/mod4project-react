@@ -1182,27 +1182,37 @@
           "id": 15,
           "name": "Mnks Sunflower Bread",
           "price": 3,
-          "category": "Bread",
+          "category": "Seafood",
           "sub_category": "Bread, Packaged",
           "quantity": 69,
           "image": "https://wfmproducts.azureedge.net/images-500/00041678429861.jpg",
           "description": "Bread, Sunflower, with Rolled Oats"
         },
         {
-          "id": 17,
-          "name": "Dmfl Vollkornbrot Bread",
+          "id": 153232,
+          "name": "Jack Daniels",
           "price": 3,
-          "category": "Bread",
+          "category": "Spirits",
+          "sub_category": "Bread, Packaged",
+          "quantity": 69,
+          "image": "https://wfmproducts.azureedge.net/images-500/00041678429861.jpg",
+          "description": "Bread, Sunflower, with Rolled Oats"
+        },
+        {
+          "id": 131237,
+          "name": "Snacks",
+          "price": 3,
+          "category": "PreparedFoods",
           "sub_category": "Bread, Packaged",
           "quantity": 89,
           "image": "https://wfmproducts.azureedge.net/images-500/00060569007117.jpg",
           "description": "Bread, Whole Grain Rye, Vollkornbrot"
         },
         {
-          "id": 17,
+          "id": 232323217,
           "name": "Dmfl Vollkornbrot Bread",
           "price": 3,
-          "category": "Bread",
+          "category": "Produce",
           "sub_category": "Bread, Packaged",
           "quantity": 89,
           "image": "https://wfmproducts.azureedge.net/images-500/00060569007117.jpg",
@@ -1212,7 +1222,7 @@
           "id": 26,
           "name": "Wg Org 27 Grain/Seed",
           "price": 5,
-          "category": "Bread",
+          "category": "Other",
           "sub_category": "Bread, Packaged",
           "quantity": 59,
           "image": "https://wfmproducts.azureedge.net/images-500/00077890413104.jpg",
@@ -1489,6 +1499,66 @@
       "quantity": 76,
       "image": "https://wfmproducts.azureedge.net/images-500/00071319000159.jpg",
       "description": "Enriched Bread, Giant"
+    },
+    {
+      "id": 153232,
+      "name": "Jack Daniels",
+      "price": 3,
+      "category": "Spirits",
+      "sub_category": "Bread, Packaged",
+      "quantity": 69,
+      "image": "https://wfmproducts.azureedge.net/images-500/00041678429861.jpg",
+      "description": "Bread, Sunflower, with Rolled Oats"
+    },
+    {
+      "id": 131237,
+      "name": "Snacks",
+      "price": 3,
+      "category": "PreparedFoods",
+      "sub_category": "Bread, Packaged",
+      "quantity": 89,
+      "image": "https://wfmproducts.azureedge.net/images-500/00060569007117.jpg",
+      "description": "Bread, Whole Grain Rye, Vollkornbrot"
+    },
+    {
+      "id": 232323217,
+      "name": "Dmfl Vollkornbrot Bread",
+      "price": 3,
+      "category": "Produce",
+      "sub_category": "Bread, Packaged",
+      "quantity": 89,
+      "image": "https://wfmproducts.azureedge.net/images-500/00060569007117.jpg",
+      "description": "Bread, Whole Grain Rye, Vollkornbrot"
+    },
+    {
+      "id": 26,
+      "name": "Wg Org 27 Grain/Seed",
+      "price": 5,
+      "category": "Other",
+      "sub_category": "Bread, Packaged",
+      "quantity": 59,
+      "image": "https://wfmproducts.azureedge.net/images-500/00077890413104.jpg",
+      "description": "27 Grains & Seeds Sandwich Bread"
+    },
+    {
+      "id": 36,
+      "name": "Wg FP Trad Naan",
+      "price": 6,
+      "category": "Bread",
+      "sub_category": "Stuffing, Pitas, Flatbreads, Wraps & Pizza Shells",
+      "quantity": 80,
+      "image": "https://wfmproducts.azureedge.net/images-500/00077890335383.jpg",
+      "description": "Traditional Naan, FAMILY PACK"
+    },
+    {
+      "id": 58,
+      "name": "WEG Medium Brie",
+      "price": 15,
+      "category": "Cheese",
+      "sub_category": "Cave-Ripened Cheese",
+      "quantity": 98,
+      "image": "https://wfmproducts.azureedge.net/images-500/00277416000003.jpg",
+      "description": "Medium Brie Cheese, Buttery"
     },
     {
       "id": 13,
@@ -2454,158 +2524,6 @@
     }
   ],
   "user_carts": [
-    {
-      "id": 2,
-      "item_id": 78,
-      "cart_id": 1,
-      "created_at": "2020-09-28T02:21:36.264Z",
-      "updated_at": "2020-09-28T02:21:36.264Z",
-      "item": {
-        "id": 78,
-        "name": "Beef Cntr Shank SP KFP",
-        "price": 4,
-        "category": "Meat",
-        "sub_category": "Beef",
-        "quantity": 60,
-        "image": "https://wfmproducts.azureedge.net/images-500/201854000004.jpg",
-        "description": "Beef Center Cut Shank"
-      },
-      "cart": {
-        "id": 1,
-        "created_at": "2020-09-28T02:15:49.724Z",
-        "updated_at": "2020-09-28T02:15:49.724Z",
-        "user_cart": [
-          {
-            "id": 1,
-            "user_id": 1,
-            "cart_id": 1,
-            "created_at": "2020-09-28T02:16:43.996Z",
-            "updated_at": "2020-09-28T02:16:43.996Z"
-          },
-          {
-            "id": 2,
-            "user_id": 2,
-            "cart_id": 1,
-            "created_at": "2020-09-28T03:18:12.328Z",
-            "updated_at": "2020-09-28T03:18:12.328Z"
-          }
-        ]
-      }
-    },
-    {
-      "id": 4,
-      "item_id": 20,
-      "cart_id": 1,
-      "created_at": "2020-09-28T02:21:36.291Z",
-      "updated_at": "2020-09-28T02:21:36.291Z",
-      "item": {
-        "id": 20,
-        "name": "Dmfl Monastery Bread",
-        "price": 11,
-        "category": "Bread",
-        "sub_category": "Bread, Packaged",
-        "quantity": 91,
-        "image": "https://wfmproducts.azureedge.net/images-500/060569007032.jpg",
-        "description": "Bread, Delicatessen Rye"
-      },
-      "cart": {
-        "id": 1,
-        "created_at": "2020-09-28T02:15:49.724Z",
-        "updated_at": "2020-09-28T02:15:49.724Z",
-        "user_cart": [
-          {
-            "id": 1,
-            "user_id": 1,
-            "cart_id": 1,
-            "created_at": "2020-09-28T02:16:43.996Z",
-            "updated_at": "2020-09-28T02:16:43.996Z"
-          },
-          {
-            "id": 2,
-            "user_id": 2,
-            "cart_id": 1,
-            "created_at": "2020-09-28T03:18:12.328Z",
-            "updated_at": "2020-09-28T03:18:12.328Z"
-          }
-        ]
-      }
-    },
-    {
-      "id": 5,
-      "item_id": 14,
-      "cart_id": 1,
-      "created_at": "2020-09-28T02:21:36.306Z",
-      "updated_at": "2020-09-28T02:21:36.306Z",
-      "item": {
-        "id": 14,
-        "name": "AR/BB 100% Stonegrnd WW",
-        "price": 3,
-        "category": "Bread",
-        "sub_category": "Bread, Packaged",
-        "quantity": 93,
-        "image": "https://wfmproducts.azureedge.net/images-500/073410022504.jpg",
-        "description": "Stone Ground 100% Whole Wheat Bread"
-      },
-      "cart": {
-        "id": 1,
-        "created_at": "2020-09-28T02:15:49.724Z",
-        "updated_at": "2020-09-28T02:15:49.724Z",
-        "user_cart": [
-          {
-            "id": 1,
-            "user_id": 1,
-            "cart_id": 1,
-            "created_at": "2020-09-28T02:16:43.996Z",
-            "updated_at": "2020-09-28T02:16:43.996Z"
-          },
-          {
-            "id": 2,
-            "user_id": 2,
-            "cart_id": 1,
-            "created_at": "2020-09-28T03:18:12.328Z",
-            "updated_at": "2020-09-28T03:18:12.328Z"
-          }
-        ]
-      }
-    },
-    {
-      "id": 6,
-      "item_id": 11,
-      "cart_id": 1,
-      "created_at": "2020-09-28T06:38:03.407Z",
-      "updated_at": "2020-09-28T06:38:03.407Z",
-      "item": {
-        "id": 11,
-        "name": "Schwebel Giant Bread",
-        "price": 2,
-        "category": "Bread",
-        "sub_category": "Bread, Packaged",
-        "quantity": 76,
-        "image": "https://wfmproducts.azureedge.net/images-500/00071319000159.jpg",
-        "description": "Enriched Bread, Giant"
-      },
-      "cart": {
-        "id": 1,
-        "created_at": "2020-09-28T02:15:49.724Z",
-        "updated_at": "2020-09-28T02:15:49.724Z",
-        "user_cart": [
-          {
-            "id": 1,
-            "user_id": 1,
-            "cart_id": 1,
-            "created_at": "2020-09-28T02:16:43.996Z",
-            "updated_at": "2020-09-28T02:16:43.996Z"
-          },
-          {
-            "id": 2,
-            "user_id": 2,
-            "cart_id": 1,
-            "created_at": "2020-09-28T03:18:12.328Z",
-            "updated_at": "2020-09-28T03:18:12.328Z"
-          }
-        ]
-      }
-    },
     {
       "id": 7,
       "item_id": 41,
