@@ -92,12 +92,13 @@ class App extends Component {
       (data) =>
         this.setState({
           shopItemArray: data[0],
-          fridgeItemArray: data[1],
+          fridgeItemArray: data[1].map((el) => el.item),
           recipeArray: data[2],
           userCartArray: data[3],
         })
     );
   }
+
   // "http://localhost:3005/cart_items/1",
   // cartItemArray: data[3],
 
@@ -187,7 +188,9 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.state.fridgeItemArray);
     console.log(this.state.userCartArray);
+    // debugger;
     return (
       <BrowserRouter>
         <div

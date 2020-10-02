@@ -38,6 +38,7 @@
 .shop-main {
   justify-content: center;
   text-align: center;
+  margin-right: 90px;
 }
 
 .dd-wrapper {
@@ -113,6 +114,7 @@
   margin-top: 15px;
   font-size: 22px;
   width: 35%;
+  margin-left: 20px;
 }
 
 .item-right-card.img {
