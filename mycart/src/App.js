@@ -3,7 +3,7 @@ import "./App.css";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import HomeIndex from "./components/Home/HomeIndex";
 import Navbar from "./components/Navbar/Navbar.js";
-import Fridge from "./containers/Fridge.js";
+import Fridge from "./components/Shop/Fridge.js";
 import Friends from "./containers/Friends.js";
 import Shop from "./containers/Shop.js";
 import Signup from "./components/Navbar/Signup.js";
@@ -225,7 +225,10 @@ class App extends Component {
             </Route>
 
             <Route path="/fridge">
-            <Fridge item={this.state.fridgeItemArray} />
+              <Fridge
+                item={this.state.fridgeItemArray}
+                fridgeSubmit={this.moveToFridge}
+              />
             </Route>
 
             <Route path="/friends">
