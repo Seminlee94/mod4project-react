@@ -27,7 +27,7 @@ class Navbar extends Component {
             return (
               <li key={index}>
                 <a className={item.cName} href={item.url}>
-                  {item.title}
+                  {<item.title />}
                 </a>
               </li>
             );
