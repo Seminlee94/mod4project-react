@@ -50,8 +50,8 @@ class RecipeMain extends React.Component {
             position: "absolute",
             top: "100px",
             right: "500px",
-            width: "8%",
-            height: "80px",
+            width: "10%",
+            height: "90px",
           }}
           variant="primary"
           onClick={() => this.setModalShow(true)}

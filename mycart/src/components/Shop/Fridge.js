@@ -52,9 +52,9 @@ class Fridge extends React.Component {
           style={{
             position: "absolute",
             top: "100px",
-            right: "130px",
+            right: "300px",
             width: "10%",
-            height: "100px",
+            height: "90px",
           }}
           onClick={() => this.setModalShow(true)}
         >
