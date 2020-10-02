@@ -2092,6 +2092,16 @@
       "image": "https://wfmproducts.azureedge.net/images-500/073410022504.jpg",
       "description": "Stone Ground 100% Whole Wheat Bread",
       "id": 122
+    },
+    {
+      "name": "Goat Brie",
+      "price": 9,
+      "category": "Cheese",
+      "sub_category": "Cave-Ripened Cheese",
+      "quantity": 61,
+      "image": "https://wfmproducts.azureedge.net/images-500/00077890503065.jpg",
+      "description": "Goat Brie",
+      "id": 232323218
     }
   ],
   "recipes": [
@@ -2530,82 +2540,5 @@
       "id": 32313
     }
   ],
-  "user_carts": [
-    {
-      "id": 7,
-      "item_id": 41,
-      "cart_id": 1,
-      "created_at": "2020-09-28T06:39:01.207Z",
-      "updated_at": "2020-09-28T06:39:01.207Z",
-      "item": {
-        "id": 41,
-        "name": "Wg FP Garlic Naan",
-        "price": 6,
-        "category": "Bread",
-        "sub_category": "Stuffing, Pitas, Flatbreads, Wraps & Pizza Shells",
-        "quantity": 92,
-        "image": "https://wfmproducts.azureedge.net/images-500/077890396056.jpg",
-        "description": "Garlic Naan, FAMILY PACK"
-      },
-      "cart": {
-        "id": 1,
-        "created_at": "2020-09-28T02:15:49.724Z",
-        "updated_at": "2020-09-28T02:15:49.724Z",
-        "user_cart": [
-          {
-            "id": 1,
-            "user_id": 1,
-            "cart_id": 1,
-            "created_at": "2020-09-28T02:16:43.996Z",
-            "updated_at": "2020-09-28T02:16:43.996Z"
-          },
-          {
-            "id": 2,
-            "user_id": 2,
-            "cart_id": 1,
-            "created_at": "2020-09-28T03:18:12.328Z",
-            "updated_at": "2020-09-28T03:18:12.328Z"
-          }
-        ]
-      }
-    },
-    {
-      "id": 8,
-      "item_id": 51,
-      "cart_id": 1,
-      "created_at": "2020-09-28T06:40:43.630Z",
-      "updated_at": "2020-09-28T06:40:43.630Z",
-      "item": {
-        "id": 51,
-        "name": "Goat Brie",
-        "price": 9,
-        "category": "Cheese",
-        "sub_category": "Cave-Ripened Cheese",
-        "quantity": 61,
-        "image": "https://wfmproducts.azureedge.net/images-500/00077890503065.jpg",
-        "description": "Goat Brie"
-      },
-      "cart": {
-        "id": 1,
-        "created_at": "2020-09-28T02:15:49.724Z",
-        "updated_at": "2020-09-28T02:15:49.724Z",
-        "user_cart": [
-          {
-            "id": 1,
-            "user_id": 1,
-            "cart_id": 1,
-            "created_at": "2020-09-28T02:16:43.996Z",
-            "updated_at": "2020-09-28T02:16:43.996Z"
-          },
-          {
-            "id": 2,
-            "user_id": 2,
-            "cart_id": 1,
-            "created_at": "2020-09-28T03:18:12.328Z",
-            "updated_at": "2020-09-28T03:18:12.328Z"
-          }
-        ]
-      }
-    }
-  ]
+  "user_carts": []
 }

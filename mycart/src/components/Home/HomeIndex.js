@@ -3,6 +3,8 @@ import HomeStore from "./HomeStore";
 import HomeRecipes from "./HomeRecipes";
 import HomeFridge from "./HomeFridge";
 import Shelf from "../../components/Shelf";
+import Jumbotron from "react-bootstrap/Jumbotron";
+import Container from "react-bootstrap/Container";
 
 class HomeIndex extends Component {
   fridge = () => {
@@ -25,13 +27,28 @@ class HomeIndex extends Component {
     ];
 
     const frontPage = frontPageObj.map(({ title, shelf }) => (
-      <div style={{ marginBottom: "30px", textAlign: "center" }}>
-        <h1>{title}</h1>
+      <div
+        style={{
+          marginTop: "40px",
+          marginBottom: "30px",
+          textAlign: "center",
+        }}
+      >
+        <h1 style={{ fontWeight: "1000" }}>{title}</h1>
         <Shelf category={shelf} />
       </div>
     ));
 
-    return <div className="app">{frontPage}</div>;
+    return (
+      <div className="FP">
+        {/* <Jumbotron className="jumbo" fluid>
+          <Container> */}
+        {/* <h1>Welcome To ShopnShop!</h1> */}
+        {/* </Container>
+        </Jumbotron> */}
+        {frontPage}
+      </div>
+    );
   }
 }
 

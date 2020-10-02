@@ -1,12 +1,11 @@
 import React from "react";
 import FridgeButton from "../Home/FridgeButton";
-
+import TrashCan from "../Fridge/trashcan.js";
 const ItemRightCard = (props) => {
   return (
     <div className="item-right-card">
-      {console.log(props)}
       <button onClick={() => props.deleteHandler(props.cartId, props.item.id)}>
-        X
+        {<TrashCan />}
       </button>
       <img
         src={props.item.image}
