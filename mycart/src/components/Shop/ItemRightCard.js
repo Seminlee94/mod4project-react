@@ -4,7 +4,6 @@ import FridgeButton from "../Home/FridgeButton";
 const ItemRightCard = (props) => {
   return (
     <div className="item-right-card">
-      {console.log(props)}
       <button onClick={() => props.deleteHandler(props.cartId, props.item.id)}>
         X
       </button>

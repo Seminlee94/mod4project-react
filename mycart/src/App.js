@@ -10,21 +10,20 @@ import Shop from "./containers/Shop.js";
 import Signup from "./components/Navbar/Signup.js";
 import Login from "./components/Navbar/Login.js";
 import RecipeMain from "./components/Recipe/RecipeMain";
-import Logout from "./components/Navbar/Logout.js";
-import { Redirect } from "react-router-dom";
+
 
 class App extends Component {
   state = {
     shopItemArray: [],
     fridgeItemArray: [],
     recipeArray: [],
-    // cartItemArray: [],
     userCartArrays: [],
     friendArray: [],
     followerArray: [],
     OurCartArray: [],
     user: {},
     cart: {},
+    fridge: {},
     userCarts: {},
     userCartObj: {},
     
@@ -94,37 +93,49 @@ class App extends Component {
         localStorage.setItem("userId", data.id);
         this.setState({ user: data.user });
 
-
-        fetch("http://localhost:3000/api/v1/carts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          accepts: "application/json"
-        },
-        body: JSON.stringify({ username: data.user.username })
+        fetch("http://localhost:3000/api/v1/fridges", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            accepts: "application/json"
+          },
+          body: JSON.stringify({ user_id: data.user.id })
         })
           .then(resp => resp.json())
-          .then(cart => { 
-            this.setState({ cart: cart })
+          .then(userFridge => {
+            this.setState({ fridge: userFridge })
 
-            fetch(`http://localhost:3000/api/v1/user_carts`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                accepts: "application/json"
-              },
-              body: JSON.stringify({ 
-                cart_id: cart.id,
-                user_id: data.user.id })
-              })
-                .then(resp => resp.json())
-                .then(userCart => this.setState({ userCart: userCart }))
-                
+            fetch("http://localhost:3000/api/v1/carts", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              accepts: "application/json"
+            },
+            body: JSON.stringify({ username: data.user.username })
+            })
+              .then(resp => resp.json())
+              .then(cart => { 
+                this.setState({ cart: cart })
+
+                fetch(`http://localhost:3000/api/v1/user_carts`, {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    accepts: "application/json"
+                  },
+                  body: JSON.stringify({ 
+                    cart_id: cart.id,
+                    user_id: data.user.id })
+                  })
+                    .then(resp => resp.json())
+                    .then(userCart => this.setState({ userCart: userCart }))
+
+            })
           })
         })
       
   };
-  //       // this.setState({ user: data.user }, () => this.props.history.push('/fridge'))
+        // this.setState({ user: data.user }, () => this.props.history.push('/'))
   //     });
   // }
 
@@ -142,7 +153,7 @@ class App extends Component {
     .then(data => {
       localStorage.setItem("token", data.jwt);
       localStorage.setItem("userId", data.id);
-      // this.setState({ user: data.user }, () => history.push('/'))
+      // this.setState({ user: data.user }, () => this.props.history.push('/'))
       this.setState({ 
         user: data.user
 
@@ -156,7 +167,7 @@ class App extends Component {
         const urls = [
           "http://localhost:3000/api/v1/items",
           "http://localhost:3000/api/v1/fridge_items",
-          "http://localhost:3005/recipes",
+          "http://localhost:3000/api/v1/recipes",
           "http://localhost:3000/api/v1/cart_items",
           "http://localhost:3000/api/v1/user_carts/",
 
@@ -306,7 +317,7 @@ class App extends Component {
   };
     
   recipeSubmit = (recipeInput) => {
-    fetch("http://localhost:3000/recipes", {
+    fetch("http://localhost:3000/api/v1/recipes", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -325,7 +336,7 @@ class App extends Component {
     // console.log(this.state.user)
     // console.log(this.state.userCartArray)
     // console.log(this.state.userCartObj.id)
-    console.log(this.state)
+    // console.log(this.state)
     
 
     return (
@@ -355,12 +366,12 @@ class App extends Component {
               <Route path="/shop">
                 <Shop
                   shopItemArray={this.state.shopItemArray}
+                  moveToFridge={this.moveToFridge}
                   cartItemArray={this.state.cartItemArray}
                   userCartArray={this.state.userCartArrays}
-                  ourCartArray={this.state.OurCartArray}
                   itemClickHandler={this.cartItemClickHandler}
                   deleteHandler={this.cartItemDeleteHandler}
-                  moveToFridge={this.moveToFridge}
+                  ourCartArray={this.state.OurCartArray}
                   user = {this.state.user}
                   userId={userId}
                 /> 
@@ -369,6 +380,7 @@ class App extends Component {
               <Route path="/fridge">
                 <Fridge 
                   item={this.state.fridgeItemArray}
+                  fridgeSubmit={this.moveToFridge}
                   userId = {userId}
                 />
               </Route>

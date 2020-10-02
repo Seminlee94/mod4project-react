@@ -54,7 +54,6 @@ class RecipeMain extends React.Component {
             />
           )}
           <div>
-            {/* <RecipeForm recipeSubmit={() => {}} /> */}
             <Button variant="primary" onClick={() => this.setModalShow(true)}>
               <svg
                 width="25px"
