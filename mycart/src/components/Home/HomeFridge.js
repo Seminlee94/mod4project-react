@@ -7,8 +7,8 @@ class HomeFridge extends React.Component {
       <Card style={{ marginRight: "5px", marginLeft: "5px", width: "200px" }}>
         <Card.Img
           variant="top"
-          alt={this.props.fridgeItem.name}
-          src={this.props.fridgeItem.image}
+          alt={this.props.fridgeItem.item.name}
+          src={this.props.fridgeItem.item.image}
           style={{ width: "100%" }}
         />
         <Card.Body>{this.props.fridgeItem.name}</Card.Body>

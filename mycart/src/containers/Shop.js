@@ -17,6 +17,7 @@ import { PreparedfoodCategory } from "../components/Shop/Subcategory-lists/Prepa
 import { OtherCategory } from "../components/Shop/Subcategory-lists/Other.js";
 import { Redirect } from "react-router-dom";
 
+
 class Shop extends React.Component {
   state = {
     filteredItem: [],
@@ -47,7 +48,7 @@ class Shop extends React.Component {
     ];
 
     const ShopMap = ShopMapper.map(({ title, category }) => (
-      <Accordion>
+      <Accordion style={{ marginTop: "5px", marginLeft: "5px" }}>
         <Card style={{ border: 0, marginBottom: "5px" }}>
           <Accordion.Toggle
             as={Button}

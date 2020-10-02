@@ -3,7 +3,8 @@ import HomeStore from "./HomeStore";
 import HomeRecipes from "./HomeRecipes";
 import HomeFridge from "./HomeFridge";
 import Shelf from "../../components/Shelf";
-import { Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom"
+
 
 class HomeIndex extends Component {
   fridge = () => {
@@ -27,8 +28,14 @@ class HomeIndex extends Component {
     ];
 
     const frontPage = frontPageObj.map(({ title, shelf }) => (
-      <div style={{ marginBottom: "30px", textAlign: "center" }}>
-        <h1>{title}</h1>
+      <div
+        style={{
+          marginTop: "40px",
+          marginBottom: "30px",
+          textAlign: "center",
+        }}
+      >
+        <h1 style={{ fontWeight: "1000" }}>{title}</h1>
         <Shelf category={shelf} />
       </div>
     ));
@@ -41,7 +48,7 @@ class HomeIndex extends Component {
           
           ?
 
-            <div className="app">{frontPage}</div>
+            <div className="FP">{frontPage}</div>
         
           :
             

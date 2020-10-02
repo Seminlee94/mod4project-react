@@ -2,13 +2,13 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import FormLabel from "react-bootstrap/FormLabel";
+// import FormLabel from "react-bootstrap/FormLabel";
 
 class FridgeForm extends React.Component {
   state = {
     name: "",
     category: "",
-    sub_category: null,
+    sub_category: "Inputted Fridge Item",
     price: 0,
     quantity: 0,
     description: "Inputted Fridge Item",
@@ -27,18 +27,14 @@ class FridgeForm extends React.Component {
       category: "",
       id: this.state.id + 1
     });
-    this.props.onHide();
+    this.props.onHide()
   };
 
   categoryClick = (e) => {
     this.setState({ category: e.target.value });
   };
 
-  measurementClick = (e) => {
-    this.setState({ quantity_measurement: e.target.value });
-  };
-
-  fridgeFormHandler = (e) => {
+ fridgeFormHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
@@ -86,7 +82,7 @@ class FridgeForm extends React.Component {
               <option value="Seafood">Seafood</option>
               <option value="Cheese">Cheese</option>
               <option value="Meat">Meat</option>
-              <option value="Liquors">Spirits</option>
+              <option value="Liquor">Spirits</option>
               <option value="PreparedFoods">Prepared Foods</option>
               <option value="Bakery">Bakery</option>
               <option value="Other">Other</option>

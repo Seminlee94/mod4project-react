@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Navbar.css";
-// import Logout from "./Logout.js";
+import { MenuItems } from "./MenuItems.js";
+
 class Navbar extends Component {
   state = {
     clicked: false,
@@ -13,9 +14,6 @@ class Navbar extends Component {
   };
 
   render() {
-
-    // console.log(Object.keys(this.props.user).length)
-    // console.log(this.props.user)
     return (
       <nav className="NavbarItems">
         <h1 className="NavbarLogo">Cart-In</h1>
@@ -25,62 +23,15 @@ class Navbar extends Component {
           ></i>
         </div>
         <ul className={this.state.clicked ? "nav-menu active" : "nav-menu"}>
-
-          <li>
-            <a className="nav-links" href="/">
-              Home
-            </a>
-          </li>
-          <li>
-            <a className="nav-links" href="/shop">
-              Shop
-            </a>
-          </li>
-          <li>
-            <a className="nav-links" href="/fridge">
-              Fridge
-            </a>
-          </li>
-          <li>
-            <a className="nav-links" href="/recipes">
-              Recipes
-            </a>
-          </li>
-          <li>
-            <a className="nav-links" href="/friends">
-              Friends
-            </a>
-          </li>
-      
-          {(Object.keys(this.props.user).length===0)
-          
-             ? 
-            
-              <li>
-                <a className="nav-links" href="/login">
-                  Log in
+          {MenuItems.map((item, index) => {
+            return (
+              <li key={index}>
+                <a className={item.cName} href={item.url}>
+                  {<item.title />}
                 </a>
               </li>
-
-            
-             : 
-            <>
-
-              <li>
-                <a className="nav-links" href="/" onClick={this.props.logoutHandler} >
-                  Log out
-                </a>
-              </li>
-
-              <li>
-                <a className="nav-links">
-                    {this.props.user.username}
-                </a>
-              </li>
-            </>
-          } 
-
-
+            );
+          })}
         </ul>
       </nav>
     );
@@ -88,4 +39,3 @@ class Navbar extends Component {
 }
 
 export default Navbar;
-

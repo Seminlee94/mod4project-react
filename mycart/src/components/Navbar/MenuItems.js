@@ -1,37 +1,46 @@
+// import React from "react";
+import navFridge from "./navFridge";
+import navFriends from "./navFriends";
+import navHome from "./navHome";
+import navLogin from "./navLogin";
+import navRecipe from "./navRecipe";
+import navShop from "./navShop";
+import navSignup from "./navSignup";
+
 export const MenuItems = [
   {
-    title: "Home",
+    title: navHome,
     url: "/",
     cName: "nav-links",
   },
   {
-    title: "Shop",
+    title: navShop,
     url: "/shop",
     cName: "nav-links",
   },
   {
-    title: "Fridge",
+    title: navFridge,
     url: "/fridge",
     cName: "nav-links",
   },
   {
-    title: "Recipes",
+    title: navRecipe,
     url: "/recipes",
     cName: "nav-links",
   },
   {
-    title: "Friends",
-    url: "/friends",
-    cName: "nav-links",
-  },
-  {
-    title: "Sign up",
+    title: navSignup,
     url: "/signup",
     cName: "nav-links",
   },
   {
-    title: "Log In",
+    title: navLogin,
     url: "/login",
+    cName: "nav-links",
+  },
+  {
+    title: navFriends,
+    url: "/friends",
     cName: "nav-links",
   },
 ];

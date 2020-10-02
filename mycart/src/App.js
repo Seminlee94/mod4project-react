@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Switch, Route, BrowserRouter } from "react-router-dom";
-// import { Switch, Route, BrowserRouter, withRouter } from "react-router-dom";
+import { Switch, Route, BrowserRouter, withRouter } from "react-router-dom";
 import HomeIndex from "./components/Home/HomeIndex";
 import Navbar from "./components/Navbar/Navbar.js";
 import Fridge from "./containers/Fridge.js";
@@ -17,6 +16,7 @@ class App extends Component {
     shopItemArray: [],
     fridgeItemArray: [],
     fridgeArray: [],
+    fridgeActualArray: [],
     recipeArray: [],
     userCartArrays: [],
     friendArray: [],
@@ -153,11 +153,11 @@ class App extends Component {
     .then(data => {
       localStorage.setItem("token", data.jwt);
       localStorage.setItem("userId", data.id);
-      // this.setState({ user: data.user }, () => this.props.history.push('/'))
-      this.setState({ 
-        user: data.user
+      this.setState({ user: data.user }, () => this.props.history.push('/shop'))
+      // this.setState({ 
+      //   user: data.user
 
-      })
+      // })
     })
   };
 
@@ -170,21 +170,27 @@ class App extends Component {
           "http://localhost:3000/api/v1/cart_items",
           "http://localhost:3000/api/v1/user_carts/",
           "http://localhost:3000/api/v1/fridge_items",
+          "http://localhost:3000/api/v1/fridge_items",
           "http://localhost:3000/api/v1/fridges"
         ];
         Promise.all(urls.map((url) => fetch(url).then((resp) => resp.json()))).then(
           (data) =>
+          // console.log(data))
             this.setState(() =>  ({
               shopItemArray: data[0],
               recipeArray: data[1],
               cartItemArray: data[2],
               userCarts: data[3],
               fridgeItemArray: data[4],
-              fridgeArray: data[5]
+              fridgeActualArray: data[5].map((el) => el.item),
+              fridgeArray: data[6]
             }), () => this.findUserCart()
         ));
      }
   }
+
+  // "http://localhost:3005/cart_items/1",
+  // cartItemArray: data[3],
 
 
   findUserCart = () => {
@@ -376,14 +382,36 @@ class App extends Component {
       );
   };
 
+  deleteItemfromFridge = (id) => {
+    const updatedArray = this.state.fridgeItemArray.filter(
+      currentObj => id !== currentObj.id)
+    // console.log(updatedArray)
+    // console.log(id)
+    fetch(`http://localhost:3000/api/v1/fridge_items/${id}`, {
+      method: "DELETE",
+  })
+    .then((res) => res.json())
+		.then(() => {
+			this.setState({
+			    fridgeItemArray: updatedArray,
+			})
+		})
+  }
+
+
+
+
+
   render() {
     let userId = localStorage.getItem("userId")
     // console.log(this.state)
     // console.log(this.state.userCartArray)
     // console.log(this.state.userCartObj.id)
-    console.log(this.state.fridgeItemArray)
+    // console.log(this.state.fridgeItemArray)
     
 
+    // console.log(this.state.fridgeItemArray);
+    // console.log(this.state.fridgeActualArray)
     return (
       <BrowserRouter>
         <div
@@ -427,6 +455,7 @@ class App extends Component {
                   item={this.state.fridgeItemArray}
                   fridgeSubmit={this.fridgeSubmit}
                   userId = {userId}
+                  deleteItemfromFridge={this.deleteItemfromFridge}
                 />
               </Route>
 
@@ -467,4 +496,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

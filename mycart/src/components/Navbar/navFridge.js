@@ -1,28 +1,12 @@
 import React from "react";
-// import navFridge from "../components/Navbar/navFridge"
-// import FridgeButton from "../Home/FridgeButton";
-import TrashCan from "../Fridge/trashcan.js";
-// import Button from "react-bootstrap/button"
-const ItemRightCard = (props) => {
-  return (
-    <div className="item-right-card">
-      <img
-        src={props.item.image}
-        alt={props.item.name}
-        style={{ width: "70px", height: "50px", marginLeft: "5px" }}
-      />
-      <div className="item-right-price">${props.item.price}</div>
-      
-      <button className="item-right-card-add" onClick={() => props.addToFridge(props.cartId, props.item.id) }
-        item={props.item.id}>
-        <svg
+const navFridge = (props) => (
+  <svg
     id="Capa_1"
     enable-background="new 0 0 512 512"
-    height="20"
+    height="512"
     viewBox="0 0 512 512"
-    width="20"
+    width="512"
     xmlns="http://www.w3.org/2000/svg"
-    style={{ marginLeft: "8px" }}
     {...props}
   >
     <g>
@@ -43,14 +27,5 @@ const ItemRightCard = (props) => {
       </g>
     </g>
   </svg>
-      </button>  
-       
-      <button className="item-right-card-delete" onClick={() => props.deleteHandler(props.cartId, props.item.id)}>
-        {<TrashCan style={{ height: "20", width: "20" }} />}
-      </button>
-      
-    </div>
-  );
-};
-
-export default ItemRightCard;
+);
+export default navFridge;
