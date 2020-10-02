@@ -5,7 +5,6 @@ import Search from "./Search.js";
 class ShopMain extends React.Component {
   state = {
     searchTerm: "",
-    itemArray: [],
   };
 
   items = () => {
@@ -29,7 +28,7 @@ class ShopMain extends React.Component {
   };
 
   showItemArray() {
-    let findItems = this.state.itemArray.filter(
+    let findItems = this.props.itemArray.filter(
       (item) =>
         item.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()) ||
         item.description
@@ -52,9 +51,9 @@ class ShopMain extends React.Component {
     ));
   }
 
-  submitHandler = (term) => {
+  submitHandler = (searchValue) => {
     this.setState({
-      searchTerm: term.searchTerm,
+      searchTerm: searchValue,
     });
   };
 
@@ -64,8 +63,7 @@ class ShopMain extends React.Component {
         <div className="item-search">
           <Search
             className="searchBar"
-            searchTerm={this.state.searchTerm}
-            search={this.search}
+            searchValue={this.state.searchTerm}
             submitHandler={this.submitHandler}
           />
         </div>

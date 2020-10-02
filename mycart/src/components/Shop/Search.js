@@ -1,38 +1,22 @@
-import React from 'react'
+import React from "react";
 
 class Search extends React.Component {
-
-    state = {
-      searchTerm: ""
-    }
-
-    onChange = (e) => {
-      e.persist()
-      this.setState(() => ({
-        searchTerm: e.target.value
-      }))
-    };
-
-    submitHandler = (e) => {
-      e.preventDefault()
-      this.props.submitHandler(this.state)
-    }
-    
-    render() {
-    
-      return (
-        <form className="search" onSubmit={this.submitHandler}>
-             <input
-                className="search-input"
-                type="text"
-                placeholder="Search Item"
-                value={this.state.searchValue}
-                onChange={this.onChange}
-             ></input>
-             <button className="search-button">Submit</button>
-        </form>
-      );
-    }
+  inputHandler = (e) => {
+    e.preventDefault();
+    this.props.submitHandler(e.target.value);
+  };
+  render() {
+    return (
+      <form className="search">
+        <input
+          className="search-input"
+          type="text"
+          placeholder="Search Item"
+          value={this.props.searchValue}
+          onChange={this.inputHandler}
+        ></input>
+      </form>
+    );
+  }
 }
-
-export default Search
+export default Search;
