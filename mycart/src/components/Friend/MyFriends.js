@@ -18,7 +18,7 @@ class MyFriends extends React.Component {
         return(
             <div className="my-friends">
                 <div className="friend-container-top">
-                    I am following...
+                    I am following... 
                 </div>
                 <div className="user-card-container">
                     {this.friends()}
