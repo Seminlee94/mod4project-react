@@ -89,6 +89,7 @@
 
 .shop-right {
   height: 500px;
+  width: 400px;
   overflow-y: scroll;
 }
 
@@ -126,11 +127,23 @@
   width: "50px";
 }
 
+.item-right-card-add {
+  justify-content: center;
+}
+
 .item-right-card-add:hover {
   background-color: #ff4500
 }
 
+.item-right-card-delete {
+  margin-left: 15px;
+}
 
 .item-right-card-delete:hover {
   background-color: #ff4500
+}
+
+.item-right-buttons {
+  margin-left: 30%;
+  margin-top: 10px;
 }

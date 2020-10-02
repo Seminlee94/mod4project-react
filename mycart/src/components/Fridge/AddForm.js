@@ -9,10 +9,10 @@ class FridgeForm extends React.Component {
     name: "",
     category: "",
     sub_category: "Inputted Fridge Item",
-    price: 0,
+    price: 1,
     quantity: 0,
     description: "Inputted Fridge Item",
-    image: null,
+    image: "https://assets.bonappetit.com/photos/5c62e4a3e81bbf522a9579ce/master/pass/milk-bread.jpg",
     id: 10000,
     quantity_value: "",
     quantity_measurement: ""
@@ -82,9 +82,9 @@ class FridgeForm extends React.Component {
               <option value="Seafood">Seafood</option>
               <option value="Cheese">Cheese</option>
               <option value="Meat">Meat</option>
-              <option value="Liquor">Spirits</option>
+              <option value="Liquor">Liquor</option>
               <option value="PreparedFoods">Prepared Foods</option>
-              <option value="Bakery">Bakery</option>
+              <option value="Bread">Bread</option>
               <option value="Other">Other</option>
             </select>
             

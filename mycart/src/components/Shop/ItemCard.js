@@ -31,9 +31,9 @@ class ItemCard extends React.Component {
         <Card.Img variant="top" src={this.props.item.image} />
         <Card.Body>
           <Card.Title>{this.props.item.name}</Card.Title>
-          <Card.Text text="primary" className="item-card-price">
+          {/* <Card.Text text="primary" className="item-card-price">
             ${this.props.item.price}
-          </Card.Text>
+          </Card.Text> */}
         </Card.Body>
       </Card>
     );
