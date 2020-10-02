@@ -1,5 +1,6 @@
 import React from "react";
 import MyFriends from "../components/Friend/MyFriends";
+import FollowedBy from "../components/Friend/FollowedBy";
 import { Redirect } from "react-router-dom";
 import SearchUserForm from "../components/Friend/SearchUserForm";
 import SearchUserCard from "../components/Friend/SearchUserCard";
@@ -38,13 +39,16 @@ class Friends extends React.Component {
           {this.props.userId  
           
           ?
-          <>
+          <div>
             <div>
               <SearchUserForm
                 value={this.state.searchTerm}
                 submitHandler={this.submitHandler}
               />
             </div>
+            <div className="searched-users">
+                    {this.state.searchTerm === "" ? null : this.searchUser()}
+                </div>
             <div>
               <div className="user-container" style={{ display:"flex" }} >
                 <div className="friend-container">
@@ -55,13 +59,18 @@ class Friends extends React.Component {
                   />  
                 </div>
 
-                <div className="searched-users">
-                    {this.state.searchTerm === "" ? null : this.searchUser()}
+                <div className="friend-container">
+                  <FollowedBy 
+                    friend={this.props.follower}
+                    addFriendHandler={this.props.addFriendHandler}
+                  />
                 </div>
+
+  
 
               </div>
             </div>
-          </>
+          </div>
         
           :
           

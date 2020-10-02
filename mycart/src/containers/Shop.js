@@ -95,13 +95,13 @@ class Shop extends React.Component {
               
               <div className="shop-carts">
 
-                {this.props.userCartArray.length > 0 ? (
+                {this.props.userCartArrays.length > 0 ? (
                   <>
                     <h3>My Cart</h3>
                     <ShopRight
 
-                      moveToFridge={this.props.moveToFridge}
-                      userCartArray={this.props.userCartArray}
+                      addToFridge={this.props.addToFridge}
+                      userCartArrays={this.props.userCartArrays}
                       deleteHandler={this.props.deleteHandler}
                       />
                     </>
@@ -116,7 +116,7 @@ class Shop extends React.Component {
 
                       deleteHandler={this.props.deleteHandler}
                       ourCartArray={this.props.ourCartArray}
-                      moveToFridge={this.props.moveToFridge}
+                      addToFridge={this.props.addToFridge}
                     
                     />
 

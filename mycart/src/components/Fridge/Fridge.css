@@ -1,9 +1,10 @@
+
+
 body {
   height: 100%;
   width: 100%;
   overflow: hidden;
 }
-
 .fridge-container {
   display: flex;
   flex-direction: column;
@@ -11,8 +12,8 @@ body {
   text-align: center;
   background-size: cover;
   background-attachment: fixed;
+  margin-top: 30px;
 }
-
 .fridge-shelf {
   width: 100%;
   max-width: 800px;
@@ -20,56 +21,34 @@ body {
   padding-bottom: 30px;
   border-bottom: 2px solid black;
 }
-
 .fridge-shelf-button {
   width: 40px;
   height: 40px;
 }
-
 .fridge-item-card {
   justify-content: center;
   display: flex;
   align-items: center;
 }
-
 .fridge-item {
   width: 125px;
   margin-left: 10px;
   margin-right: 10px;
   align-self: flex-start;
 }
-
 .item-image {
   width: 125px;
   height: 125px;
   object-fit: cover;
   margin-bottom: 5px;
 }
-
 .item-icon {
   width: 125px;
   height: 125px;
   margin-bottom: 5px;
 }
-
 .item-image:hover {
   cursor: pointer;
 }
 
-/* @media screen and (max-width: 960px) {
 
-    .fridge-container{
-        position: relative;
-    }
-
-    .fridge-shelf {
-        height: auto;
-        width: auto;
-    }
-
-    .fridge-item-card {
-        height: auto;
-        width: auto;
-    }
-
-} */

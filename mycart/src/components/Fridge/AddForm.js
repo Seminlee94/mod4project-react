@@ -13,20 +13,29 @@ class FridgeForm extends React.Component {
     quantity: 0,
     description: "Inputted Fridge Item",
     image: null,
+    id: 10000,
+    quantity_value: "",
+    quantity_measurement: ""
   };
 
   fridgeSubmitHandler = (e) => {
+    let quantity = this.state.quantity_value + " " + this.state.quantity_measurement
     e.preventDefault();
-    this.props.fridgeSubmit(this.state);
+    this.props.fridgeSubmit(this.state, quantity);
     this.setState({
       name: "",
       category: "",
+      id: this.state.id + 1
     });
     this.props.onHide();
   };
 
   categoryClick = (e) => {
     this.setState({ category: e.target.value });
+  };
+
+  measurementClick = (e) => {
+    this.setState({ quantity_measurement: e.target.value });
   };
 
   fridgeFormHandler = (e) => {
@@ -77,11 +86,43 @@ class FridgeForm extends React.Component {
               <option value="Seafood">Seafood</option>
               <option value="Cheese">Cheese</option>
               <option value="Meat">Meat</option>
-              <option value="Liquor">Spirits</option>
+              <option value="Liquors">Spirits</option>
               <option value="PreparedFoods">Prepared Foods</option>
               <option value="Bakery">Bakery</option>
               <option value="Other">Other</option>
             </select>
+            
+            <div className="add-form-quantity-container" style={{ display: "flex" }} >
+  
+                <Form.Control
+                  size="sm"
+                  type="text"
+                  placeholder="Quantity"
+                  name="quantity_value"
+                  value={this.state.quantity_value}
+                  onChange={this.fridgeFormHandler}
+                  className="form-input"
+                />
+
+                <select
+                  onChange={this.measurementClick}
+                  value={this.state.quantity_measurement}
+                  className="form-header"
+                >
+                  <option selected>measurement</option>
+                  <option value="blank"></option>
+                  <option value="oz">oz</option>
+                  <option value="lbs">lbs</option>
+                  <option value="kg">kg</option>
+                  <option value="teaspoon">teaspoon</option>
+                  <option value="tablespoon">tablespoon</option>
+                  <option value="pints">pint</option>
+                  <option value="cup">cup</option>
+                  <option value="gals">gal</option>
+                  <option value="liter">liter</option>
+                </select>
+
+            </div>
           </Form>
         </Modal.Body>
         <Modal.Footer>

@@ -1,15 +1,14 @@
 import React from "react"
-import UserCard from "./UserCard.js";
+import FollowedUserCard from "./FollowedUserCard.js";
 
 
-class MyFriends extends React.Component {
+class FollowedBy extends React.Component {
 
     friends = () => {
-        return this.props.friend.map(user => <UserCard 
+        return this.props.friend.map(user => <FollowedUserCard 
             key={user.id} 
             user={user} 
-            deleteFriendHandler={this.props.deleteFriendHandler} 
-            addFriendtoCartHandler={this.props.addFriendtoCartHandler} 
+            addFriendHandler={this.props.addFriendHandler}
             /> 
         )
       }
@@ -18,7 +17,7 @@ class MyFriends extends React.Component {
         return(
             <div className="my-friends">
                 <div className="friend-container-top">
-                    I am following...
+                    I am followed by...
                 </div>
                 <div className="user-card-container">
                     {this.friends()}
@@ -28,4 +27,4 @@ class MyFriends extends React.Component {
     }
 }
 
-export default MyFriends
+export default FollowedBy

@@ -16,6 +16,7 @@ class App extends Component {
   state = {
     shopItemArray: [],
     fridgeItemArray: [],
+    fridgeArray: [],
     recipeArray: [],
     userCartArrays: [],
     friendArray: [],
@@ -23,7 +24,7 @@ class App extends Component {
     OurCartArray: [],
     user: {},
     cart: {},
-    fridge: {},
+    userFridge: {},
     userCarts: {},
     userCartObj: {},
     
@@ -33,7 +34,6 @@ class App extends Component {
     // localStorage.clear()
     // localStorage.removeItem("token")
     // localStorage.removeItem("userId")
-    // this.state.user = {}
     const token = localStorage.getItem("token");
     if (token) {
       fetch("http://localhost:3000/api/v1/profile", {
@@ -166,20 +166,21 @@ class App extends Component {
     if (prevState.user !== this.state.user ) {
         const urls = [
           "http://localhost:3000/api/v1/items",
-          "http://localhost:3000/api/v1/fridge_items",
           "http://localhost:3000/api/v1/recipes",
           "http://localhost:3000/api/v1/cart_items",
           "http://localhost:3000/api/v1/user_carts/",
-
+          "http://localhost:3000/api/v1/fridge_items",
+          "http://localhost:3000/api/v1/fridges"
         ];
         Promise.all(urls.map((url) => fetch(url).then((resp) => resp.json()))).then(
           (data) =>
             this.setState(() =>  ({
               shopItemArray: data[0],
-              fridgeItemArray: data[1],
-              recipeArray: data[2],
-              cartItemArray: data[3],
-              userCarts: data[4]
+              recipeArray: data[1],
+              cartItemArray: data[2],
+              userCarts: data[3],
+              fridgeItemArray: data[4],
+              fridgeArray: data[5]
             }), () => this.findUserCart()
         ));
      }
@@ -191,44 +192,98 @@ class App extends Component {
     let userCartObjId = foundCartObj[0].id
     fetch(`http://localhost:3000/api/v1/user_carts/${userCartObjId}`)
       .then(resp => resp.json())
-      .then(data => this.setState(() => ({ userCartArrays: data.cart.cart_item, userCartObj: data }), ()=>this.OurCart()))
+      .then(data => this.setState(() => ({ userCartArrays: data.cart.cart_item, userCartObj: data }), ()=>this.findUserFridge()))
   }
 
-  OurCart = () => {
-    let foundOurCartArray = this.state.userCarts.filter(el=>el.cart_id === this.state.userCartObj.cart_id)
-    this.setState(()=>({ OurCartArray: foundOurCartArray  }))
+  findUserFridge = () => {
+    let foundObj = this.state.fridgeArray.find(el => el.user_id === this.state.user.id)
+    let foundUserFridge = this.state.fridgeItemArray.filter(el => el.fridge.user_id === this.state.user.id )
+    this.setState(() => ({ fridgeItemArray: foundUserFridge, userFridge: foundObj.id  }))
+
   }
 
+  // OurCart = () => {
+  //   let foundOurCartArray = this.state.userCarts.filter(el=>el.cart_id === this.state.userCartObj.cart_id)
+  //   this.setState(()=>({ OurCartArray: foundOurCartArray  }))
+  // }
 
-  moveToFridge = (id, clickedItemIndex) => {
-    // Copy the object, so that we don't change any places it's being referenced
-    let foundObj = {
-      ...this.state.shopItemArray.find((el) => el.id === parseInt(id)),
-    };
-    delete foundObj.id; //deletes the store ID, letting newObj create new ID for fridgeitem so we don't get conflicts when trying to post
-    fetch("http://localhost:3000/api/v1/fridge_items", {
+
+
+  fridgeSubmit = (clickedItemIndex, quantity) => {
+    fetch("http://localhost:3000/api/v1/items", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify(foundObj),
+      body: JSON.stringify({ 
+        name: clickedItemIndex.name,
+        price: clickedItemIndex.price,
+        description: clickedItemIndex.description,
+        quantity: quantity,
+        image: clickedItemIndex.image,
+        category: clickedItemIndex.category,
+        sub_category: clickedItemIndex.sub_category
+      }),
     })
       .then((res) => res.json())
-      .then((newObj) => {
-        const updatedArray = this.state.cartItemArray.filter(
-          (item, index) => index !== clickedItemIndex
-        );
+      .then((data) => this.renderToFridge(data.id))
+              
+    };
 
-        this.setState({
-          fridgeItemArray: [...this.state.fridgeItemArray, newObj],
-          cartItemArray: updatedArray,
-        });
-      });
-  };
+    renderToFridge = (itemId) => {
+      console.log("clicked: ", itemId)
+      fetch("http://localhost:3000/api/v1/fridge_items", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "accepts": "application/json"
+        },
+        body: JSON.stringify({ 
+          item_id: itemId,
+          fridge_id: this.state.userFridge
+          })
+      })
+        .then(res => res.json())
+        .then(data => this.setState({
+          fridgeItemArray: [...this.state.fridgeItemArray, data]
+        }))
+    }
+
+
+    addToFridge = (cartId, itemId) => {
+      console.log("clicked: ", itemId)
+      fetch("http://localhost:3000/api/v1/fridge_items", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "accepts": "application/json"
+        },
+        body: JSON.stringify({ 
+          item_id: itemId,
+          fridge_id: this.state.userFridge
+          })
+      })
+        .then(res => res.json())
+        .then(data => this.setState( () => ({
+          fridgeItemArray: [...this.state.fridgeItemArray, data] }), () => this.cartItemDeleteHandler(cartId))
+        )
+    }
+
+    cartItemDeleteHandler = (cartId) => {
+      let updatedArrays = this.state.userCartArrays.filter(
+        (el) => el.id !== cartId
+      );
+      fetch(`http://localhost:3000/api/v1/cart_items/${cartId}`, {
+        method: "DELETE",
+      })
+        .then((resp) => resp.json())
+        .then(this.setState({ userCartArrays: updatedArrays }));
+    };
+  
+
 
   cartItemClickHandler = (item) => {
-    // console.log(this.state.userCartObj.cart_id)
     fetch("http://localhost:3000/api/v1/cart_items/", {
       method: "POST",
       headers: {
@@ -245,20 +300,10 @@ class App extends Component {
         this.setState(() => ({
           userCartArrays: [...this.state.userCartArrays, data],
         }))
-      );
-  };
-
-  cartItemDeleteHandler = (cartId) => {
-    let updatedArrays = this.state.userCartArrays.filter(
-      (el) => el.id !== cartId
     );
-    fetch(`http://localhost:3000/cart_items/${cartId}`, {
-      method: "DELETE",
-    })
-      .then((resp) => resp.json())
-      .then(this.setState({ userCartArrays: updatedArrays }));
   };
 
+  
   addFriendHandler = (id) => {
     let findObj = this.state.friendArray.some(el => el.id === id); 
     return (findObj) ? null :
@@ -333,10 +378,10 @@ class App extends Component {
 
   render() {
     let userId = localStorage.getItem("userId")
-    // console.log(this.state.user)
+    // console.log(this.state)
     // console.log(this.state.userCartArray)
     // console.log(this.state.userCartObj.id)
-    // console.log(this.state)
+    console.log(this.state.fridgeItemArray)
     
 
     return (
@@ -366,9 +411,9 @@ class App extends Component {
               <Route path="/shop">
                 <Shop
                   shopItemArray={this.state.shopItemArray}
-                  moveToFridge={this.moveToFridge}
                   cartItemArray={this.state.cartItemArray}
-                  userCartArray={this.state.userCartArrays}
+                  userCartArrays={this.state.userCartArrays}
+                  addToFridge={this.addToFridge}
                   itemClickHandler={this.cartItemClickHandler}
                   deleteHandler={this.cartItemDeleteHandler}
                   ourCartArray={this.state.OurCartArray}
@@ -380,7 +425,7 @@ class App extends Component {
               <Route path="/fridge">
                 <Fridge 
                   item={this.state.fridgeItemArray}
-                  fridgeSubmit={this.moveToFridge}
+                  fridgeSubmit={this.fridgeSubmit}
                   userId = {userId}
                 />
               </Route>
@@ -389,6 +434,7 @@ class App extends Component {
                 <Friends 
                   user={this.state.user}
                   friends={this.state.friendArray}
+                  follower={this.state.followerArray}
                   addFriendHandler={this.addFriendHandler}
                   deleteFriendHandler={this.deleteFriendHandler}
                   addFriendtoCartHandler={this.addFriendtoCartHandler}
