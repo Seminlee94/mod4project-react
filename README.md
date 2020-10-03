@@ -53,7 +53,7 @@
 #### By comparing the two images, you can tell that one user has Se Min Lee as follower/followee and another user has Kevin as follower/followee. We can potentially use this to add any followed friend to the cart, so that you and your friends can shop with one cart and divide the tip, and delivery fee.
 
 
-## Developeres✅
+## Developers✅
 ### Se Min Lee
 - email: seminlee2794@gmail.com
 - github: https://github.com/Seminlee94
